@@ -1,0 +1,288 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Empeños.Controles">
+
+    <local:AngleToPointConverter x:Key="AngleToPointConverter"/>
+    <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+    <local:ScaleFactorConverter x:Key="ScaleFactorConverter"/>
+
+    <Style TargetType="local:GaugeControl">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:GaugeControl">
+                    <Grid x:Name="LayoutRoot" >
+                        <Grid>
+                            <!-- attached the view model -->
+                            <local:RadialGaugeControlViewModel.Attach>
+                                <local:RadialGaugeControlViewModel/>
+                            </local:RadialGaugeControlViewModel.Attach>
+
+                            <!-- dial background and outer border -->
+                            <Ellipse Stretch="Fill" StrokeThickness="8">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush Center="0.5,0.5">
+                                        <GradientStop Color="#EEF"/>
+                                        <GradientStop Color="#99B" Offset="0.9"/>
+                                        <GradientStop Color="#335" Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#BBD" Offset="0"/>
+                                        <GradientStop Color="#003" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+
+                            <!-- minor ticks -->
+                            <ItemsControl ItemsSource="{Binding Path=MinorTicks}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas></Canvas>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse Fill="Black" Width="3" Height="3">
+                                            <Ellipse.RenderTransform>
+                                                <TransformGroup>
+                                                    <TranslateTransform X="-1.5" Y="-1.5"/>
+                                                    <TranslateTransform X="0"
+                                              Y="{Binding Path=Parent.ElementHeight, Converter={StaticResource ScaleFactorConverter}, ConverterParameter=-0.37}"/>
+                                                    <RotateTransform Angle="{Binding Path=Angle}"/>
+                                                </TransformGroup>
+                                            </Ellipse.RenderTransform>
+                                        </Ellipse>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- major ticks -->
+                            <ItemsControl ItemsSource="{Binding Path=MajorTicks}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas></Canvas>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse Fill="Black" Width="8" Height="8">
+                                            <Ellipse.RenderTransform>
+                                                <TransformGroup>
+                                                    <TranslateTransform X="-4" Y="-4"/>
+                                                    <TranslateTransform X="0"
+                                              Y="{Binding Path=Parent.ElementHeight, Converter={StaticResource ScaleFactorConverter}, ConverterParameter=-0.37}"/>
+                                                    <RotateTransform Angle="{Binding Angle}"/>
+                                                </TransformGroup>
+                                            </Ellipse.RenderTransform>
+                                        </Ellipse>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- major labels -->
+                            <ItemsControl ItemsSource="{Binding Path=MajorTicks}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas></Canvas>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="50" Height="20">
+                                            <Grid.RenderTransform>
+                                                <TransformGroup>
+                                                    <TranslateTransform X="-25" Y="-10"/>
+                                                    <TranslateTransform X="0"
+                                              Y="{Binding Path=Parent.ElementHeight, Converter={StaticResource ScaleFactorConverter}, ConverterParameter=-0.42}"/>
+                                                    <RotateTransform Angle="{Binding Path=Angle}"/>
+                                                </TransformGroup>
+                                            </Grid.RenderTransform>
+                                            <TextBlock Text="{Binding Path=Value}" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- the qualatative ranges -->
+                            <ItemsControl ItemsSource="{Binding Path=Ranges}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            RenderTransformOrigin="0.5, 0.5"
+                            Width="200" Height="200">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.RenderTransform>
+                                    <ScaleTransform ScaleX="{Binding Path=ElementHeight, Converter={StaticResource ScaleFactorConverter}, ConverterParameter=0.005}"
+                                  ScaleY="{Binding Path=ElementHeight, Converter={StaticResource ScaleFactorConverter}, ConverterParameter=0.005}"/>
+                                </ItemsControl.RenderTransform>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Path Stroke="Black" StrokeThickness="0.5"
+                          Fill="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
+                                            <Path.Data>
+                                                <PathGeometry>
+                                                    <PathGeometry.Figures>
+                                                        <PathFigure IsClosed="True" 
+                                    StartPoint="{Binding Path=StartAngle, Converter={StaticResource AngleToPointConverter}, ConverterParameter=60}" >
+                                                            <PathFigure.Segments>
+                                                                <ArcSegment Size="60,60" RotationAngle="45" IsLargeArc="False"
+                                      SweepDirection="Clockwise"
+                                      Point="{Binding Path=EndAngle, Converter={StaticResource AngleToPointConverter}, ConverterParameter=60}"/>
+                                                                <LineSegment Point="{Binding Path=EndAngle, Converter={StaticResource AngleToPointConverter}, ConverterParameter=50}"/>
+                                                                <ArcSegment Size="50,50" RotationAngle="85" IsLargeArc="False"
+                                            SweepDirection="Counterclockwise"
+                                            Point="{Binding Path=StartAngle, Converter={StaticResource AngleToPointConverter}, ConverterParameter=50}"/>
+                                                            </PathFigure.Segments>
+                                                        </PathFigure >
+                                                    </PathGeometry.Figures>
+                                                </PathGeometry>
+                                            </Path.Data>
+                                        </Path>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- the needle path -->
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition Height="7*"/>
+                                    <RowDefinition Height="10*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Path Stretch="Uniform"
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    Stroke="Black" StrokeThickness="0.5"
+                    Data="M 0,0 l 10,60 l -10, 40 l -10 -40"
+                    RenderTransformOrigin="0.5,1">
+                                    <Path.RenderTransform>
+                                        <RotateTransform Angle="{Binding Path=ValueAngle}"/>
+                                    </Path.RenderTransform>
+                                    <Path.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="DarkRed" Offset="0"/>
+                                            <GradientStop Color="DarkRed" Offset="0.45"/>
+                                            <GradientStop Color="Red" Offset="0.55"/>
+                                            <GradientStop Color="Red" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Path.Fill>
+                                    <Path.Effect>
+                                        <DropShadowEffect Color="Black" Direction="{Binding Path=ValueAngle}"
+                                      BlurRadius="3"
+                                      Opacity="0.6"
+                                      ShadowDepth="5"/>
+                                    </Path.Effect>
+                                </Path>
+                            </Grid>
+
+                            <!-- needle cover -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="9*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="9*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="9*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="9*"/>
+                                </Grid.RowDefinitions>
+
+                                <Ellipse StrokeThickness="2"
+                         Grid.Column="1"
+                         Grid.Row="1">
+                                    <Ellipse.Fill>
+                                        <RadialGradientBrush Center="0.5,0.5">
+                                            <GradientStop Color="#666"/>
+                                            <GradientStop Color="#000" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Ellipse.Fill>
+                                    <Ellipse.Stroke>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#000" Offset="0"/>
+                                            <GradientStop Color="#AAA" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Ellipse.Stroke>
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect Color="Black" Direction="0"
+                                      BlurRadius="3"
+                                      Opacity="0.6"
+                                      ShadowDepth="5"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Grid>
+
+                            <!-- refraction layer -->
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#00000000"/>
+                                        <GradientStop Offset="0.4" Color="#BBFFFFFF"/>
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <!-- reflection layer -->
+                            <Path Stretch="Fill">
+                                <Path.RenderTransform>
+                                    <ScaleTransform ScaleY="0.5" />
+                                </Path.RenderTransform>
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure IsClosed="True" StartPoint="98.999,45.499">
+                                            <BezierSegment Point1="98.999,54.170" Point2="89.046,52.258" Point3="85.502,51.029"/>
+                                            <BezierSegment Point1="75.860,47.685" Point2="69.111,45.196" Point3="50.167,45.196"/>
+                                            <BezierSegment Point1="30.805,45.196" Point2="20.173,47.741" Point3="10.665,51.363"/>
+                                            <BezierSegment  Point1="7.469,52.580" Point2="1.000,53.252" Point3="1.000,44.999"/>
+                                            <BezierSegment Point1="1.000,39.510" Point2="0.884,39.227" Point3="2.519,34.286"/>
+                                            <BezierSegment  Point1="9.106,14.370" Point2="27.875,0" Point3="50,0"/>
+                                            <BezierSegment Point1="72.198,0" Point2="91.018,14.466" Point3="97.546,34.485"/>
+                                            <BezierSegment  Point1="99.139,39.369" Point2="98.999,40.084" Point3="98.999,45.499"/>
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Path.Data>
+                                <Path.Fill>
+                                    <RadialGradientBrush GradientOrigin="0.498,0.526">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1" ScaleY="1.997"/>
+                                                <TranslateTransform X="0" Y="0.5"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#99FFFFFF"/>
+                                        <GradientStop Offset="0.85" Color="#44FFFFFF"/>
+                                        <GradientStop Offset="0" Color="#00000000"/>
+                                    </RadialGradientBrush>
+                                </Path.Fill>
+                            </Path>
+
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+ 

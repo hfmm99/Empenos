@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Empeños" Class="EmpeñosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Salvada3;Initial Catalog=Empeños;Integrated Security=False;User ID=sa" SettingsObjectName="Empeños.Properties.Settings" SettingsPropertyName="EmpeñosConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Artículos" Member="Artículos">
+    <Type Name="Artículo">
+      <Column Name="Código" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Código_Categoría" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Costo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Notas" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Artículo_VentasDetalle" Member="VentasDetalles" ThisKey="Código" OtherKey="Código_Artículo" Type="VentasDetalle" />
+      <Association Name="Artículo_Artículos_Característica" Member="Artículos_Características" ThisKey="Código" OtherKey="Código_Artículo" Type="Artículos_Característica" />
+      <Association Name="Artículo_ArtículosFoto" Member="ArtículosFotos" ThisKey="Código" OtherKey="Código_Artículo" Type="ArtículosFoto" />
+      <Association Name="Artículo_ComprasDetalle" Member="ComprasDetalles" ThisKey="Código" OtherKey="Código_Artículo" Type="ComprasDetalle" />
+      <Association Name="Artículo_EmpeñosDetalle" Member="EmpeñosDetalles" ThisKey="Código" OtherKey="Código_Artículo" Type="EmpeñosDetalle" />
+      <Association Name="Categoría_Artículo" Member="Categoría" ThisKey="Código_Categoría" OtherKey="Código" Type="Categoría" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VentasDetalle" Member="VentasDetalles">
+    <Type Name="VentasDetalle">
+      <Column Name="Código_Venta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Artículo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Artículo_VentasDetalle" Member="Artículo" ThisKey="Código_Artículo" OtherKey="Código" Type="Artículo" IsForeignKey="true" />
+      <Association Name="Venta_VentasDetalle" Member="Venta" Storage="_Ventas" ThisKey="Código_Venta" OtherKey="Código" Type="Venta" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Artículos_Características" Member="Artículos_Características">
+    <Type Name="Artículos_Característica">
+      <Column Name="Código_Artículo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Característica" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Valor" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="Artículo_Artículos_Característica" Member="Artículo" ThisKey="Código_Artículo" OtherKey="Código" Type="Artículo" IsForeignKey="true" />
+      <Association Name="Característica_Artículos_Característica" Member="Característica" ThisKey="Código_Característica" OtherKey="Código" Type="Característica" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArtículosFotos" Member="ArtículosFotos">
+    <Type Name="ArtículosFoto">
+      <Column Name="Código_Artículo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripción" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Artículo_ArtículosFoto" Member="Artículo" ThisKey="Código_Artículo" OtherKey="Código" Type="Artículo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Características" Member="Características">
+    <Type Name="Característica">
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TipoDeDato" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Association Name="Característica_Artículos_Característica" Member="Artículos_Características" ThisKey="Código" OtherKey="Código_Característica" Type="Artículos_Característica" />
+      <Association Name="Característica_Categorías_Característica" Member="Categorías_Características" ThisKey="Código" OtherKey="Código_Característica" Type="Categorías_Característica" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categorías" Member="Categorías">
+    <Type Name="Categoría">
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Categoría_Artículo" Member="Artículos" ThisKey="Código" OtherKey="Código_Categoría" Type="Artículo" />
+      <Association Name="Categoría_Categorías_Característica" Member="Categorías_Características" ThisKey="Código" OtherKey="Código_Categoría" Type="Categorías_Característica" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categorías_Características" Member="Categorías_Características">
+    <Type Name="Categorías_Característica">
+      <Column Name="Código_Categoría" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Característica" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Característica_Categorías_Característica" Member="Característica" ThisKey="Código_Característica" OtherKey="Código" Type="Característica" IsForeignKey="true" />
+      <Association Name="Categoría_Categorías_Característica" Member="Categoría" ThisKey="Código_Categoría" OtherKey="Código" Type="Categoría" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Clientes" Member="Clientes">
+    <Type Name="Cliente">
+      <Column Name="Código" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCompleto" Type="System.String" DbType="VarChar(201) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Género" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Teléfono" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RecibirNotificaciones" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="true" />
+      <Association Name="Cliente_Compra" Member="Compras" ThisKey="Código" OtherKey="Código_Cliente" Type="Compra" />
+      <Association Name="Cliente_Empeño" Member="Empeños" ThisKey="Código" OtherKey="Código_Cliente" Type="Empeño" />
+      <Association Name="Cliente_Venta" Member="Venta" Storage="_Ventas" ThisKey="Código" OtherKey="Código_Cliente" Type="Venta" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Compras" Member="Compras">
+    <Type Name="Compra">
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Cliente" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CostoTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Notas" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Association Name="Compra_ComprasDetalle" Member="ComprasDetalles" ThisKey="Código" OtherKey="Código_Compra" Type="ComprasDetalle" />
+      <Association Name="Cliente_Compra" Member="Cliente" ThisKey="Código_Cliente" OtherKey="Código" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ComprasDetalle" Member="ComprasDetalles">
+    <Type Name="ComprasDetalle">
+      <Column Name="Código_Compra" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Artículo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Artículo_ComprasDetalle" Member="Artículo" ThisKey="Código_Artículo" OtherKey="Código" Type="Artículo" IsForeignKey="true" />
+      <Association Name="Compra_ComprasDetalle" Member="Compra" ThisKey="Código_Compra" OtherKey="Código" Type="Compra" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Empeños" Member="Empeños">
+    <Type Name="Empeño">
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Cliente" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalMontoPréstamo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Firma" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Empeño_EmpeñosDetalle" Member="EmpeñosDetalles" ThisKey="Código" OtherKey="Código_Empeño" Type="EmpeñosDetalle" />
+      <Association Name="Empeño_EmpeñosGarantía" Member="EmpeñosGarantías" ThisKey="Código" OtherKey="Código_Empeño" Type="EmpeñosGarantía" />
+      <Association Name="Empeño_EmpeñosPago" Member="EmpeñosPagos" ThisKey="Código" OtherKey="Código_Empeño" Type="EmpeñosPago" />
+      <Association Name="Cliente_Empeño" Member="Cliente" ThisKey="Código_Cliente" OtherKey="Código" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmpeñosDetalle" Member="EmpeñosDetalles">
+    <Type Name="EmpeñosDetalle">
+      <Column Name="Código_Empeño" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Artículo" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Artículo_EmpeñosDetalle" Member="Artículo" ThisKey="Código_Artículo" OtherKey="Código" Type="Artículo" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Empeño_EmpeñosDetalle" Member="Empeño" ThisKey="Código_Empeño" OtherKey="Código" Type="Empeño" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmpeñosGarantías" Member="EmpeñosGarantías">
+    <Type Name="EmpeñosGarantía">
+      <Column Name="Código_Empeño" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Documento" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Empeño_EmpeñosGarantía" Member="Empeño" ThisKey="Código_Empeño" OtherKey="Código" Type="Empeño" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmpeñosPagos" Member="EmpeñosPagos">
+    <Type Name="EmpeñosPago">
+      <Column Name="Código_Empeño" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cuota" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FechaPago" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCuota" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Intereses" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Abono" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Firma" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Empeño_EmpeñosPago" Member="Empeño" ThisKey="Código_Empeño" OtherKey="Código" Type="Empeño" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Parámetros" Member="Parámetros">
+    <Type Name="Parámetro">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PeriodoDeCobro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Plazo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PorcentajeInterés" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="RutaRespaldoBD" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="RutaServidorReportes" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ventas" Member="Ventas">
+    <Type Name="Venta">
+      <Column Name="Código" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Código_Cliente" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Notas" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Association Name="Venta_VentasDetalle" Member="VentasDetalles" ThisKey="Código" OtherKey="Código_Venta" Type="VentasDetalle" />
+      <Association Name="Venta_VentasAbono" Member="VentasAbonos" ThisKey="Código" OtherKey="Código_Venta" Type="VentasAbono" />
+      <Association Name="Cliente_Venta" Member="Cliente" ThisKey="Código_Cliente" OtherKey="Código" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VentasAbonos" Member="VentasAbonos">
+    <Type Name="VentasAbono">
+      <Column Name="Código_Venta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cuota" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Venta_VentasAbono" Member="Venta" ThisKey="Código_Venta" OtherKey="Código" Type="Venta" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Respaldar" Method="Respaldar">
+    <Parameter Name="Ruta" Parameter="ruta" Type="System.String" DbType="VarChar(1000)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

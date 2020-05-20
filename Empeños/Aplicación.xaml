@@ -1,0 +1,14 @@
+﻿<Application x:Class="Empeños.Aplicación"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             StartupUri="Formularios/FrmPrincipal.xaml" Startup="Application_Startup" Exit="Application_Exit">
+    <Application.Resources>
+        <Style TargetType="{x:Type Control}">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="{x:Type xcdg:HierarchicalGroupByControl}">
+            <Setter Property="NoGroupContent" Value="Arrastre una columna acá para agrupar por esa columna"/>
+        </Style>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Empeños.Controles.IndicadorEstado"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Viewbox x:Name="paths" Width="100" Height="50">
+        <Canvas Width="66.4981" Height="33.5">
+            <Path x:Name="pathVerde" Width="33.7491" Height="27.2694" Canvas.Left="0" Canvas.Top="6.23056" Stretch="Fill"  Stroke="#FF000000" Fill="#00FF00" Data="M 33.2491,33L 0.5,33C 0.580612,22.2213 5.86816,12.6815 14.0284,6.73056L 33.2491,33 Z "/>
+            <Path x:Name="pathAmarillo" Width="40.736" Height="33.12" Canvas.Left="14.132" Canvas.Top="0" Stretch="Fill" Stroke="#FF000000" Fill="Yellow" Data="M 14.0284,6.73056C 19.4265,2.81128 26.0679,0.5 33.2491,0.5C 41.0153,0.5 48.1501,3.20325 53.764,7.72009L 33.197,32.6198L 14.0284,6.73056 Z "/>
+            <Path x:Name="pathRojo" Width="33.749" Height="26.2799" Canvas.Left="32.7491" Canvas.Top="7.22009" Stretch="Fill" Stroke="#FF000000" Fill="Red" Data="M 53.764,7.72009C 61.1644,13.6743 65.9217,22.7803 65.9981,33L 33.2491,33L 53.764,7.72009 Z "/>
+        </Canvas>
+    </Viewbox>
+</UserControl>

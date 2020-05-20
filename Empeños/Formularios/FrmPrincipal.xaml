@@ -1,0 +1,136 @@
+﻿<Window x:Class="Empeños.Formularios.FrmPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        Title="Empeños" Width="1024" Height="300" WindowState="Maximized" Loaded="Window_Loaded"
+        FontFamily="Verdana" FontSize="16">
+    <Window.Resources>
+        <ResourceDictionary Source="/Recursos/Estilos/TabControl.xaml"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type xcdg:ColumnManagerCell}">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="{x:Type xcdg:GroupByControl}">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="{x:Type xcdg:GroupByItem}">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="{x:Type xcdg:DataCell}">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+        </Grid.Resources>
+        <TabControl x:Name="tabOpciones" Style="{DynamicResource ResourceKey=styleTabControl}" SelectionChanged="tabOpciones_SelectionChanged">
+            <TabItem Header="Empeños" Style="{DynamicResource ResourceKey=styleTabItemLeft}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
+                        <Button x:Name="btnAgregarEmpeño" Content="Agregar Empeño" Click="btnAgregar_Click" Margin="4,5" Height="30" Width="150" />
+                        <Button x:Name="btnEditarEmpeño" Content="Editar" Click="btnEditar_Click"  Margin="4,5"  Height="30" Width="58" />
+                        <Button x:Name="btnEliminarEmpeño" Content="Eliminar"  Margin="4,5" Height="30" Width="80" Click="btnEliminarEmpeño_Click" />
+                        <Button x:Name="btnImprimirEmpeño" Content="Imprimir"  Margin="4,0,4,5" Height="30" Width="90" Click="btnImprimirEmpeño_Click" VerticalAlignment="Bottom" />
+                        <Button x:Name="btnQuedado" Content="Quedado" ToolTip="Enajenar la prenda puesta en garantía (Quedar)"  Margin="4,0,4,5" Height="30" Width="100" VerticalAlignment="Bottom" Click="btnQuedado_Click" />
+                        <Button x:Name="btnReempeñar" Content="Reempeñar"  Margin="4,0,4,5" Height="30" Width="100" VerticalAlignment="Bottom" Click="btnReempeñar_Click" Visibility="Hidden" />
+                    </StackPanel>
+                    <xcdg:DataGridControl x:Name="dgEmpeños" MouseDoubleClick="dgEmpeños_MouseDoubleClick" SelectionChanged="dgEmpeños_SelectionChanged" KeyUp="dgEmpeños_KeyUp" AutoCreateColumns="False" ReadOnly="True" ItemsSourceChangeCompleted="dgEmpeños_ItemsSourceChangeCompleted" FontSize="22">
+                        <xcdg:DataGridControl.Columns>
+                            <xcdg:Column Title="Código" FieldName="Código" Width="150px" />
+                            <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150px" />
+                            <xcdg:Column Title="Identificación" FieldName="Código_Cliente" Width="200px" />
+                            <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="200*" />
+                            <xcdg:Column Title="Monto Prestado" FieldName="TotalMontoPréstamo" Width="200px" CellContentStringFormat="{}{0:# ###}" CellHorizontalContentAlignment="Right" />
+                            <xcdg:Column Title="Estado" FieldName="EstadoEmpeño"  Width="170px"/>
+                        </xcdg:DataGridControl.Columns>
+                    </xcdg:DataGridControl>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Compras" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
+                        <Button x:Name="btnAgregarCompra" Content="Agregar Compra" Click="btnAgregar_Click" Margin="4,5" Height="30" Width="150" />
+                        <Button x:Name="btnEditarCompra" Content="Editar" Click="btnEditar_Click"  Margin="4,5"  Height="30" Width="58" />
+                        <Button x:Name="btnEliminarCompra" Content="Eliminar"  Click="btnEliminarCompra_Click" Margin="4,5" Height="30" Width="80" />
+                        <Button x:Name="btnImprimirCompra" Content="Imprimir"  Click="btnImprimirCompra_Click" Margin="4,0,4,5" Height="30" Width="90" VerticalAlignment="Bottom" />
+                    </StackPanel>
+                    <xcdg:DataGridControl x:Name="dgCompras" MouseDoubleClick="dgEmpeños_MouseDoubleClick" KeyUp="dgEmpeños_KeyUp" AutoCreateColumns="False" ReadOnly="True" FontSize="22">
+                        <xcdg:DataGridControl.Columns>
+                            <xcdg:Column Title="Código" FieldName="Código" Width="150px" />
+                            <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150px" />
+                            <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="200*" />
+                            <xcdg:Column Title="Costo" FieldName="CostoTotal" Width="150px" CellContentStringFormat="{}{0:# ###}" CellHorizontalContentAlignment="Right" />
+                            <xcdg:Column Title="Estado" FieldName="EstadoCompra"  Width="150px"/>
+                        </xcdg:DataGridControl.Columns>
+                    </xcdg:DataGridControl>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Ventas" Style="{DynamicResource ResourceKey=styleTabItemDefault}" >
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
+                        <Button x:Name="btnAgregarVenta" Content="Agregar Venta" Margin="4,5" Width="130" Click="btnAgregar_Click" />
+                        <Button x:Name="btnEditarVenta" Content="Editar Venta" Margin="4,5" Width="110" Click="btnEditar_Click"  />
+                        <Button x:Name="btnEliminarVenta" Content="Eliminar Venta" Margin="4,5" Width="130" Click="btnEliminarVenta_Click" />
+                        <Button x:Name="btnImprimirVenta" Content="Imprimir"  Margin="4,0,4,5" Height="30" Width="90" VerticalAlignment="Bottom" Click="btnImprimirVenta_Click" />
+                    </StackPanel>
+                    <xcdg:DataGridControl x:Name="dgVentas" MouseDoubleClick="dgEmpeños_MouseDoubleClick" KeyUp="dgEmpeños_KeyUp" AutoCreateColumns="False" ReadOnly="True" FontSize="22">
+                        <xcdg:DataGridControl.Columns>
+                            <xcdg:Column Title="Código" FieldName="Código" Width="150px" />
+                            <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150px" />
+                            <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="300*" />
+                            <xcdg:Column Title="Estado" FieldName="EstadoVenta" Width="150px" />
+                        </xcdg:DataGridControl.Columns>
+                    </xcdg:DataGridControl>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Clientes" Style="{DynamicResource ResourceKey=styleTabItemDefault}" >
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
+                        <Button x:Name="btnAgregarCliente" Content="Agregar Cliente" Margin="4,5" Height="30" Width="150" Click="btnAgregar_Click" />
+                        <Button x:Name="btnEditarCliente" Content="Editar Cliente" Margin="4,5" Height="30" Width="150" Click="btnEditarCliente_Click" />
+                        <Button x:Name="btnEliminarCliente" Content="Eliminar Cliente" Margin="4,5" Height="30" Width="150" Visibility="Collapsed" />
+                    </StackPanel>
+                    <xcdg:DataGridControl x:Name="dgClientes" MouseDoubleClick="dgEmpeños_MouseDoubleClick" KeyUp="dgEmpeños_KeyUp" AutoCreateColumns="False" ReadOnly="True" FontSize="22">
+                        <xcdg:DataGridControl.Columns>
+                            <xcdg:Column Title="Identificación" FieldName="Código" Width="150px" />
+                            <xcdg:Column Title="Nombre" FieldName="NombreCompleto" Width="300px" />
+                            <xcdg:Column Title="Teléfono" FieldName="Teléfono" Width="150px" />
+                            <xcdg:Column Title="Email" FieldName="Email" Width="150px" />
+                            <xcdg:Column Title="Dirección" FieldName="Dirección" Width="300*" />
+                        </xcdg:DataGridControl.Columns>
+                    </xcdg:DataGridControl>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Reportes" Style="{DynamicResource ResourceKey=styleTabItemDefault}" Visibility="Collapsed" >
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
+                        <Button x:Name="btnAbrirReporte" Content="_Abrir Reporte" Margin="4,5" Height="30" Width="121" Click="btnAbrirReporte_Click" />
+                    </StackPanel>
+                    <ListBox x:Name="lstReportes" MouseDoubleClick="dgEmpeños_MouseDoubleClick" KeyUp="dgEmpeños_KeyUp">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="4" BorderThickness="1" BorderBrush="SteelBlue" CornerRadius="3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontWeight="Bold" Text="{Binding Key}" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Reportes" Style="{DynamicResource ResourceKey=styleTabItemRight}">
+                <WebBrowser x:Name="webBrowser" />
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Orientation="Horizontal" Height="44" HorizontalAlignment="Right" Width="461" VerticalAlignment="Top">
+            <Label Content="Buscar:" VerticalAlignment="Center" Foreground="White" />
+            <TextBox x:Name="txtBuscar" Width="350" VerticalContentAlignment="Center" Margin="0,5" KeyUp="txtBuscar_KeyUp"/>
+            <Button x:Name="btnBuscar" Width="32" Click="btnBuscar_Click" Height="30" Margin="2,1" Background="{StaticResource ResourceKey=gradientBrushSegmentedTabItem}"
+            		BorderThickness="0,0,1,0"
+            		BorderBrush="#032A6B">
+                <Image Source="/Empeños;component/Recursos/Imágenes/Buscar.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

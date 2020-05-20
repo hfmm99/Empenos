@@ -1,0 +1,1099 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmpeñosModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EmpeñosModelStoreContainer">
+          <EntitySet Name="Artículos" EntityType="EmpeñosModel.Store.Artículos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Artículos_Características" EntityType="EmpeñosModel.Store.Artículos_Características" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Características" EntityType="EmpeñosModel.Store.Características" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categorías" EntityType="EmpeñosModel.Store.Categorías" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categorías_Características" EntityType="EmpeñosModel.Store.Categorías_Características" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clientes" EntityType="EmpeñosModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Compras" EntityType="EmpeñosModel.Store.Compras" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ComprasDetalle" EntityType="EmpeñosModel.Store.ComprasDetalle" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Empeños" EntityType="EmpeñosModel.Store.Empeños" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmpeñosDetalle" EntityType="EmpeñosModel.Store.EmpeñosDetalle" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmpeñosGarantías" EntityType="EmpeñosModel.Store.EmpeñosGarantías" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmpeñosPagos" EntityType="EmpeñosModel.Store.EmpeñosPagos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Parámetros" EntityType="EmpeñosModel.Store.Parámetros" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ventas" EntityType="EmpeñosModel.Store.Ventas" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VentasAbonos" EntityType="EmpeñosModel.Store.VentasAbonos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VentasDetalle" EntityType="EmpeñosModel.Store.VentasDetalle" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Artículos__Categorías" Association="EmpeñosModel.Store.FK_Artículos__Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Artículos" EntitySet="Artículos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artículos_Características__Artículos" Association="EmpeñosModel.Store.FK_Artículos_Características__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="Artículos_Características" EntitySet="Artículos_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artículos_Características__Características" Association="EmpeñosModel.Store.FK_Artículos_Características__Características">
+            <End Role="Características" EntitySet="Características" />
+            <End Role="Artículos_Características" EntitySet="Artículos_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categorías_Características__Características" Association="EmpeñosModel.Store.FK_Categorías_Características__Características">
+            <End Role="Características" EntitySet="Características" />
+            <End Role="Categorías_Características" EntitySet="Categorías_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categorías_Características__Categorías" Association="EmpeñosModel.Store.FK_Categorías_Características__Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Categorías_Características" EntitySet="Categorías_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras__Clientes" Association="EmpeñosModel.Store.FK_Compras__Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprasDetalle__Artículos" Association="EmpeñosModel.Store.FK_ComprasDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="ComprasDetalle" EntitySet="ComprasDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprasDetalle__Ventas" Association="EmpeñosModel.Store.FK_ComprasDetalle__Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="ComprasDetalle" EntitySet="ComprasDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empeños__Clientes" Association="EmpeñosModel.Store.FK_Empeños__Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Empeños" EntitySet="Empeños" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosDetalle__Artículos" Association="EmpeñosModel.Store.FK_EmpeñosDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="EmpeñosDetalle" EntitySet="EmpeñosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosDetalle__Empeños" Association="EmpeñosModel.Store.FK_EmpeñosDetalle__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosDetalle" EntitySet="EmpeñosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosGarantías__Empeños" Association="EmpeñosModel.Store.FK_EmpeñosGarantías__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosGarantías" EntitySet="EmpeñosGarantías" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosPagos__Empeños" Association="EmpeñosModel.Store.FK_EmpeñosPagos__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosPagos" EntitySet="EmpeñosPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas__Clientes" Association="EmpeñosModel.Store.FK_Ventas__Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasAbonos__Ventas" Association="EmpeñosModel.Store.FK_VentasAbonos__Ventas">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="VentasAbonos" EntitySet="VentasAbonos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasDetalle__Artículos" Association="EmpeñosModel.Store.FK_VentasDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="VentasDetalle" EntitySet="VentasDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasDetalle__Empeños" Association="EmpeñosModel.Store.FK_VentasDetalle__Empeños">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="VentasDetalle" EntitySet="VentasDetalle" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Artículos">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Código_Categoría" Type="int" />
+          <Property Name="Valor" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="Notas" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Foto" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Artículos_Características">
+          <Key>
+            <PropertyRef Name="Código_Artículo" />
+            <PropertyRef Name="Código_Característica" />
+          </Key>
+          <Property Name="Código_Artículo" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Código_Característica" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Características">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="TipoDeDato" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Categorías">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Categorías_Características">
+          <Key>
+            <PropertyRef Name="Código_Categoría" />
+            <PropertyRef Name="Código_Característica" />
+          </Key>
+          <Property Name="Código_Categoría" Type="int" Nullable="false" />
+          <Property Name="Código_Característica" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="NombreCompleto" Type="varchar" Nullable="false" MaxLength="201" StoreGeneratedPattern="Computed" />
+          <Property Name="Género" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="Teléfono" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="RecibirNotificaciones" Type="bit" Nullable="false" />
+          <Property Name="Dirección" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Notas" Type="varchar" MaxLength="500" />
+          <Property Name="Foto" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Código_Cliente" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="Notas" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="ComprasDetalle">
+          <Key>
+            <PropertyRef Name="Código_Compra" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Name="Código_Compra" Type="int" Nullable="false" />
+          <Property Name="Código_Artículo" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empeños">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Código_Cliente" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="ValorMercadería" Type="money" Nullable="false" />
+          <Property Name="MontoPréstamo" Type="money" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="Notas" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="EmpeñosDetalle">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Name="Código_Empeño" Type="int" Nullable="false" />
+          <Property Name="Código_Artículo" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpeñosGarantías">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código_Empeño" Type="int" Nullable="false" />
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="tinyint" Nullable="false" />
+          <Property Name="Documento" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpeñosPagos">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Cuota" />
+          </Key>
+          <Property Name="Código_Empeño" Type="int" Nullable="false" />
+          <Property Name="Cuota" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Intereses" Type="money" Nullable="false" />
+          <Property Name="Abono" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parámetros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodoDeCobro" Type="int" Nullable="false" />
+          <Property Name="Plazo" Type="int" Nullable="false" />
+          <Property Name="PorcentajePréstamo" Type="money" Nullable="false" />
+          <Property Name="PorcentajeInterés" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Name="Código" Type="int" Nullable="false" />
+          <Property Name="Código_Cliente" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VentasAbonos">
+          <Key>
+            <PropertyRef Name="Código_Venta" />
+          </Key>
+          <Property Name="Código_Venta" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Monto" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VentasDetalle">
+          <Key>
+            <PropertyRef Name="Código_Venta" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Name="Código_Venta" Type="int" Nullable="false" />
+          <Property Name="Código_Artículo" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Artículos__Categorías">
+          <End Role="Categorías" Type="EmpeñosModel.Store.Categorías" Multiplicity="0..1" />
+          <End Role="Artículos" Type="EmpeñosModel.Store.Artículos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos">
+              <PropertyRef Name="Código_Categoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artículos_Características__Artículos">
+          <End Role="Artículos" Type="EmpeñosModel.Store.Artículos" Multiplicity="1" />
+          <End Role="Artículos_Características" Type="EmpeñosModel.Store.Artículos_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos_Características">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artículos_Características__Características">
+          <End Role="Características" Type="EmpeñosModel.Store.Características" Multiplicity="1" />
+          <End Role="Artículos_Características" Type="EmpeñosModel.Store.Artículos_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Características">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos_Características">
+              <PropertyRef Name="Código_Característica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categorías_Características__Características">
+          <End Role="Características" Type="EmpeñosModel.Store.Características" Multiplicity="1" />
+          <End Role="Categorías_Características" Type="EmpeñosModel.Store.Categorías_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Características">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Categorías_Características">
+              <PropertyRef Name="Código_Característica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categorías_Características__Categorías">
+          <End Role="Categorías" Type="EmpeñosModel.Store.Categorías" Multiplicity="1" />
+          <End Role="Categorías_Características" Type="EmpeñosModel.Store.Categorías_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Categorías_Características">
+              <PropertyRef Name="Código_Categoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras__Clientes">
+          <End Role="Clientes" Type="EmpeñosModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Compras" Type="EmpeñosModel.Store.Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprasDetalle__Artículos">
+          <End Role="Artículos" Type="EmpeñosModel.Store.Artículos" Multiplicity="1" />
+          <End Role="ComprasDetalle" Type="EmpeñosModel.Store.ComprasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="ComprasDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprasDetalle__Ventas">
+          <End Role="Ventas" Type="EmpeñosModel.Store.Ventas" Multiplicity="1" />
+          <End Role="ComprasDetalle" Type="EmpeñosModel.Store.ComprasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="ComprasDetalle">
+              <PropertyRef Name="Código_Compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empeños__Clientes">
+          <End Role="Clientes" Type="EmpeñosModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Empeños" Type="EmpeñosModel.Store.Empeños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Empeños">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosDetalle__Artículos">
+          <End Role="Artículos" Type="EmpeñosModel.Store.Artículos" Multiplicity="1" />
+          <End Role="EmpeñosDetalle" Type="EmpeñosModel.Store.EmpeñosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosDetalle__Empeños">
+          <End Role="Empeños" Type="EmpeñosModel.Store.Empeños" Multiplicity="1" />
+          <End Role="EmpeñosDetalle" Type="EmpeñosModel.Store.EmpeñosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosDetalle">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosGarantías__Empeños">
+          <End Role="Empeños" Type="EmpeñosModel.Store.Empeños" Multiplicity="1" />
+          <End Role="EmpeñosGarantías" Type="EmpeñosModel.Store.EmpeñosGarantías" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosGarantías">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosPagos__Empeños">
+          <End Role="Empeños" Type="EmpeñosModel.Store.Empeños" Multiplicity="1" />
+          <End Role="EmpeñosPagos" Type="EmpeñosModel.Store.EmpeñosPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosPagos">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas__Clientes">
+          <End Role="Clientes" Type="EmpeñosModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Ventas" Type="EmpeñosModel.Store.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasAbonos__Ventas">
+          <End Role="Ventas" Type="EmpeñosModel.Store.Ventas" Multiplicity="1" />
+          <End Role="VentasAbonos" Type="EmpeñosModel.Store.VentasAbonos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasAbonos">
+              <PropertyRef Name="Código_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasDetalle__Artículos">
+          <End Role="Artículos" Type="EmpeñosModel.Store.Artículos" Multiplicity="1" />
+          <End Role="VentasDetalle" Type="EmpeñosModel.Store.VentasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasDetalle__Empeños">
+          <End Role="Ventas" Type="EmpeñosModel.Store.Ventas" Multiplicity="1" />
+          <End Role="VentasDetalle" Type="EmpeñosModel.Store.VentasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasDetalle">
+              <PropertyRef Name="Código_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpeñosModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmpeñosEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Artículos" EntityType="EmpeñosModel.Artículo" />
+          <EntitySet Name="Artículos_Características" EntityType="EmpeñosModel.Artículos_Características" />
+          <EntitySet Name="Características" EntityType="EmpeñosModel.Características" />
+          <EntitySet Name="Categorías" EntityType="EmpeñosModel.Categoría" />
+          <EntitySet Name="Clientes" EntityType="EmpeñosModel.Cliente" />
+          <EntitySet Name="Compras" EntityType="EmpeñosModel.Compra" />
+          <EntitySet Name="ComprasDetalles" EntityType="EmpeñosModel.ComprasDetalle" />
+          <EntitySet Name="Empeños" EntityType="EmpeñosModel.Empeño" />
+          <EntitySet Name="EmpeñoDetalles" EntityType="EmpeñosModel.EmpeñoDetalle" />
+          <EntitySet Name="EmpeñoGarantías" EntityType="EmpeñosModel.EmpeñoGarantía" />
+          <EntitySet Name="EmpeñoPagos" EntityType="EmpeñosModel.EmpeñoPago" />
+          <EntitySet Name="Parámetros" EntityType="EmpeñosModel.Parámetros" />
+          <EntitySet Name="Ventas" EntityType="EmpeñosModel.Venta" />
+          <EntitySet Name="VentasAbonos" EntityType="EmpeñosModel.VentasAbono" />
+          <EntitySet Name="VentasDetalles" EntityType="EmpeñosModel.VentasDetalle" />
+          <AssociationSet Name="FK_Artículos__Categorías" Association="EmpeñosModel.FK_Artículos__Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Artículos" EntitySet="Artículos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artículos_Características__Artículos" Association="EmpeñosModel.FK_Artículos_Características__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="Artículos_Características" EntitySet="Artículos_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprasDetalle__Artículos" Association="EmpeñosModel.FK_ComprasDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="ComprasDetalle" EntitySet="ComprasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosDetalle__Artículos" Association="EmpeñosModel.FK_EmpeñosDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="EmpeñosDetalle" EntitySet="EmpeñoDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasDetalle__Artículos" Association="EmpeñosModel.FK_VentasDetalle__Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="VentasDetalle" EntitySet="VentasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Artículos_Características__Características" Association="EmpeñosModel.FK_Artículos_Características__Características">
+            <End Role="Características" EntitySet="Características" />
+            <End Role="Artículos_Características" EntitySet="Artículos_Características" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Compras__Clientes" Association="EmpeñosModel.FK_Compras__Clientes">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Compra" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empeños__Clientes" Association="EmpeñosModel.FK_Empeños__Clientes">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Empeños" EntitySet="Empeños" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ventas__Clientes" Association="EmpeñosModel.FK_Ventas__Clientes">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Venta" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprasDetalle__Ventas" Association="EmpeñosModel.FK_ComprasDetalle__Ventas">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="ComprasDetalle" EntitySet="ComprasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosDetalle__Empeños" Association="EmpeñosModel.FK_EmpeñosDetalle__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosDetalle" EntitySet="EmpeñoDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosGarantías__Empeños" Association="EmpeñosModel.FK_EmpeñosGarantías__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosGarantías" EntitySet="EmpeñoGarantías" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpeñosPagos__Empeños" Association="EmpeñosModel.FK_EmpeñosPagos__Empeños">
+            <End Role="Empeños" EntitySet="Empeños" />
+            <End Role="EmpeñosPagos" EntitySet="EmpeñoPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasAbonos__Ventas" Association="EmpeñosModel.FK_VentasAbonos__Ventas">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="VentasAbono" EntitySet="VentasAbonos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VentasDetalle__Empeños" Association="EmpeñosModel.FK_VentasDetalle__Empeños">
+            <End Role="Venta" EntitySet="Ventas" />
+            <End Role="VentasDetalle" EntitySet="VentasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="Categorías_Características" Association="EmpeñosModel.Categorías_Características">
+            <End Role="Características" EntitySet="Características" />
+            <End Role="Categorías" EntitySet="Categorías" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Artículo">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="String" Name="Código" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Código_Categoría" />
+          <Property Type="Decimal" Name="Valor" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Byte" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="Notas" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Foto" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Categorías" Relationship="EmpeñosModel.FK_Artículos__Categorías" FromRole="Artículos" ToRole="Categorías" />
+          <NavigationProperty Name="Artículos_Características" Relationship="EmpeñosModel.FK_Artículos_Características__Artículos" FromRole="Artículos" ToRole="Artículos_Características" />
+          <NavigationProperty Name="ComprasDetalles" Relationship="EmpeñosModel.FK_ComprasDetalle__Artículos" FromRole="Artículos" ToRole="ComprasDetalle" />
+          <NavigationProperty Name="EmpeñosDetalle" Relationship="EmpeñosModel.FK_EmpeñosDetalle__Artículos" FromRole="Artículos" ToRole="EmpeñosDetalle" />
+          <NavigationProperty Name="VentasDetalles" Relationship="EmpeñosModel.FK_VentasDetalle__Artículos" FromRole="Artículos" ToRole="VentasDetalle" />
+        </EntityType>
+        <EntityType Name="Artículos_Características">
+          <Key>
+            <PropertyRef Name="Código_Artículo" />
+            <PropertyRef Name="Código_Característica" />
+          </Key>
+          <Property Type="String" Name="Código_Artículo" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Código_Característica" Nullable="false" />
+          <Property Type="String" Name="Valor" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Artículos" Relationship="EmpeñosModel.FK_Artículos_Características__Artículos" FromRole="Artículos_Características" ToRole="Artículos" />
+          <NavigationProperty Name="Características" Relationship="EmpeñosModel.FK_Artículos_Características__Características" FromRole="Artículos_Características" ToRole="Características" />
+        </EntityType>
+        <EntityType Name="Características">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TipoDeDato" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Artículos_Características" Relationship="EmpeñosModel.FK_Artículos_Características__Características" FromRole="Características" ToRole="Artículos_Características" />
+          <NavigationProperty Name="Categorías" Relationship="EmpeñosModel.Categorías_Características" FromRole="Características" ToRole="Categorías" />
+        </EntityType>
+        <EntityType Name="Categoría">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Artículos" Relationship="EmpeñosModel.FK_Artículos__Categorías" FromRole="Categorías" ToRole="Artículos" />
+          <NavigationProperty Name="Características" Relationship="EmpeñosModel.Categorías_Características" FromRole="Categorías" ToRole="Características" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="String" Name="Código" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NombreCompleto" Nullable="false" MaxLength="201" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="Género" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Teléfono" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="RecibirNotificaciones" Nullable="false" />
+          <Property Type="String" Name="Dirección" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Notas" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Foto" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Compras" Relationship="EmpeñosModel.FK_Compras__Clientes" FromRole="Cliente" ToRole="Compra" />
+          <NavigationProperty Name="Empeños" Relationship="EmpeñosModel.FK_Empeños__Clientes" FromRole="Cliente" ToRole="Empeños" />
+          <NavigationProperty Name="Ventas" Relationship="EmpeñosModel.FK_Ventas__Clientes" FromRole="Cliente" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="String" Name="Código_Cliente" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
+          <Property Type="Byte" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="Notas" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="EmpeñosModel.FK_Compras__Clientes" FromRole="Compra" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="ComprasDetalle">
+          <Key>
+            <PropertyRef Name="Código_Compra" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Type="Int32" Name="Código_Compra" Nullable="false" />
+          <Property Type="String" Name="Código_Artículo" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Artículos" Relationship="EmpeñosModel.FK_ComprasDetalle__Artículos" FromRole="ComprasDetalle" ToRole="Artículos" />
+          <NavigationProperty Name="Venta" Relationship="EmpeñosModel.FK_ComprasDetalle__Ventas" FromRole="ComprasDetalle" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Empeño">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="String" Name="Código_Cliente" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
+          <Property Type="Decimal" Name="ValorMercadería" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="MontoPréstamo" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Byte" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="Notas" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="EmpeñosModel.FK_Empeños__Clientes" FromRole="Empeños" ToRole="Cliente" />
+          <NavigationProperty Name="EmpeñosDetalle" Relationship="EmpeñosModel.FK_EmpeñosDetalle__Empeños" FromRole="Empeños" ToRole="EmpeñosDetalle" />
+          <NavigationProperty Name="EmpeñosGarantías" Relationship="EmpeñosModel.FK_EmpeñosGarantías__Empeños" FromRole="Empeños" ToRole="EmpeñosGarantías" />
+          <NavigationProperty Name="EmpeñosPagos" Relationship="EmpeñosModel.FK_EmpeñosPagos__Empeños" FromRole="Empeños" ToRole="EmpeñosPagos" />
+        </EntityType>
+        <EntityType Name="EmpeñoDetalle">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Type="Int32" Name="Código_Empeño" Nullable="false" />
+          <Property Type="String" Name="Código_Artículo" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Artículos" Relationship="EmpeñosModel.FK_EmpeñosDetalle__Artículos" FromRole="EmpeñosDetalle" ToRole="Artículos" />
+          <NavigationProperty Name="Empeños" Relationship="EmpeñosModel.FK_EmpeñosDetalle__Empeños" FromRole="EmpeñosDetalle" ToRole="Empeños" />
+        </EntityType>
+        <EntityType Name="EmpeñoGarantía">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código_Empeño" Nullable="false" />
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="Byte" Name="Tipo" Nullable="false" />
+          <Property Type="Binary" Name="Documento" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Empeños" Relationship="EmpeñosModel.FK_EmpeñosGarantías__Empeños" FromRole="EmpeñosGarantías" ToRole="Empeños" />
+        </EntityType>
+        <EntityType Name="EmpeñoPago">
+          <Key>
+            <PropertyRef Name="Código_Empeño" />
+            <PropertyRef Name="Cuota" />
+          </Key>
+          <Property Type="Int32" Name="Código_Empeño" Nullable="false" />
+          <Property Type="Int32" Name="Cuota" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
+          <Property Type="Decimal" Name="Intereses" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="Abono" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Empeños" Relationship="EmpeñosModel.FK_EmpeñosPagos__Empeños" FromRole="EmpeñosPagos" ToRole="Empeños" />
+        </EntityType>
+        <EntityType Name="Parámetros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PeriodoDeCobro" Nullable="false" />
+          <Property Type="Int32" Name="Plazo" Nullable="false" />
+          <Property Type="Decimal" Name="PorcentajePréstamo" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="PorcentajeInterés" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="Código" />
+          </Key>
+          <Property Type="Int32" Name="Código" Nullable="false" />
+          <Property Type="String" Name="Código_Cliente" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
+          <Property Type="Byte" Name="Estado" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="EmpeñosModel.FK_Ventas__Clientes" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="ComprasDetalles" Relationship="EmpeñosModel.FK_ComprasDetalle__Ventas" FromRole="Venta" ToRole="ComprasDetalle" />
+          <NavigationProperty Name="VentasAbono" Relationship="EmpeñosModel.FK_VentasAbonos__Ventas" FromRole="Venta" ToRole="VentasAbono" />
+          <NavigationProperty Name="VentasDetalles" Relationship="EmpeñosModel.FK_VentasDetalle__Empeños" FromRole="Venta" ToRole="VentasDetalle" />
+        </EntityType>
+        <EntityType Name="VentasAbono">
+          <Key>
+            <PropertyRef Name="Código_Venta" />
+          </Key>
+          <Property Type="Int32" Name="Código_Venta" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
+          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Venta" Relationship="EmpeñosModel.FK_VentasAbonos__Ventas" FromRole="VentasAbono" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="VentasDetalle">
+          <Key>
+            <PropertyRef Name="Código_Venta" />
+            <PropertyRef Name="Código_Artículo" />
+          </Key>
+          <Property Type="Int32" Name="Código_Venta" Nullable="false" />
+          <Property Type="String" Name="Código_Artículo" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Artículos" Relationship="EmpeñosModel.FK_VentasDetalle__Artículos" FromRole="VentasDetalle" ToRole="Artículos" />
+          <NavigationProperty Name="Venta" Relationship="EmpeñosModel.FK_VentasDetalle__Empeños" FromRole="VentasDetalle" ToRole="Venta" />
+        </EntityType>
+        <Association Name="FK_Artículos__Categorías">
+          <End Type="EmpeñosModel.Categoría" Role="Categorías" Multiplicity="0..1" />
+          <End Type="EmpeñosModel.Artículo" Role="Artículos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos">
+              <PropertyRef Name="Código_Categoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artículos_Características__Artículos">
+          <End Type="EmpeñosModel.Artículo" Role="Artículos" Multiplicity="1" />
+          <End Type="EmpeñosModel.Artículos_Características" Role="Artículos_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos_Características">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprasDetalle__Artículos">
+          <End Type="EmpeñosModel.Artículo" Role="Artículos" Multiplicity="1" />
+          <End Type="EmpeñosModel.ComprasDetalle" Role="ComprasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="ComprasDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosDetalle__Artículos">
+          <End Type="EmpeñosModel.Artículo" Role="Artículos" Multiplicity="1" />
+          <End Type="EmpeñosModel.EmpeñoDetalle" Role="EmpeñosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasDetalle__Artículos">
+          <End Type="EmpeñosModel.Artículo" Role="Artículos" Multiplicity="1" />
+          <End Type="EmpeñosModel.VentasDetalle" Role="VentasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasDetalle">
+              <PropertyRef Name="Código_Artículo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Artículos_Características__Características">
+          <End Type="EmpeñosModel.Características" Role="Características" Multiplicity="1" />
+          <End Type="EmpeñosModel.Artículos_Características" Role="Artículos_Características" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Características">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Artículos_Características">
+              <PropertyRef Name="Código_Característica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Compras__Clientes">
+          <End Type="EmpeñosModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="EmpeñosModel.Compra" Role="Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empeños__Clientes">
+          <End Type="EmpeñosModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="EmpeñosModel.Empeño" Role="Empeños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Empeños">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ventas__Clientes">
+          <End Type="EmpeñosModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="EmpeñosModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="Código_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprasDetalle__Ventas">
+          <End Type="EmpeñosModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="EmpeñosModel.ComprasDetalle" Role="ComprasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="ComprasDetalle">
+              <PropertyRef Name="Código_Compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosDetalle__Empeños">
+          <End Type="EmpeñosModel.Empeño" Role="Empeños" Multiplicity="1" />
+          <End Type="EmpeñosModel.EmpeñoDetalle" Role="EmpeñosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosDetalle">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosGarantías__Empeños">
+          <End Type="EmpeñosModel.Empeño" Role="Empeños" Multiplicity="1" />
+          <End Type="EmpeñosModel.EmpeñoGarantía" Role="EmpeñosGarantías" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosGarantías">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpeñosPagos__Empeños">
+          <End Type="EmpeñosModel.Empeño" Role="Empeños" Multiplicity="1" />
+          <End Type="EmpeñosModel.EmpeñoPago" Role="EmpeñosPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empeños">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="EmpeñosPagos">
+              <PropertyRef Name="Código_Empeño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasAbonos__Ventas">
+          <End Type="EmpeñosModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="EmpeñosModel.VentasAbono" Role="VentasAbono" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasAbono">
+              <PropertyRef Name="Código_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VentasDetalle__Empeños">
+          <End Type="EmpeñosModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="EmpeñosModel.VentasDetalle" Role="VentasDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Código" />
+            </Principal>
+            <Dependent Role="VentasDetalle">
+              <PropertyRef Name="Código_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Categorías_Características">
+          <End Type="EmpeñosModel.Características" Role="Características" Multiplicity="*" />
+          <End Type="EmpeñosModel.Categoría" Role="Categorías" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmpeñosModelStoreContainer" CdmEntityContainer="EmpeñosEntities">
+          <EntitySetMapping Name="Artículos">
+            <EntityTypeMapping TypeName="EmpeñosModel.Artículo">
+              <MappingFragment StoreEntitySet="Artículos">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Código_Categoría" ColumnName="Código_Categoría" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artículos_Características">
+            <EntityTypeMapping TypeName="EmpeñosModel.Artículos_Características">
+              <MappingFragment StoreEntitySet="Artículos_Características">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Código_Característica" ColumnName="Código_Característica" />
+                <ScalarProperty Name="Código_Artículo" ColumnName="Código_Artículo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Características">
+            <EntityTypeMapping TypeName="EmpeñosModel.Características">
+              <MappingFragment StoreEntitySet="Características">
+                <ScalarProperty Name="TipoDeDato" ColumnName="TipoDeDato" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorías">
+            <EntityTypeMapping TypeName="EmpeñosModel.Categoría">
+              <MappingFragment StoreEntitySet="Categorías">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="EmpeñosModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Dirección" ColumnName="Dirección" />
+                <ScalarProperty Name="RecibirNotificaciones" ColumnName="RecibirNotificaciones" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Teléfono" ColumnName="Teléfono" />
+                <ScalarProperty Name="Género" ColumnName="Género" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compras">
+            <EntityTypeMapping TypeName="EmpeñosModel.Compra">
+              <MappingFragment StoreEntitySet="Compras">
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Código_Cliente" ColumnName="Código_Cliente" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComprasDetalles">
+            <EntityTypeMapping TypeName="EmpeñosModel.ComprasDetalle">
+              <MappingFragment StoreEntitySet="ComprasDetalle">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Código_Artículo" ColumnName="Código_Artículo" />
+                <ScalarProperty Name="Código_Compra" ColumnName="Código_Compra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empeños">
+            <EntityTypeMapping TypeName="EmpeñosModel.Empeño">
+              <MappingFragment StoreEntitySet="Empeños">
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="MontoPréstamo" ColumnName="MontoPréstamo" />
+                <ScalarProperty Name="ValorMercadería" ColumnName="ValorMercadería" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Código_Cliente" ColumnName="Código_Cliente" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpeñoDetalles">
+            <EntityTypeMapping TypeName="EmpeñosModel.EmpeñoDetalle">
+              <MappingFragment StoreEntitySet="EmpeñosDetalle">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Código_Artículo" ColumnName="Código_Artículo" />
+                <ScalarProperty Name="Código_Empeño" ColumnName="Código_Empeño" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpeñoGarantías">
+            <EntityTypeMapping TypeName="EmpeñosModel.EmpeñoGarantía">
+              <MappingFragment StoreEntitySet="EmpeñosGarantías">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+                <ScalarProperty Name="Código_Empeño" ColumnName="Código_Empeño" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpeñoPagos">
+            <EntityTypeMapping TypeName="EmpeñosModel.EmpeñoPago">
+              <MappingFragment StoreEntitySet="EmpeñosPagos">
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="Intereses" ColumnName="Intereses" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cuota" ColumnName="Cuota" />
+                <ScalarProperty Name="Código_Empeño" ColumnName="Código_Empeño" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parámetros">
+            <EntityTypeMapping TypeName="EmpeñosModel.Parámetros">
+              <MappingFragment StoreEntitySet="Parámetros">
+                <ScalarProperty Name="PorcentajeInterés" ColumnName="PorcentajeInterés" />
+                <ScalarProperty Name="PorcentajePréstamo" ColumnName="PorcentajePréstamo" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="PeriodoDeCobro" ColumnName="PeriodoDeCobro" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="EmpeñosModel.Venta">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Código_Cliente" ColumnName="Código_Cliente" />
+                <ScalarProperty Name="Código" ColumnName="Código" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentasAbonos">
+            <EntityTypeMapping TypeName="EmpeñosModel.VentasAbono">
+              <MappingFragment StoreEntitySet="VentasAbonos">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Código_Venta" ColumnName="Código_Venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentasDetalles">
+            <EntityTypeMapping TypeName="EmpeñosModel.VentasDetalle">
+              <MappingFragment StoreEntitySet="VentasDetalle">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Código_Artículo" ColumnName="Código_Artículo" />
+                <ScalarProperty Name="Código_Venta" ColumnName="Código_Venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Categorías_Características" TypeName="EmpeñosModel.Categorías_Características" StoreEntitySet="Categorías_Características">
+            <EndProperty Name="Categorías">
+              <ScalarProperty Name="Código" ColumnName="Código_Categoría" />
+            </EndProperty>
+            <EndProperty Name="Características">
+              <ScalarProperty Name="Código" ColumnName="Código_Característica" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

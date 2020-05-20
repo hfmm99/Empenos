@@ -1,0 +1,137 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:clases="clr-namespace:Empeños.Clases"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controles="clr-namespace:Empeños.Controles" 
+        x:Class="Empeños.Formularios.FrmVentas"
+        Title="Ventas" Width="1100" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        FontSize="16" mc:Ignorable="d" Closing="Window_Closing" Height="709.902" ShowInTaskbar="False">
+    <Window.Resources>
+        <clases:RowToIndexConv x:Key="RowToIndexConv"/>
+        <Style x:Key="CellRightAlign">
+            <Setter Property="Control.HorizontalAlignment"
+            Value="Right" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,42">
+        <Label HorizontalAlignment="Left" Margin="28,11,0,0" VerticalAlignment="Top" Content="Código:"/>
+        <controles:NumericTextBox x:Name="txtCódigo" Height="27" Margin="120,12,0,0" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Left" Width="215" Loaded="txtCódigo_Loaded" Mask="0:0" TabIndex="0" />
+        <Label Margin="0,11,257,0" VerticalAlignment="Top" Content="Fecha:" RenderTransformOrigin="0.512,0.692" HorizontalAlignment="Right" />
+        <DatePicker x:Name="dtpFecha" Height="28" Margin="0,12,37,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="215" IsTabStop="True" TabIndex="1" />
+        <Label HorizontalAlignment="Left" Margin="28,46,0,0" VerticalAlignment="Top" Cursor="Hand" MouseLeftButtonUp="lblCliente_MouseLeftButtonUp">
+            <TextBlock ><Underline><Run Text="Cliente:"/></Underline></TextBlock>
+        </Label>
+        <controles:MyAutoCompleteBox x:Name="txtClientes" Placeholder="Buscar cliente" Height="27" Margin="120,47,37,0" VerticalAlignment="Top" Populating="txtClientes_Populating" MinimumPrefixLength="3" IsTextCompletionEnabled="True" IsDropDownOpen="True" IsManipulationEnabled="True" MinimumPopulateDelay="700" FilterMode="None" ValueMemberPath="Value" IsTabStop="True" TabIndex="2">
+            <controles:MyAutoCompleteBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Key}" FontWeight="Bold" Margin="2" />
+                        <TextBlock Text="{Binding Value}" Margin="2" />
+                    </StackPanel>
+                </DataTemplate>
+            </controles:MyAutoCompleteBox.ItemTemplate>
+        </controles:MyAutoCompleteBox>
+        <TabControl Margin="0,189,0,5">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="IsTabStop" Value="False"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabItem Header="Artículos">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="437*"/>
+                        <RowDefinition Height="47*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel x:Name="pnlListaArtículos" LastChildFill="True" d:IsHidden="False">
+                        <DockPanel.RenderTransform>
+                            <TranslateTransform />
+                        </DockPanel.RenderTransform>
+                        <WrapPanel DockPanel.Dock="Top" Height="45" VerticalAlignment="Center" Margin="0,10,0,0">
+                            <WrapPanel.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Margin" Value="4"/>
+                                </Style>
+                            </WrapPanel.Resources>
+
+                            <controles:MyAutoCompleteBox x:Name="txtArtículos" Placeholder="Buscar artículo" Height="34" VerticalAlignment="Top" Populating="txtArtículos_Populating" MinimumPrefixLength="3" IsTextCompletionEnabled="True" IsDropDownOpen="True" IsManipulationEnabled="True" MinimumPopulateDelay="700" FilterMode="None" ValueMemberPath="Value" Width="857" Margin="4,4,0,4" IsTabStop="True" TabIndex="7">
+                                <controles:MyAutoCompleteBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Key}" FontWeight="Bold" Margin="2" Width="110" />
+                                            <TextBlock Text="{Binding Value}"  FontStyle="Italic" Foreground="DarkGray" Margin="2" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </controles:MyAutoCompleteBox.ItemTemplate>
+                            </controles:MyAutoCompleteBox>
+
+                            <Button x:Name="btnAgregarArtículo" Content="_Agregar" Width="85" Height="30" Margin="10,4,4,4" Click="btnAgregarArtículo_Click" TabIndex="8"/>
+                            <Button x:Name="btnBorrarArtículo" Content="_Borrar" Width="85" Height="30" Click="btnBorrarArtículo_Click" TabIndex="9" />
+                        </WrapPanel>
+                        <DataGrid x:Name="grdArtículos" Margin="0,5,0,0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CellEditEnding="grdArtículos_CellEditEnding" IsTabStop="True" TabIndex="10" ClipboardCopyMode="IncludeHeader"  >
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Código" Width="1*" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Código}">
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip>
+                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:#,#}}" />
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Artículo" Width="2*" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DescripciónExtendida}">
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip>
+                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:#,#}}" />
+                                                    </ToolTip>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Precio de Venta" Binding="{Binding Precio, StringFormat=\{0:#\,#\}}"  ElementStyle="{StaticResource CellRightAlign}" Width="1*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                    <Label HorizontalAlignment="Right" Grid.Row="1" Margin="0,5,211,0" VerticalAlignment="Top" Content="Monto Total de la venta:" Height="29" Width="199"/>
+                    <controles:NumericTextBox x:Name="txtTotalMontoVenta" Grid.Row="1" Height="27" Margin="0,6,15,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Right" Width="187" IsReadOnly="True" Background="LightYellow" MinValue="0" TabIndex="11" Text="0"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabAbonos" Header="Abonos" Visibility="Hidden">
+                <DockPanel x:Name="pnlListaPagos" Grid.Row="0" LastChildFill="True" d:IsHidden="False">
+                    <Grid>
+                        <controles:IndicadorEstado x:Name="ctrlIndicador" Margin="0,328,651,0"/>
+                        <TextBlock Text="Total de intereses cancelados:" Margin="0,0,194,66" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" />
+                        <TextBlock Margin="0,0,194,38" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" ><Run Text="Total de "/><Run Language="es-us" Text="préstamo"/><Run Text=" cancelado:"/></TextBlock>
+                        <TextBlock Margin="0,0,194,10" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" ><Run Language="es-us" Text="Saldo del préstamo"/><Run Text=":"/></TextBlock>
+                        <controles:NumericTextBox x:Name="txtTotalInteresesCancelados" Margin="0,0,10,66" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                        <controles:NumericTextBox x:Name="txtTotalDePréstamoCancelado" Margin="0,0,10,38" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                        <controles:NumericTextBox x:Name="txtSaldoDelPréstamo" Margin="0,0,10,10" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                    </Grid>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="btnGuardar" Content="Guardar" Margin="0,0,115,-34" HorizontalAlignment="Right" Width="90" Click="btnGuardar_Click" Height="31" VerticalAlignment="Bottom" TabIndex="13"/>
+        <Button x:Name="btnCancelar" Content="Salir" Margin="0,0,15,-34" HorizontalAlignment="Right" Width="87" Height="31" VerticalAlignment="Bottom" Click="btnCancelar_Click" TabIndex="14"/>
+        <CheckBox x:Name="chkImprimirAlGuardar" Content="Imprimir al guardar" IsChecked="True" Margin="0,0,229,-27" HorizontalAlignment="Right" VerticalAlignment="Bottom" TabIndex="12" />
+        <Label HorizontalAlignment="Left" Margin="28,78,0,0" VerticalAlignment="Top" Content="Estado:"/>
+        <ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" Margin="120,80,0,0" VerticalAlignment="Top" Width="215" SelectedIndex='0' IsEnabled="False" TabIndex="3">
+            <ComboBoxItem Content="Activo" />
+            <ComboBoxItem Content="Retirado" />
+            <ComboBoxItem Content="Quedado" />
+        </ComboBox>
+        <Label Margin="0,78,266,0" Content="Tipo:" HorizontalAlignment="Right" Width="45" Height="32" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbTipoContado" Content="Contado" Margin="0,76,172,0" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Right" Width="80" Height="36" VerticalAlignment="Top" TabIndex="4" Checked="rbTipo_Checked"/>
+        <RadioButton x:Name="rbTipoApartado" Content="Apartado" Margin="0,77,37,0" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="85" Height="34" VerticalAlignment="Top" TabIndex="5" Checked="rbTipo_Checked" IsEnabled="False"  />
+        <TextBox x:Name="txtNotasVentas" Height="72" Margin="120,112,37,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" TabIndex="6"/>
+        <Label HorizontalAlignment="Left" Margin="34,132,0,0" VerticalAlignment="Top" Content="Notas:"/>
+    </Grid>
+</Window>
