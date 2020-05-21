@@ -44,6 +44,7 @@ namespace Empeños.Formularios
                     {
                         txtCódigo.Text = cliente.Código;
                         txtCódigo.IsReadOnly = true;
+    
 
                         txtNombre.Text = cliente.Nombre;
                         txtApellidos.Text = cliente.Apellidos;
@@ -100,6 +101,27 @@ namespace Empeños.Formularios
                 return;
             }
 
+            string caseSwitch = cmbTipoId.Text;
+            int tipoid;
+            switch (caseSwitch)
+            {
+                case "Física":
+                    tipoid = 1;
+                    break;
+                case "Jurídica":
+                    tipoid = 2;
+                    break;
+                case "NITE":
+                    tipoid = 3;
+                    break;
+                case "DIMEX":
+                    tipoid = 4;
+                    break;
+                default:
+                    tipoid = 5;
+                    break;
+            }
+
             using (var bd = new EmpeñosDataContext())
             {
                 Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Text.Trim());
@@ -119,6 +141,7 @@ namespace Empeños.Formularios
                 Cliente.RecibirNotificaciones = chkRecibirNotificaciones.IsChecked.Value;
                 Cliente.Dirección = txtDirección.Text;
                 Cliente.Notas = txtNotas.Text;
+                Cliente.TipoCedula = tipoid;
 
                 if (imgFoto.Source != null && !imgFoto.Source.ToString().StartsWith("pack"))
                 {
