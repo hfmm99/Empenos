@@ -42,9 +42,28 @@ namespace Empeños.Formularios
                     var cliente = bd.Clientes.SingleOrDefault(c => c.Código == códigoCliente);
                     if (cliente != null)
                     {
-                        txtCódigo.Text = cliente.Código;
                         txtCódigo.IsReadOnly = true;
-    
+                        cmbTipoId.IsEnabled = false;
+                        short caseSwitch = cliente.TipoCedula;
+                        string tipoid;
+                        switch (caseSwitch)
+                        {
+                            case 1:
+                                tipoid = "Física";
+                                break;
+                            case 2:
+                                tipoid = "Jurídica";
+                                break;
+                            case 3:
+                                tipoid = "NITE";
+                                break;
+                            case 4:
+                                tipoid = "DIMEX";
+                                break;
+                            default:
+                                tipoid = "Sin Definir";
+                                break;
+                        }
 
                         txtNombre.Text = cliente.Nombre;
                         txtApellidos.Text = cliente.Apellidos;
@@ -55,6 +74,9 @@ namespace Empeños.Formularios
                         chkRecibirNotificaciones.IsChecked = cliente.RecibirNotificaciones;
                         txtDirección.Text = cliente.Dirección;
                         txtNotas.Text = cliente.Notas;
+                        cmbTipoId.Text = tipoid;
+                        txtCódigo.Text = cliente.Código;
+                        
 
                         if (cliente.Foto != null)
                         {
@@ -102,7 +124,7 @@ namespace Empeños.Formularios
             }
 
             string caseSwitch = cmbTipoId.Text;
-            int tipoid;
+            short tipoid;
             switch (caseSwitch)
             {
                 case "Física":
@@ -124,15 +146,14 @@ namespace Empeños.Formularios
 
             using (var bd = new EmpeñosDataContext())
             {
-                Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Text.Trim());
+                Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Value.ToString());
 
                 if (Cliente == null)
                 {
-                    Cliente = new Cliente();
+                    Cliente = new Cliente { TipoCedula = tipoid, Código = txtCódigo.Value.ToString() };
                     bd.Clientes.InsertOnSubmit(Cliente);
                 }
 
-                Cliente.Código = txtCódigo.Text.Trim();
                 Cliente.Nombre = txtNombre.Text.Trim();
                 Cliente.Apellidos = txtApellidos.Text.Trim();
                 Cliente.Género = rbMasculino.IsChecked.Value ? 'M' : 'F';
@@ -141,7 +162,6 @@ namespace Empeños.Formularios
                 Cliente.RecibirNotificaciones = chkRecibirNotificaciones.IsChecked.Value;
                 Cliente.Dirección = txtDirección.Text;
                 Cliente.Notas = txtNotas.Text;
-                Cliente.TipoCedula = tipoid;
 
                 if (imgFoto.Source != null && !imgFoto.Source.ToString().StartsWith("pack"))
                 {
@@ -201,5 +221,38 @@ namespace Empeños.Formularios
         {
             imgFoto.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png"));
         }
+
+        private void ChangeMaskID(object sender, RoutedEventArgs e)
+        {
+           
+            if (txtCódigo != null)
+            {
+                txtCódigo.Clear();
+                switch (cmbTipoId.SelectedIndex)
+                {
+                    case 0:
+                        txtCódigo.Mask = "0-0000-0000";
+                        txtCódigo.IncludeLiteralsInValue = false;
+                        break;
+                    case 1:
+                        txtCódigo.Mask = "0000000000";
+                        break;
+                    case 2:
+                        txtCódigo.Mask = "0000000000";
+                        break;
+                    case 3:
+                        txtCódigo.Mask = "000000000000";
+                        break;
+                    default:
+                        txtCódigo.Mask = "";
+                        break;
+                }
+                txtCódigo.Focus();
+            }
+        }
+            
     }
+
+     
+    
 }

@@ -1683,7 +1683,7 @@ namespace Empeños.Datos
 		
 		private System.Data.Linq.Link<System.Data.Linq.Binary> _Foto;
 		
-		private int _TipoCedula;
+		private short _TipoCedula;
 		
 		private EntitySet<Compra> _Compras;
 		
@@ -1717,7 +1717,7 @@ namespace Empeños.Datos
     partial void OnNotasChanged();
     partial void OnFotoChanging(System.Data.Linq.Binary value);
     partial void OnFotoChanged();
-    partial void OnTipoCedulaChanging(int value);
+    partial void OnTipoCedulaChanging(short value);
     partial void OnTipoCedulaChanged();
     #endregion
 		
@@ -1949,8 +1949,8 @@ namespace Empeños.Datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoCedula", DbType="Int NOT NULL")]
-		public int TipoCedula
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoCedula", DbType="SmallInt NOT NULL")]
+		public short TipoCedula
 		{
 			get
 			{

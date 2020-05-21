@@ -81,7 +81,7 @@
       <Column Name="Dirección" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="true" />
-      <Column Name="TipoCedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoCedula" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Cliente_Compra" Member="Compras" ThisKey="Código" OtherKey="Código_Cliente" Type="Compra" />
       <Association Name="Cliente_Empeño" Member="Empeños" ThisKey="Código" OtherKey="Código_Cliente" Type="Empeño" />
       <Association Name="Cliente_Venta" Member="Venta" Storage="_Ventas" ThisKey="Código" OtherKey="Código_Cliente" Type="Venta" />
