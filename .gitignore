@@ -5,3 +5,6 @@
 /.vs/Empenos
 /.vs/Empeños/v16/Server/sqlite3
 /.vs
+/packages
+/Empeños/obj/Debug
+/Empeños/bin/Debug
