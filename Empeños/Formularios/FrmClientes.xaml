@@ -28,15 +28,15 @@
         <ComboBox x:Name="cmbTipoId"  Height="27"  Grid.Row="0"  Grid.Column="1" VerticalAlignment="Center"  SelectedIndex='0'  TabIndex="5" SelectionChanged="ChangeMaskID" >
             <ComboBoxItem Content="Física" />
             <ComboBoxItem Content="Jurídica" />
-            <ComboBoxItem Content="NITE" />
             <ComboBoxItem Content="DIMEX" />
+            <ComboBoxItem Content="NITE" />
             <ComboBoxItem Content="Sin Definir" />
         </ComboBox>
 
         <Label Grid.Row="1" VerticalAlignment="Center" Content="Identificación:"/>
         <!--TextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/-->
 
-        <xctk:MaskedTextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0-0000-0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False" />
+        <xctk:MaskedTextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0 0000 0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False" />
         
         <Label  Grid.Row="2" VerticalAlignment="Center" Content="Nombre:"/>
         <TextBox x:Name="txtNombre" Height="27" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>

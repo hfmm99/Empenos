@@ -55,10 +55,10 @@ namespace Empeños.Formularios
                                 tipoid = "Jurídica";
                                 break;
                             case 3:
-                                tipoid = "NITE";
+                                tipoid = "DIMEX";
                                 break;
                             case 4:
-                                tipoid = "DIMEX";
+                                tipoid = "NITE";
                                 break;
                             default:
                                 tipoid = "Sin Definir";
@@ -133,10 +133,10 @@ namespace Empeños.Formularios
                 case "Jurídica":
                     tipoid = 2;
                     break;
-                case "NITE":
+                case "DIMEX":
                     tipoid = 3;
                     break;
-                case "DIMEX":
+                case "NITE":
                     tipoid = 4;
                     break;
                 default:
@@ -231,17 +231,17 @@ namespace Empeños.Formularios
                 switch (cmbTipoId.SelectedIndex)
                 {
                     case 0:
-                        txtCódigo.Mask = "0-0000-0000";
+                        txtCódigo.Mask = "0 0000 0000";
                         txtCódigo.IncludeLiteralsInValue = false;
                         break;
                     case 1:
-                        txtCódigo.Mask = "0000000000";
+                        txtCódigo.Mask = "0 000 000000";
                         break;
                     case 2:
-                        txtCódigo.Mask = "0000000000";
+                        txtCódigo.Mask = "000000000000";
                         break;
                     case 3:
-                        txtCódigo.Mask = "000000000000";
+                        txtCódigo.Mask = "0 000 000000";
                         break;
                     default:
                         txtCódigo.Mask = "";
