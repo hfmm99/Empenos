@@ -44,7 +44,7 @@ namespace Empeños.Formularios
                     {
                         txtCódigo.IsReadOnly = true;
                         cmbTipoId.IsEnabled = false;
-                        short caseSwitch = cliente.TipoCedula;
+                        short caseSwitch = cliente.TipoIdentificación;
                         string tipoid;
                         switch (caseSwitch)
                         {
@@ -150,7 +150,7 @@ namespace Empeños.Formularios
 
                 if (Cliente == null)
                 {
-                    Cliente = new Cliente { TipoCedula = tipoid, Código = txtCódigo.Value.ToString() };
+                    Cliente = new Cliente { TipoIdentificación = tipoid, Código = txtCódigo.Value.ToString() };
                     bd.Clientes.InsertOnSubmit(Cliente);
                 }
 

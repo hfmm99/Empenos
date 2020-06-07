@@ -71,6 +71,7 @@
   <Table Name="dbo.Clientes" Member="Clientes">
     <Type Name="Cliente">
       <Column Name="Código" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TipoIdentificación" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="NombreCompleto" Type="System.String" DbType="VarChar(201) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
@@ -81,7 +82,6 @@
       <Column Name="Dirección" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="true" />
-      <Column Name="TipoCedula" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Cliente_Compra" Member="Compras" ThisKey="Código" OtherKey="Código_Cliente" Type="Compra" />
       <Association Name="Cliente_Empeño" Member="Empeños" ThisKey="Código" OtherKey="Código_Cliente" Type="Empeño" />
       <Association Name="Cliente_Venta" Member="Venta" Storage="_Ventas" ThisKey="Código" OtherKey="Código_Cliente" Type="Venta" />
@@ -114,6 +114,8 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="TotalMontoPréstamo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Plazo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PorcentajeInterés" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Firma" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Empeño_EmpeñosDetalle" Member="EmpeñosDetalles" ThisKey="Código" OtherKey="Código_Empeño" Type="EmpeñosDetalle" />

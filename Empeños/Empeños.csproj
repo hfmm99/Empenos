@@ -324,6 +324,9 @@
     <Resource Include="Resources\Firmar.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\1.sql" />
+    <Content Include="Scripts\2.sql" />
+    <Content Include="Scripts\3.sql" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
