@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Collections.ObjectModel;
 
 namespace Empeños.Formularios
 {
@@ -19,6 +20,7 @@ namespace Empeños.Formularios
         Parámetro parámetros;
 
         List<Artículo> listaArtículos = new List<Artículo>();
+        ObservableCollection<VentasAbono> abonos;
 
         public FrmVentas()
         {
@@ -374,6 +376,54 @@ namespace Empeños.Formularios
         {
             if (rbTipoApartado != null)
                 tabAbonos.Visibility = rbTipoApartado.IsChecked.Value ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void GridAbonos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridApartado.SelectedItem != null)
+            {
+                var abono = gridApartado.SelectedItem as VentasAbono;
+
+                if (abono != null)
+                {
+                    var frmVentas = new FrmVentas();
+
+                    if (frmVentas.ShowDialog() == true)
+                    {
+                        //abono.Fecha = frmVentas.abon;
+                        //abono.FechaCuota = frmCuota.FechaCuota;
+                    }
+                }
+            }
+        }
+
+        private void btnAgregarAbono(object sender, RoutedEventArgs e)
+        {
+            var frmAbono = new FrmAbono(int.Parse(txtCódigo.Text), 0, DateTime.Now, 0);
+
+            try
+            {
+                //inkFirma.SetTabletState(1);
+
+                if (frmAbono.ShowDialog() == true)
+                {
+                    var abono = new VentasAbono {Código_Venta = txtCódigo.AsInt, Cuota = abonos.Count, Fecha = frmAbono.Fecha, Monto = frmAbono.Monto };
+
+                    abono.PropertyChanged += pago_PropertyChanged;
+                    abonos.Add(abono);
+                    gridApartado.SelectedItem = abono;
+                    //ActualizarTotales();
+                }
+            }
+            finally
+            {
+              //  inkFirma.SetTabletState(1);
+            }
+
+
+
+           // var frmAbono = new FrmAbono(int.Parse(txtCódigo.Text), 0, DateTime.Now,0);
+            //frmAbono.ShowDialog();
         }
     }
 }

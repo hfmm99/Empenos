@@ -1,12 +1,13 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:clases="clr-namespace:Empeños.Clases"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:controles="clr-namespace:Empeños.Controles"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
         xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
         x:Class="Empeños.Formularios.FrmEmpeños"
-         xmlns:Topaz="clr-namespace:Topaz;assembly=SigPlusNET" 
+        xmlns:Topaz="clr-namespace:Topaz;assembly=SigPlusNET" 
         Title="Empeños" Width="1119.5" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
         FontSize="16" mc:Ignorable="d" Closing="Window_Closing" Height="845.454" ShowInTaskbar="False" WindowState="Maximized">
     <Window.Resources>

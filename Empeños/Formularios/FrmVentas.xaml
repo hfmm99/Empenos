@@ -2,6 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:clases="clr-namespace:Empeños.Clases"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controles="clr-namespace:Empeños.Controles" 
         x:Class="Empeños.Formularios.FrmVentas"
@@ -106,15 +108,84 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabAbonos" Header="Abonos" Visibility="Hidden">
-                <DockPanel x:Name="pnlListaPagos" Grid.Row="0" LastChildFill="True" d:IsHidden="False">
-                    <Grid>
-                        <controles:IndicadorEstado x:Name="ctrlIndicador" Margin="0,328,651,0"/>
-                        <TextBlock Text="Total de intereses cancelados:" Margin="0,0,194,66" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" />
-                        <TextBlock Margin="0,0,194,38" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" ><Run Text="Total de "/><Run Language="es-us" Text="préstamo"/><Run Text=" cancelado:"/></TextBlock>
-                        <TextBlock Margin="0,0,194,10" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" ><Run Language="es-us" Text="Saldo del préstamo"/><Run Text=":"/></TextBlock>
-                        <controles:NumericTextBox x:Name="txtTotalInteresesCancelados" Margin="0,0,10,66" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
-                        <controles:NumericTextBox x:Name="txtTotalDePréstamoCancelado" Margin="0,0,10,38" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
-                        <controles:NumericTextBox x:Name="txtSaldoDelPréstamo" Margin="0,0,10,10" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="23" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                <DockPanel x:Name="pnlListaPagos2" Grid.Row="0" LastChildFill="True" d:IsHidden="False">
+                    <DockPanel.RenderTransform>
+                        <TranslateTransform />
+                    </DockPanel.RenderTransform>
+                    <WrapPanel DockPanel.Dock="Top">
+                        <WrapPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="4"/>
+                            </Style>
+                        </WrapPanel.Resources>
+                        <Button x:Name="btnNuevoAbono" Content="_Abonar" ToolTip="Abonar una cuota a un apartado" Width="85" Height="30" Click="btnAgregarAbono" />
+                        <Button x:Name="btnRetirarApartado" Content="Re_tirar" ToolTip="Cancelar la totalidad del saldo del apartado y retirar los artículos" Width="85" Height="30"/>
+                        <Button x:Name="btnBorrarAbono" Content="_Borrar" Width="85" Height="30" />
+                        <Button x:Name="btnImprimirAbono" Content="Imprimir"  Width="85" Height="30"  />
+                    </WrapPanel>
+                    <Grid Margin="0,3,0,0">
+                        <xcdg:DataGridControl x:Name="gridApartado" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,115" AutoCreateColumns="False" ReadOnly="True" 
+                            MouseDoubleClick="GridAbonos_MouseDoubleClick">
+                            <xcdg:DataGridControl.Resources>
+                                <Style TargetType="{x:Type xcdg:GroupByControl}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
+                                <Style x:Key="itemIndexSelectorStyle" TargetType="{x:Type xcdg:RowSelector}">
+                                    <Setter Property="Content" Value="{Binding ItemIndex, Converter={StaticResource RowToIndexConv}, RelativeSource={RelativeSource Self}}" />
+                                </Style>
+
+                                <Style TargetType="{x:Type xcdg:DataRow}">
+                                    <Setter Property="xcdg:RowSelector.RowSelectorStyle" Value="{StaticResource itemIndexSelectorStyle}" />
+                                </Style>
+
+                                <Style TargetType="{x:Type xcdg:ColumnManagerCell}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+
+                            </xcdg:DataGridControl.Resources>
+
+                            <xcdg:DataGridControl.Columns>
+                                <xcdg:Column AllowSort="False" AllowGroup="False" FieldName="Fecha" Title="Fecha de Abono" Width="1.5*">
+                                    <xcdg:Column.CellEditor>
+                                        <xcdg:CellEditor>
+                                            <xcdg:CellEditor.EditTemplate>
+                                                <DataTemplate>
+                                                    <xctk:DateTimePicker FormatString="d/M/yyyy h:mm:ss tt" Format="Custom" IsEnabled="{Binding EditMode}" Value="{xcdg:CellEditorBinding}"/>
+                                                </DataTemplate>
+                                            </xcdg:CellEditor.EditTemplate>
+                                        </xcdg:CellEditor>
+                                    </xcdg:Column.CellEditor>
+                                </xcdg:Column>
+                                <xcdg:Column AllowSort="False" AllowGroup="False" FieldName="Monto" Title="Monto" Width="1*">
+                                    <xcdg:Column.CellContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock TextAlignment="Right" Text="{Binding StringFormat=N0}"/>
+                                        </DataTemplate>
+                                    </xcdg:Column.CellContentTemplate>
+                                    <xcdg:Column.CellEditor>
+                                        <xcdg:CellEditor>
+                                            <xcdg:CellEditor.EditTemplate>
+                                                <DataTemplate>
+                                                    <xctk:IntegerUpDown FormatString="N0" Value="{xcdg:CellEditorBinding}"/>
+                                                </DataTemplate>
+                                            </xcdg:CellEditor.EditTemplate>
+                                        </xcdg:CellEditor>
+                                    </xcdg:Column.CellEditor>
+                                </xcdg:Column>
+                            </xcdg:DataGridControl.Columns>
+                            <xcdg:DataGridControl.View>
+                                <xcdg:TableView AllowRowResize="False"/>
+                            </xcdg:DataGridControl.View>
+                        </xcdg:DataGridControl>
+
+                        <TextBlock Text="Total de venta:" Margin="0,0,194,84" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" />
+                        <TextBlock Text="Total de abono:" Margin="0,0,194,49" TextAlignment="Right" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="215" />
+                        <TextBlock Text="Saldo:" Margin="0,0,194,13" TextAlignment="Right" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="162" />
+                        <controles:NumericTextBox x:Name="txtTotalVenta" Margin="0,0,10,80" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="30" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                        <controles:NumericTextBox x:Name="txtTotalAbono" Margin="0,0,10,45" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="30" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                        <controles:NumericTextBox x:Name="txtSaldo" Margin="0,0,10,10" TextAlignment="Right" HorizontalAlignment="Right" Width="179" Height="30" VerticalAlignment="Bottom" IsReadOnly="True" IsTabStop="False" Background="LightYellow" />
+                        <TextBlock x:Name="lblDías" Margin="10,0,414,10" TextAlignment="Center" Height="30" VerticalAlignment="Bottom"/>
                     </Grid>
                 </DockPanel>
             </TabItem>

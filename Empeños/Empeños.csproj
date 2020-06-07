@@ -148,6 +148,9 @@
     <Compile Include="Datos\Empeños.cs">
       <DependentUpon>Empeños.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmAbono.xaml.cs">
+      <DependentUpon>FrmAbono.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FrmCuota.xaml.cs">
       <DependentUpon>FrmCuota.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
     <Page Include="Controles\IndicadorEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\FrmAbono.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Formularios\FrmCuota.xaml">
       <SubType>Designer</SubType>
