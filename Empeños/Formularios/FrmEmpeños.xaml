@@ -189,13 +189,13 @@
             </controles:MyAutoCompleteBox.ItemTemplate>
         </controles:MyAutoCompleteBox>
 
-        <Border BorderBrush="#1E90FF" Margin="10,144,30,0" BorderThickness="1" Height="121" VerticalAlignment="Top" Grid.Column="1">
+        <Border BorderBrush="#1E90FF" Margin="10.2,186,29.8,0" BorderThickness="1" Height="126" VerticalAlignment="Top" Grid.Column="1">
             <WindowsFormsHost>
                 <Topaz:SigPlusNET x:Name="inkFirma" Dock="Fill" />
             </WindowsFormsHost>
         </Border>
 
-        <TabControl Margin="0,278,0,10" Grid.ColumnSpan="2">
+        <TabControl Margin="0,324,-0.2,10" Grid.ColumnSpan="2">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="IsTabStop" Value="False"/>
@@ -414,19 +414,23 @@
         <Button x:Name="btnGuardar" Content="Guardar" Margin="0,0,115,-28" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom" Click="btnGuardar_Click" Grid.Column="1"/>
         <Button x:Name="btnCancelar" Content="Salir" Margin="0,0,15,-28" HorizontalAlignment="Right" Width="87" Height="32" VerticalAlignment="Bottom" Click="btnCancelar_Click" Grid.Column="1"/>
         <CheckBox x:Name="chkImprimirAlGuardar" Content="Imprimir al guardar" IsChecked="True" Margin="0,0,229,-28" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" VerticalContentAlignment="Center" Height="32" />
-        <Label HorizontalAlignment="Left" Margin="30,78,0,0" VerticalAlignment="Top" Content="Estado:" Width="59"/>
-        <ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" Margin="120,80,0,0" VerticalAlignment="Top" Width="215" SelectedIndex='0' IsEnabled="False" Height="29">
+        <Label HorizontalAlignment="Left" Margin="30,120,0,0" VerticalAlignment="Top" Content="Estado:" Width="59" Height="29"/>
+        <ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" Margin="120,122,0,0" VerticalAlignment="Top" Width="215" SelectedIndex='0' IsEnabled="False" Height="26">
             <ComboBoxItem Content="Activo" />
             <ComboBoxItem Content="Retirado" />
             <ComboBoxItem Content="Quedado" />
             <ComboBoxItem Content="ComboBoxItem" Height="100" Width="100"/>
         </ComboBox>
-        <Label Margin="0,80,257,0" VerticalAlignment="Top" Content="Fecha de Vencimiento:" RenderTransformOrigin="0.512,0.692" Grid.Column="1" Height="29" HorizontalAlignment="Right" Width="168" />
-        <DatePicker x:Name="dtpFechaVencimiento" Height="30" Margin="0,79,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="222" IsEnabled="False" Grid.Column="1" />
-        <Label HorizontalAlignment="Left" Margin="30,114,0,0" VerticalAlignment="Top" Content="Notas:" RenderTransformOrigin="0.482,2.048" Height="30"/>
-        <TextBox x:Name="txtNotasEmpeño" Height="121" Margin="30,144,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" AcceptsReturn="True" />
-        <Label HorizontalAlignment="Left" Margin="30,114,0,0" VerticalAlignment="Top" Content="Notas:" RenderTransformOrigin="0.482,2.048" Height="30"/>
-        <Label HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Content="Firma:" RenderTransformOrigin="10.047,-3.21" Grid.Column="1"/>
-        <Button x:Name="btnLimpiarFirma" Content="  Limpiar Firma  " Margin="0,270,30,0" Click="BtnLimpiarFirma_Click" Background="#FFFF9393" Foreground="White" Height="30" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Right" Width="118"/>
+        <Label Margin="0,121,256.8,0" VerticalAlignment="Top" Content="Fecha de Vencimiento:" RenderTransformOrigin="0.512,0.692" Grid.Column="1" Height="27" HorizontalAlignment="Right" Width="168" />
+        <DatePicker x:Name="dtpFechaVencimiento" Height="28" Margin="0,120,29.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="222" IsEnabled="False" Grid.Column="1" />
+        <TextBox x:Name="txtNotasEmpeño" Height="126" Margin="30,186,9.8,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" AcceptsReturn="True" />
+        <Label HorizontalAlignment="Left" Margin="30,154,0,0" VerticalAlignment="Top" Content="Notas:" RenderTransformOrigin="0.482,2.048" Height="27"/>
+        <Label HorizontalAlignment="Left" Margin="10.2,152,0,0" VerticalAlignment="Top" Content="Firma:" RenderTransformOrigin="10.047,-3.21" Grid.Column="1" Height="29"/>
+        <Button x:Name="btnLimpiarFirma" Content="  Limpiar Firma  " Margin="0,323,29.8,0" Click="BtnLimpiarFirma_Click" Background="#FFFF9393" Foreground="White" Height="27" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Right" Width="118"/>
+        <Label HorizontalAlignment="Left" Margin="30,81,0,0" VerticalAlignment="Top" Content="Plazo:" Width="63"/>
+        <controles:NumericTextBox x:Name="txtPlazo" Height="26" Margin="120,84,0,0" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Left" Width="215" IsEnabled="False" />
+        <Label Margin="0,81,256.8,0" VerticalAlignment="Top" Content="Porcentaje de Interés:" RenderTransformOrigin="0.512,0.692" HorizontalAlignment="Right" Grid.Column="1" />
+        <controles:NumericTextBox x:Name="txtPorcentajeIntereses" Height="30" Margin="0,82,29.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="222" Grid.Column="1" IsEnabled="False" ValueType="Double" />
+        <Label HorizontalAlignment="Left" Margin="340,81,0,0" VerticalAlignment="Top" Content="meses" Width="63"/>
     </Grid>
 </Window>

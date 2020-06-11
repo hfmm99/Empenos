@@ -98,6 +98,8 @@ namespace Empeños.Formularios
                         txtClientes.Text = empeño.Cliente.NombreCompleto;
                     }
 
+                    txtPlazo.AsInt = empeño.Plazo;
+                    txtPorcentajeIntereses.AsDecimal = empeño.PorcentajeInterés;
                     txtTotalMontoPréstamo.AsInt = empeño.TotalMontoPréstamo;
                     txtNotasEmpeño.Text = empeño.Notas;
 
@@ -130,6 +132,11 @@ namespace Empeños.Formularios
 
                     dtpFecha.Focus();
                 }
+            }
+            else
+            {
+                txtPlazo.AsInt = parámetros.Plazo;
+                txtPorcentajeIntereses.AsDecimal = parámetros.PorcentajeInterés;
             }
         }
 
@@ -213,7 +220,12 @@ namespace Empeños.Formularios
 
                     if (empeño == null)
                     {
-                        empeño = new Empeño { Código = txtCódigo.AsInt };
+                        empeño = new Empeño
+                        {
+                            Código = txtCódigo.AsInt,
+                            PorcentajeInterés = txtPorcentajeIntereses.AsDecimal,
+                            TotalMontoPréstamo = txtTotalMontoPréstamo.AsInt
+                        };
                         bd.Empeños.InsertOnSubmit(empeño);
                         insertando = true;
                     }
@@ -229,7 +241,7 @@ namespace Empeños.Formularios
 
                         empeño.Código_Cliente = códigoCliente;
                         empeño.Fecha = dtpFecha.SelectedDate.Value;
-                        empeño.TotalMontoPréstamo = txtTotalMontoPréstamo.AsInt;
+                        empeño.Plazo = txtPlazo.AsInt;
                         empeño.Notas = txtNotasEmpeño.Text;
 
                         if (inkFirma.NumberOfTabletPoints() == 0)
@@ -500,8 +512,8 @@ namespace Empeños.Formularios
                 fechaCuota = últimoPago.FechaCuota.AddMonths(1);
             }
 
-            var frmCuota = new FrmCuota(txtCódigo.AsInt, sender == btnRetirar, DateTime.Now, fechaCuota, Convert.ToInt32(txtSaldoDelPréstamo.AsInt * parámetros.PorcentajeInterés / 100), (sender == btnRetirar) ? txtTotalMontoPréstamo.AsInt - pagos.Sum(p => p.Abono) : 0);
-          
+            var frmCuota = new FrmCuota(txtCódigo.AsInt, sender == btnRetirar, DateTime.Now, fechaCuota, Convert.ToInt32(txtSaldoDelPréstamo.AsInt * txtPorcentajeIntereses.AsDecimal / 100), (sender == btnRetirar) ? txtTotalMontoPréstamo.AsInt - pagos.Sum(p => p.Abono) : 0);
+
             try
             {
                 inkFirma.SetTabletState(1);
@@ -587,7 +599,7 @@ namespace Empeños.Formularios
                     cmbEstado.SelectedIndex = saldo == 0 ? (int)EstadosEmpeño.Retirado : (int)EstadosEmpeño.Activo;
 
                 fechaÚltimoPago = pagos.Max(p => p.FechaCuota);
-                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(parámetros.Plazo);
+                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(txtPlazo.AsInt);
 
                 #region Formato Condicional
 
@@ -610,7 +622,7 @@ namespace Empeños.Formularios
                 txtTotalInteresesCancelados.AsInt = txtTotalDePréstamoCancelado.AsInt = 0;
                 txtSaldoDelPréstamo.AsInt = txtTotalMontoPréstamo.AsInt;
                 fechaÚltimoPago = dtpFecha.SelectedDate.Value;
-                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(parámetros.Plazo);
+                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(txtPlazo.AsInt);
             }
             double días = (DateTime.Today - fechaÚltimoPago).TotalDays;
 
