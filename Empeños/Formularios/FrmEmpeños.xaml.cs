@@ -72,6 +72,7 @@ namespace Empeños.Formularios
 
             cmbCategorías.SelectedIndex = 0;
 
+
             dtpFecha.SelectedDate = DateTime.Today;
             pnlDetalleArtículo.Visibility = Visibility.Collapsed;
             txtCódigo.Focus();
@@ -136,8 +137,9 @@ namespace Empeños.Formularios
             else
             {
                 txtPlazo.AsInt = parámetros.Plazo;
-                txtPorcentajeIntereses.AsDecimal = parámetros.PorcentajeInterés;
+                txtPorcentajeIntereses.AsDecimal = Math.Round(parámetros.PorcentajeInterés, 2);
             }
+            if (txtPlazo.Text != "1") { labelMeses.Content = "meses"; }
         }
 
         private void pago_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -628,12 +630,16 @@ namespace Empeños.Formularios
 
             if (Convert.ToByte(cmbEstado.SelectedIndex) == (byte)EstadosEmpeño.Activo)
             {
-                if (días > 90)
+                crtOrange.Maximum = (txtPlazo.AsInt * 30);
+                crtYellow.Maximum = (txtPlazo.AsInt * 30) / 3 * 2;
+                crtGreen.Maximum = (txtPlazo.AsInt * 30) / 3;
+
+                if (días > (txtPlazo.AsInt * 30))
                 {
                     if (ctrlIndicador.QualitativeRange.Count == 3)
                         ctrlIndicador.QualitativeRange.Add(new Controles.QualitativeRange { Color = Colors.Red, Maximum = días });
 
-                    ctrlIndicador.Maximum = días;
+                    ctrlIndicador.Maximum = txtPlazo.AsInt;
                 }
                 else
                 {
@@ -642,8 +648,7 @@ namespace Empeños.Formularios
                     if (ctrlIndicador.QualitativeRange.Count == 4)
                         ctrlIndicador.QualitativeRange.RemoveAt(3);
 
-                    ctrlIndicador.Maximum = 90;
-
+                    ctrlIndicador.Maximum = txtPlazo.AsInt * 30;
                 }
 
                 ctrlIndicador.Value = días;

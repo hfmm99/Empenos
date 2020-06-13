@@ -390,12 +390,12 @@
 
                         <controles:GaugeControl x:Name="ctrlIndicador" Style="{StaticResource bulletGraphGauge}"
                         Margin="10,0,414,30"
-                        Minimum="0" Maximum="90" Height="77" VerticalAlignment="Bottom">
+                        Minimum="0" Maximum = "30" Height="77" VerticalAlignment="Bottom">
                             <controles:GaugeControl.QualitativeRange>
                                 <controles:QualitativeRanges>
-                                    <controles:QualitativeRange Color="Green" Maximum="30"/>
-                                    <controles:QualitativeRange Color="Yellow" Maximum="60"/>
-                                    <controles:QualitativeRange Color="Orange" Maximum="90"/>
+                                    <controles:QualitativeRange Color="Green" Maximum="10" x:Name="crtGreen"/>
+                                    <controles:QualitativeRange Color="Yellow" Maximum="20" x:Name="crtYellow"/>
+                                    <controles:QualitativeRange Color="Orange" Maximum="30" x:Name="crtOrange"/>
                                 </controles:QualitativeRanges>
                             </controles:GaugeControl.QualitativeRange>
                         </controles:GaugeControl>
@@ -430,7 +430,7 @@
         <Label HorizontalAlignment="Left" Margin="30,81,0,0" VerticalAlignment="Top" Content="Plazo:" Width="63"/>
         <controles:NumericTextBox x:Name="txtPlazo" Height="26" Margin="120,84,0,0" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Left" Width="215" IsEnabled="False" />
         <Label Margin="0,81,256.8,0" VerticalAlignment="Top" Content="Porcentaje de Interés:" RenderTransformOrigin="0.512,0.692" HorizontalAlignment="Right" Grid.Column="1" />
-        <controles:NumericTextBox x:Name="txtPorcentajeIntereses" Height="30" Margin="0,82,29.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="222" Grid.Column="1" IsEnabled="False" ValueType="Double" />
-        <Label HorizontalAlignment="Left" Margin="340,81,0,0" VerticalAlignment="Top" Content="meses" Width="63"/>
+        <controles:NumericTextBox x:Name="txtPorcentajeIntereses" Height="30" Margin="0,82,29.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="222" Grid.Column="1" IsEnabled="False" ValueType="Double" Mask="0,00"/>
+        <Label x:Name="labelMeses" HorizontalAlignment="Left" Margin="340,81,0,0" VerticalAlignment="Top" Content="mes" Width="63"/>
     </Grid>
 </Window>

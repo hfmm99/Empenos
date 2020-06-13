@@ -294,6 +294,7 @@ namespace Empeños.Reportes
 
         public static FlowDocument ReciboDePago(string códigoEmpeño, string códigoCliente, string nombreCliente, int cuota, DateTime fecha, DateTime fechaPago, int intereses, int abono, int saldo, string firma)
         {
+            EmpeñosDataContext empeñosDataContext = new EmpeñosDataContext();
             Image image = new Image()
             {
                 Stretch = Stretch.None
@@ -488,11 +489,20 @@ namespace Empeños.Reportes
 
             if (saldo > 0)
             {
-                paragraph11.Inlines.Add(new Run("1. Todo préstamo, es hecho a un plazo de trés meses, por un mes de intereses cancelado renueva el plazo de vencimiento un més."));
+
+                Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == int.Parse(códigoEmpeño)));
                 paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new Run("2. Tasa de interés del 10% mensual, cobrandose siempre un més como mínimo. Pagaderos por mes."));
                 paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new Run("3. El no pago de intereses en 3 meses autoriza a la Salvada para que disponga de la prenda."));
+                paragraph11.Inlines.Add(new Run($"1. Todo préstamo, es hecho a un plazo de { empeño.Plazo } {  (empeño.Plazo == 1 ? "mes" : "meses") }, por cada mes de intereses cancelado renueva el plazo de vencimiento un mes más."));
+                paragraph11.Inlines.Add(new LineBreak());
+                string value = Math.Round(empeño.PorcentajeInterés, 2).ToString();
+                paragraph11.Inlines.Add(new Run("2. Tasa de interés del " + value + "% mensual, cobrandose siempre un mes como mínimo. Pagaderos mensualmente."));
+
+                paragraph11.Inlines.Add(new LineBreak());
+                paragraph11.Inlines.Add(new Run($"3. El no pago de intereses en { empeño.Plazo }{(empeño.Plazo == 1 ? " mes" : " meses") } autoriza a La Salvada a disponer de la prenda empeñada."));
+                paragraph11.Inlines.Add(new LineBreak());
+                paragraph11.Inlines.Add(new LineBreak());
+                paragraph11.Inlines.Add(new Run("No olvide su próximo pago el: " + fecha.AddMonths(1).ToShortDateString()));
                 blocks4.Add((Block)paragraph11);
             }
             else
