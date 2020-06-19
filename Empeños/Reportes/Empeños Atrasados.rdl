@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="Empeños">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=FAMMORALES\SQLEXPRESS;Initial Catalog=Empeños</ConnectString>
+        <ConnectString>Data Source=.;Initial Catalog=Empeños</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
@@ -22,7 +22,8 @@
        C.Código                           As [Indentificación del Cliente], 
        C.NombreCompleto                   [Nombre del Cliente], 
        Max(P.FechaCuota)                  [Último Pago],
-       DateDiff(Day, IsNull(Max(P.FechaCuota), E.Fecha), GetDate()) / 30 [Meses Pendientes]
+       DateDiff(Day, IsNull(Max(P.FechaCuota), E.Fecha), GetDate()) / 30 [Meses Pendientes],
+       E.Plazo
 From   Empeños E 
        Inner Join Clientes C 
                On E.Código_Cliente = C.Código 
@@ -33,7 +34,8 @@ Group  By E.Código,
           E.Fecha, 
           E.TotalMontoPréstamo, 
           C.Código, 
-          C.NombreCompleto
+          C.NombreCompleto,
+          E.Plazo
 Having DateDiff(Day, IsNull(Max(P.FechaCuota), E.Fecha), GetDate()) / 30 &gt; 0
 Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -67,6 +69,10 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
           <DataField>Meses Pendientes</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="Plazo">
+          <DataField>Plazo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -97,6 +103,9 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>43.25625mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>25mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -369,6 +378,44 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Plazo</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#7292cc</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#4c68a2</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -607,12 +654,46 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Plazo">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Plazo.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Color>#4d4d4d</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Plazo</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#e5e5e5</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -641,7 +722,7 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
             <Top>11.92389mm</Top>
             <Left>0mm</Left>
             <Height>12mm</Height>
-            <Width>273.41874mm</Width>
+            <Width>298.41875mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -655,7 +736,7 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Empeños atrazados</Value>
+                    <Value>Empeños atrasados</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>20pt</FontSize>
@@ -691,7 +772,7 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
           </Border>
         </Style>
       </Body>
-      <Width>273.41874mm</Width>
+      <Width>298.41875mm</Width>
       <Page>
         <PageFooter>
           <Height>7.9375mm</Height>
@@ -751,6 +832,12 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>d74e8680-b6da-4fdb-922c-a832bca09fe6</rd:ReportID>
 </Report>
