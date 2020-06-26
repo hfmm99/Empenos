@@ -8,7 +8,7 @@
         xmlns:controles="clr-namespace:Empeños.Controles" 
         x:Class="Empeños.Formularios.FrmVentas"
         Title="Ventas" Width="1100" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
-        FontSize="16" mc:Ignorable="d" Closing="Window_Closing" Height="709.902" ShowInTaskbar="False">
+        FontSize="16" mc:Ignorable="d" Closing="Window_Closing" Height="731.902" ShowInTaskbar="False">
     <Window.Resources>
         <clases:RowToIndexConv x:Key="RowToIndexConv"/>
         <Style x:Key="CellRightAlign">
@@ -71,7 +71,7 @@
                             <Button x:Name="btnAgregarArtículo" Content="_Agregar" Width="85" Height="30" Margin="10,4,4,4" Click="btnAgregarArtículo_Click" TabIndex="8"/>
                             <Button x:Name="btnBorrarArtículo" Content="_Borrar" Width="85" Height="30" Click="btnBorrarArtículo_Click" TabIndex="9" />
                         </WrapPanel>
-                        <DataGrid x:Name="grdArtículos" Margin="0,5,0,0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CellEditEnding="grdArtículos_CellEditEnding" IsTabStop="True" TabIndex="10" ClipboardCopyMode="IncludeHeader"  >
+                        <DataGrid x:Name="grdArtículos" Margin="0,5,0,92" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CellEditEnding="grdArtículos_CellEditEnding" IsTabStop="True" TabIndex="10" ClipboardCopyMode="IncludeHeader"  >
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Código" Width="1*" IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -103,8 +103,12 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </DockPanel>
-                    <Label HorizontalAlignment="Right" Grid.Row="1" Margin="0,5,211,0" VerticalAlignment="Top" Content="Monto Total de la venta:" Height="29" Width="199"/>
-                    <controles:NumericTextBox x:Name="txtTotalMontoVenta" Grid.Row="1" Height="27" Margin="0,6,15,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Right" Width="187" IsReadOnly="True" Background="LightYellow" MinValue="0" TabIndex="11" Text="0"/>
+                    <Label HorizontalAlignment="Right" Margin="0,317,206,0" VerticalAlignment="Top" Content="Subtotal:" Height="29" Width="199"/>
+                    <controles:NumericTextBox x:Name="txtTotalMontoVenta" Height="27" Margin="0,318,10,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Right" Width="187" IsReadOnly="True" Background="LightYellow" MinValue="0" TabIndex="11" Text="0"/>
+                    <Label HorizontalAlignment="Right" Margin="0,355,162,0" VerticalAlignment="Top" Content="IVA:" Height="29" Width="199"/>
+                    <controles:NumericTextBox x:Name="txtIVA" Height="27" Margin="0,355,10,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Right" Width="187" IsReadOnly="True" Background="LightYellow"  TabIndex="11" Text="0" ValueType="Double" Mask="0,00" />
+                    <Label HorizontalAlignment="Right" Margin="0,389,206,0" VerticalAlignment="Top" Content="Monto total de la venta:" Height="38" Width="199" Grid.RowSpan="2"/>
+                    <controles:NumericTextBox x:Name="txtMontoAPagar" Height="27" Margin="0,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" MaxLength="15" HorizontalAlignment="Right" Width="187" IsReadOnly="True" Background="LightYellow" TabIndex="11" Text="0" Grid.Row="1"  ValueType="Double" Mask="0,00"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabAbonos" Header="Abonos" Visibility="Hidden">

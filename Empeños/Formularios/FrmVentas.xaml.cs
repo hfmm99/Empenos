@@ -59,6 +59,7 @@ namespace Empeños.Formularios
                     dtpFecha.SelectedDate = venta.Fecha;
                     cmbEstado.SelectedIndex = (int)venta.Estado;
                     txtCódigo.IsEnabled = false;
+                    txtMontoAPagar.Text = venta.Total.ToString();
 
                     if (venta.Cliente != null)
                     {
@@ -183,6 +184,8 @@ namespace Empeños.Formularios
 
                     int cuota = 0;
                     venta.VentasAbonos.Add(new VentasAbono { Cuota = ++cuota, Fecha = DateTime.Now, Monto = txtTotalMontoVenta.AsInt });
+                    venta.Impuesto = txtIVA.AsDecimal;
+                    venta.Total = txtMontoAPagar.AsInt;
 
                     bd.SubmitChanges();
 
@@ -274,6 +277,8 @@ namespace Empeños.Formularios
 
         private void ActualizarTotales()
         {
+            var bd = new EmpeñosDataContext();
+            parámetros = bd.Parámetros.FirstOrDefault();
             /*
             var pagos = gridPagos.Items.OfType<EmpeñosPago>().ToArray();
 
@@ -308,8 +313,12 @@ namespace Empeños.Formularios
             else
                 ctrlIndicador.Estado = Controles.EstadoIndicador.Rojo;
              * */
-
-            txtTotalMontoVenta.Text = listaArtículos.Sum(art => art.Precio).ToString();
+            var suma = listaArtículos.Sum(art => art.Precio);
+            var impuesto = suma * parámetros.IVA;
+            var total = suma + impuesto;
+            txtIVA.Text = impuesto.ToString();
+            txtTotalMontoVenta.Text = suma.ToString();
+            txtMontoAPagar.Text = total.ToString();
         }
 
         private void btnAgregarArtículo_Click(object sender, RoutedEventArgs e)

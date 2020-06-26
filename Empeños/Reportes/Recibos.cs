@@ -610,8 +610,14 @@ namespace Empeños.Reportes
                     Paragraph paragraph4 = new Paragraph();
                     int num10 = 1;
                     paragraph4.TextAlignment = (TextAlignment)num10;
-                    paragraph4.Inlines.Add(new Run("Monto Total: "));
+                    paragraph4.Inlines.Add(new Run("Sub-Total: "));
                     paragraph4.Inlines.Add(venta.VentasDetalles.Sum<VentasDetalle>((Func<VentasDetalle, int>)(det => det.Artículo.Precio.Value)).ToString("C0"));
+                    paragraph4.Inlines.Add(new LineBreak());
+                    paragraph4.Inlines.Add(new Run("IVA: "));
+                    paragraph4.Inlines.Add(venta.Impuesto.ToString("C0"));
+                    paragraph4.Inlines.Add(new LineBreak());
+                    paragraph4.Inlines.Add(new Run("Monto Total: "));
+                    paragraph4.Inlines.Add(venta.Total.ToString("C0"));
                     blockArray[index1] = (Block)paragraph4;
                     int index2 = 1;
                     Paragraph paragraph5 = new Paragraph();

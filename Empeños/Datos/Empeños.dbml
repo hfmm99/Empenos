@@ -161,6 +161,7 @@
       <Column Name="PorcentajeInterés" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="RutaRespaldoBD" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="RutaServidorReportes" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="IVA" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Ventas" Member="Ventas">
@@ -170,6 +171,8 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="Impuesto" Type="System.Decimal" DbType="money" CanBeNull="false" />
+      <Column Name="Total" Type="System.Int32" DbType="int" CanBeNull="false" />
       <Association Name="Venta_VentasDetalle" Member="VentasDetalles" ThisKey="Código" OtherKey="Código_Venta" Type="VentasDetalle" />
       <Association Name="Venta_VentasAbono" Member="VentasAbonos" ThisKey="Código" OtherKey="Código_Venta" Type="VentasAbono" />
       <Association Name="Cliente_Venta" Member="Cliente" ThisKey="Código_Cliente" OtherKey="Código" Type="Cliente" IsForeignKey="true" />
