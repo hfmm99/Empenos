@@ -320,6 +320,9 @@
     <Resource Include="Resources\Firmar.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Recursos\Imágenes\FirmaPorfirio.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Scripts\1.sql" />
     <Content Include="Scripts\2.sql" />
     <Content Include="Scripts\3.sql" />

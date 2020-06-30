@@ -204,7 +204,7 @@ namespace Empeños.Formularios
                     frmEmpeños.ShowDialog();
 
                     if (frmEmpeños.ImprimirAlGuardar)
-                        Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmEmpeños.txtCódigo.AsInt));
+                        Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmEmpeños.txtCódigo.AsInt, frmEmpeños.inkFirma.GetSigString()));
                     break;
                 case 1: //Compras
                     var frmCompras = new FrmCompras() { Owner = this };
@@ -236,7 +236,8 @@ namespace Empeños.Formularios
         private void btnImprimirEmpeño_Click(object sender, RoutedEventArgs e)
         {
             if (dgEmpeños.SelectedItem != null)
-                Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño((dgEmpeños.SelectedItem as Empeño).Código));
+                Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño((dgEmpeños.SelectedItem as Empeño).Código, (dgEmpeños.SelectedItem as Empeño).Firma));
+              //  Recibos.Imprimir("Imprimiendo Contrato", Recibos.ReciboDeAcuerdo((dgEmpeños.SelectedItem as Empeño).Código));
         }
 
         private void btnReempeñar_Click(object sender, RoutedEventArgs e)

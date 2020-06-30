@@ -251,12 +251,12 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Content="Nombre del artículo:"/>
-                                <TextBox x:Name="txtNombre" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TabIndex="0" Height="30" />
+                                <TextBox x:Name="txtNombre" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TabIndex="0" Height="30"  />
 
                                 <Label Grid.Row="1" Content="Monto de préstamo:" />
                                 <controles:NumericTextBox x:Name="txtMontoPréstamo" Grid.Row="1" Grid.Column="1" Height="30" TextWrapping="Wrap" MaxLength="15" TabIndex="2" MinValue="0"/>
 
-                                <Label Grid.Row="2" Content="Categoría:"/>
+                                <Label Grid.Row="2" Content="Categoría:" />
                                 <ComboBox x:Name="cmbCategorías" Grid.Row="2" Grid.Column="1" DisplayMemberPath="Value" SelectedValuePath="Key" SelectionChanged="cmbCategorías_SelectionChanged" TabIndex="3" Height="30"/>
 
                                 <DataGrid x:Name="gridCaracterísticas" Grid.Row="3" Grid.Column="1" CanUserSortColumns="False" AutoGenerateColumns="False" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" AreRowDetailsFrozen="True" FrozenColumnCount="1" SelectionMode="Extended" CanUserAddRows="False" CanUserDeleteRows="False" RowHeight="25" TabIndex="4" KeyboardNavigation.TabNavigation="Local">
@@ -290,7 +290,7 @@
                     <controles:NumericTextBox x:Name="txtTotalMontoPréstamo" Grid.Row="1" Margin="0,0,10,7" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Right" Width="252" IsReadOnly="True" IsTabStop="False" Background="LightYellow" MinValue="0" Height="27" VerticalAlignment="Bottom"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Pagos">
+            <TabItem Header="Pagos" Name="tabPagos" IsEnabled="False">
                 <DockPanel x:Name="pnlListaPagos" Grid.Row="0" LastChildFill="True" d:IsHidden="False">
                     <DockPanel.RenderTransform>
                         <TranslateTransform />
@@ -307,7 +307,7 @@
                         <Button x:Name="btnImprimirPago" Content="Imprimir" Click="btnImprimir_Click" Width="85" Height="30"  />
                     </WrapPanel>
                     <Grid Margin="0,3,0,0">
-                        <xcdg:DataGridControl x:Name="gridPagos" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,115" AutoCreateColumns="False" ReadOnly="True" MouseDoubleClick="GridPagos_MouseDoubleClick">
+                        <xcdg:DataGridControl x:Name="gridPagos" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,115" AutoCreateColumns="False" ReadOnly="True" MouseDoubleClick="GridPagos_MouseDoubleClick" >
                             <xcdg:DataGridControl.Resources>
                                 <Style TargetType="{x:Type xcdg:GroupByControl}">
                                     <Setter Property="Visibility" Value="Collapsed"/>

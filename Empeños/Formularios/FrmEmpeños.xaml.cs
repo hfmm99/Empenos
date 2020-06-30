@@ -91,6 +91,7 @@ namespace Empeños.Formularios
                         cmbEstado.SelectedIndex = (int)empeño.Estado;
                         gridArtículos.IsEnabled = pnlListaPagos.IsEnabled = btnGuardar.IsEnabled = empeño.Estado != (byte)EstadosEmpeño.Quedado;
                         txtCódigo.IsEnabled = false; ///*****///
+                        tabPagos.IsEnabled = true;
                     }
 
                     if (empeño.Cliente != null)
