@@ -170,7 +170,7 @@ namespace Empeños.Reportes
                         PageWidth = Recibos.anchoPágina,
                         PageHeight = double.NaN,
                         PagePadding = new Thickness(Recibos.margenPágina),
-                        FontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana"),
+                        FontFamily = new FontFamily("Arial"),
                         FontSize = 13,
                         Blocks =
                         {
