@@ -45,7 +45,7 @@
                     </xcdg:DataGridControl>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Compras" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
+            <TabItem Header="Compras" Style="{DynamicResource ResourceKey=styleTabItemDefault}" Visibility="Collapsed">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="40">
                         <Button x:Name="btnAgregarCompra" Content="Agregar Compra" Click="btnAgregar_Click" Margin="4,5" Height="30" Width="150" />
