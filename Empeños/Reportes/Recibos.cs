@@ -290,6 +290,10 @@ namespace Empeños.Reportes
                     paragraph1.Inlines.Add(new LineBreak());
                     InlineCollection inlines1 = paragraph1.Inlines;
                     Run run1 = new Run("La Salvada");
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     double num4 = 18.0;
                     run1.FontSize = num4;
                     FontWeight bold1 = FontWeights.Bold;
@@ -371,7 +375,7 @@ namespace Empeños.Reportes
                     paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new Run("EL COMPRADOR lo o los acepta comprar y almacenarlos por 30 dias desde hoy; por si "));
                     paragraph5.Inlines.Add(new Run("EL VENDEDOR en cualquier momento lo o los desea adquirir, por el periodo de almacenamiento, por el total, mas el 10% del mismo "));
-                    paragraph5.Inlines.Add(new Run("por concepto de almacenamiento de o los articulos. El periodo de almacenamiento podrá extenderse en acuerdo de ambos, cada 30 días "));
+                    paragraph5.Inlines.Add(new Run("por concepto de almacenamiento de o los artículos. El periodo de almacenamiento podrá extenderse en acuerdo de ambos, cada 30 días "));
                     paragraph5.Inlines.Add(new Run("realizando el pago del 10% del precio del total cada 30 dias, de lo contrario EL COMPRADOR no estará más obligado a mantener el o os articulos almacenados y disponer de este o estos."));
                     paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new LineBreak());
