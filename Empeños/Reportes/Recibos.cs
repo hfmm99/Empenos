@@ -19,10 +19,10 @@ namespace Empeños.Reportes
     public static class Recibos
     {
         private static readonly double anchoPágina = (double)new LengthConverter().ConvertFrom((object)"7,6cm");
-        private static readonly double margenPágina = (double)new LengthConverter().ConvertFrom((object)"0,5cm");
+        private static readonly double margenPágina = (double)new LengthConverter().ConvertFrom((object)"0,7cm");
         private const string formatoMoneda = "C0";
-        private static readonly double anchoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"21,6cm");
-        private static readonly double largoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"27,94cm");
+       // private static readonly double anchoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"21,6cm");
+        //private static readonly double largoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"27,94cm");
 
         public static FlowDocument ReciboDeCompra(int códigoCompra)
         {
