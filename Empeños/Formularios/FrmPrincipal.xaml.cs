@@ -237,7 +237,6 @@ namespace Empeños.Formularios
         {
             if (dgEmpeños.SelectedItem != null)
                 Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño((dgEmpeños.SelectedItem as Empeño).Código, (dgEmpeños.SelectedItem as Empeño).Firma));
-              //  Recibos.Imprimir("Imprimiendo Contrato", Recibos.ReciboDeAcuerdo((dgEmpeños.SelectedItem as Empeño).Código));
         }
 
         private void btnReempeñar_Click(object sender, RoutedEventArgs e)

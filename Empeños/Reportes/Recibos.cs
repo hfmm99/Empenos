@@ -19,7 +19,7 @@ namespace Empeños.Reportes
     public static class Recibos
     {
         private static readonly double anchoPágina = (double)new LengthConverter().ConvertFrom((object)"7,6cm");
-        private static readonly double margenPágina = (double)new LengthConverter().ConvertFrom((object)"0,7cm");
+        private static readonly double margenPágina = (double)new LengthConverter().ConvertFrom((object)"0,5cm");
         private const string formatoMoneda = "C0";
         private static readonly double anchoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"21,6cm");
         private static readonly double largoPáginaCarta = (double)new LengthConverter().ConvertFrom((object)"27,94cm");
@@ -32,234 +32,6 @@ namespace Empeños.Reportes
             {
                 var compra = empeñosDataContext.Compras.SingleOrDefault(c => c.Código == códigoCompra);
                 if (compra != null)
-                {
-                    Image image = new Image()
-                    {
-                        Stretch = Stretch.None
-                    };
-                    BitmapImage bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
-                    bitmapImage.EndInit();
-                    image.Source = (ImageSource)bitmapImage;
-                    FlowDocument flowDocument2 = new FlowDocument();
-                    flowDocument2.PageWidth = Recibos.anchoPágina;
-                    Thickness thickness = new Thickness(Recibos.margenPágina);
-                    flowDocument2.PagePadding = thickness;
-                    double num1 = double.NaN;
-                    flowDocument2.PageHeight = num1;
-                    FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
-                    flowDocument2.FontFamily = fontFamily;
-                    double num2 = 13.0;
-                    flowDocument2.FontSize = num2;
-                    flowDocument2.Blocks.Add((Block)new BlockUIContainer((UIElement)image));
-                    BlockCollection blocks1 = flowDocument2.Blocks;
-                        Paragraph paragraph1 = new Paragraph();
-                        int num3 = 2;
-                            paragraph1.TextAlignment = (TextAlignment)num3;
-                            paragraph1.Inlines.Add(new LineBreak());
-                            paragraph1.Inlines.Add(new Run("Compra Venta"));
-                            paragraph1.Inlines.Add(new LineBreak());
-                            InlineCollection inlines1 = paragraph1.Inlines;
-                                Run run1 = new Run("La Salvada");
-                                double num4 = 18.0;
-                                run1.FontSize = num4;
-                                FontWeight bold1 = FontWeights.Bold;
-                                run1.FontWeight = bold1;
-                                inlines1.Add(run1);
-                                paragraph1.Inlines.Add(new LineBreak());
-                                paragraph1.Inlines.Add(new LineBreak());
-                                paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
-                                paragraph1.Inlines.Add(new LineBreak());
-                                paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
-                                paragraph1.Inlines.Add(new LineBreak());
-                                paragraph1.Inlines.Add(new LineBreak());
-                            InlineCollection inlines2 = paragraph1.Inlines;
-                                Run run2 = new Run("FACTURA DE COMPRA NO. " + (object)compra.Código);
-                                FontWeight bold2 = FontWeights.Bold;
-                                run2.FontWeight = bold2;
-                                double num5 = 18.0;
-                                run2.FontSize = num5;
-                                inlines2.Add(run2);
-                                blocks1.Add((Block)paragraph1);
-                                BlockCollection blocks2 = flowDocument2.Blocks;
-                                Paragraph paragraph2 = new Paragraph();
-                                int num6 = 0;
-                                paragraph2.TextAlignment = (TextAlignment)num6;
-                                paragraph2.Inlines.Add(new Run("Fecha  : " + compra.Fecha.ToString("dd/MMM/yyyy")));
-                                paragraph2.Inlines.Add(new LineBreak());
-                                paragraph2.Inlines.Add(new Run("Cliente: " + compra.Cliente.NombreCompleto));
-                                paragraph2.Inlines.Add(new LineBreak());
-                                paragraph2.Inlines.Add(new Run("Cédula : " + compra.Código_Cliente));
-                                paragraph2.Inlines.Add(new LineBreak());
-                                paragraph2.Inlines.Add(new LineBreak());
-                            InlineCollection inlines3 = paragraph2.Inlines;
-                                Line line = new Line();
-                                int num7 = 1;
-                                line.Stretch = (Stretch)num7;
-                                SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Black);
-                                line.Stroke = (Brush)solidColorBrush;
-                                double num8 = 1.0;
-                                line.X2 = num8;
-                                inlines3.Add(line);
-                                blocks2.Add(paragraph2);
-                                flowDocument1 = flowDocument2;
-                                foreach (ComprasDetalle compraDetalles in compra.ComprasDetalles)
-                                {
-                                    BlockCollection blocks3 = flowDocument1.Blocks;
-                                    Paragraph paragraph3 = new Paragraph();
-                                    int num9 = 0;
-                                    paragraph3.TextAlignment = (TextAlignment)num9;
-                                    paragraph3.Inlines.Add(new Run(compraDetalles.Artículo.ToString()));
-                                    blocks3.Add((Block)paragraph3);
-                                }
-                                BlockCollection blocks4 = flowDocument1.Blocks;
-                                Block[] blockArray = new Block[4];
-                                int index1 = 0;
-                                Paragraph paragraph4 = new Paragraph();
-                                int num10 = 1;
-                                paragraph4.TextAlignment = (TextAlignment)num10;
-                                paragraph4.Inlines.Add(new Run("Monto Total: "));
-                                paragraph4.Inlines.Add((compra.ComprasDetalles.Sum(det => det.Artículo.Costo)).ToString("C0"));
-                                blockArray[index1] = (Block)paragraph4;
-                                int index2 = 1;
-                                Paragraph paragraph5 = new Paragraph();
-                                int num11 = 3;
-                                paragraph5.TextAlignment = (TextAlignment)num11;
-                                double num12 = 10.0;
-                                paragraph5.FontSize = num12;
-                                paragraph5.Inlines.Add(new LineBreak());
-                                paragraph5.Inlines.Add(new LineBreak());
-                                paragraph5.Inlines.Add(new LineBreak());
-                                paragraph5.Inlines.Add(new LineBreak());
-                                blockArray[index2] = (Block)paragraph5;
-                                int index3 = 2;
-                                Paragraph paragraph6 = new Paragraph();
-                                int num13 = 2;
-                                paragraph6.TextAlignment = (TextAlignment)num13;
-                                paragraph6.Inlines.Add(new Run("GRACIAS POR PREFERIRNOS."));
-                                blockArray[index3] = (Block)paragraph6;
-                                int index4 = 3;
-                                Paragraph paragraph7 = new Paragraph();
-                                int num14 = 2;
-                                paragraph7.TextAlignment = (TextAlignment)num14;
-                                InlineCollection inlines4 = paragraph7.Inlines;
-                                paragraph7.Inlines.Add(new LineBreak());
-                                paragraph7.Inlines.Add(new LineBreak());
-                                blockArray[index4] = (Block)paragraph7;
-                                blocks4.AddRange((IEnumerable)blockArray);
-                        }
-                    }
-
-            return flowDocument1;
-        }
-
-
-        /*  public static FlowDocument ReciboDeAcuerdo(int códigoEmpeño)
-          {
-              FlowDocument flowDocumentC = (FlowDocument)null;
-              EmpeñosDataContext empeñosDataContext = new EmpeñosDataContext();
-
-              try
-              {
-                  Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == códigoEmpeño));
-                  if (empeño != null)
-                  {
-                      Image image = new Image()
-                      {
-                          Stretch = Stretch.None
-                      };
-                      BitmapImage bitmapImage = new BitmapImage();
-                      bitmapImage.BeginInit();
-                      bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
-                      bitmapImage.EndInit();
-                      image.Source = (ImageSource)bitmapImage;
-
-                      FlowDocument flowDocumentCC = new FlowDocument();
-                      flowDocumentCC.PageWidth = Recibos.anchoPáginaCarta;
-                      Thickness thickness = new Thickness(Recibos.margenPágina);
-                      flowDocumentCC.PagePadding = thickness;
-                      double num1 = double.NaN;
-                      flowDocumentCC.PageHeight = Recibos.largoPáginaCarta;
-                      FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
-                      flowDocumentCC.FontFamily = fontFamily;
-                      double num2 = 13.0;
-                      flowDocumentCC.FontSize = num2;
-                      flowDocumentCC.Blocks.Add((Block)new BlockUIContainer((UIElement)image));
-                      BlockCollection blocks1 = flowDocumentCC.Blocks;
-                      Paragraph paragraph1 = new Paragraph();
-                      int num3 = 1;
-                      paragraph1.TextAlignment = (TextAlignment)num3;
-                      paragraph1.Inlines.Add(new LineBreak());
-                      paragraph1.Inlines.Add(new Run("Compra Venta"));
-                      paragraph1.Inlines.Add(new LineBreak());
-                      InlineCollection inlines1 = paragraph1.Inlines;
-                      Run run1 = new Run("La Salvada");
-                      double num4 = 18.0;
-                      run1.FontSize = num4;
-                      FontWeight bold1 = FontWeights.Bold;
-                      run1.FontWeight = bold1;
-                      inlines1.Add(run1);
-                      paragraph1.Inlines.Add(new LineBreak());
-                      paragraph1.Inlines.Add(new LineBreak());
-                      paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
-                      paragraph1.Inlines.Add(new LineBreak());
-                      paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
-                      paragraph1.Inlines.Add(new LineBreak());
-                      paragraph1.Inlines.Add(new LineBreak());
-                      InlineCollection inlines2 = paragraph1.Inlines;
-                      Run run2 = new Run("ACUERDO DE COMPRA Y VENTA");
-                      FontWeight bold2 = FontWeights.Bold;
-                      run2.FontWeight = bold2;
-                      double num5 = 18.0;
-                      run2.FontSize = num5;
-                      inlines2.Add(run2);
-                      blocks1.Add((Block)paragraph1);
-                      BlockCollection blocks2 = flowDocumentCC.Blocks;
-                      Paragraph paragraph2 = new Paragraph();
-                      int num6 = 3;
-                      paragraph2.TextAlignment = (TextAlignment)num6;
-                      paragraph2.Inlines.Add(new Run("Fecha: " + empeño.Fecha.ToString("dd/MMM/yyyy")));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run("Nosotros, Porfirio Morales Mora, cédula: 2 0290 0936, de ahora en adelante EL COMPRADOR y " ));
-                      paragraph2.Inlines.Add(new Run(empeño.Cliente.Nombre + " "+ empeño.Cliente.Apellidos + ", cédula: " + empeño.Cliente.Código));
-                      paragraph2.Inlines.Add(new Run(", de ahora en adelante, EL VENDEDOR, segun se identifican en este contrato."));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run("EL VENDEDOR implica que es propietario del artículo y libera al comprador de toda responsabilidad."));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run("EL COMPRADOR acuerda comprar la mercaderia que permanecera en bodega por 30 días."));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run("EL VENDEDOR, podra extender el contrato cada mes, mediante el pago del 10% sobre el monto de la compra por concepto de almacenaje y custodia. "));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run("Si EL VENDEDOR, no RECOMPRE, la mercaderia en el tiempo indicado, ni realiza el pago mensual, EL COMPRADOR procedera a vender la mercaderia."));
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run { Text = "Firma COMPRADOR:__________________________________  Cédula COMPRADOR:____________________________", FontSize = 12 });
-                      paragraph2.Inlines.Add(new LineBreak());
-                      paragraph2.Inlines.Add(new Run { Text = "Firma VENDEDOR:__________________________________   Cédula VENDEDOR:_____________________________", FontSize = 12 });
-
-                      blocks2.Add((Block)paragraph2);
-                      flowDocumentC = flowDocumentCC;
-                  }
-              }
-              finally
-              {
-                  if (empeñosDataContext != null)
-                      empeñosDataContext.Dispose();
-              }
-              return flowDocumentC;
-          }*/
-
-        public static FlowDocument ReciboDeEmpeño(int códigoEmpeño, string firma)
-        {
-            FlowDocument flowDocument1 = (FlowDocument)null;
-            EmpeñosDataContext empeñosDataContext = new EmpeñosDataContext();
-            try
-            {
-                Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == códigoEmpeño));
-                if (empeño != null)
                 {
                     Image image = new Image()
                     {
@@ -296,10 +68,6 @@ namespace Empeños.Reportes
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
-                    paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
                     paragraph1.Inlines.Add(new LineBreak());
@@ -307,7 +75,7 @@ namespace Empeños.Reportes
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     InlineCollection inlines2 = paragraph1.Inlines;
-                    Run run2 = new Run("COMPRA NO. " + (object)empeño.Código);
+                    Run run2 = new Run("FACTURA DE COMPRA NO. " + (object)compra.Código);
                     FontWeight bold2 = FontWeights.Bold;
                     run2.FontWeight = bold2;
                     double num5 = 18.0;
@@ -318,11 +86,11 @@ namespace Empeños.Reportes
                     Paragraph paragraph2 = new Paragraph();
                     int num6 = 0;
                     paragraph2.TextAlignment = (TextAlignment)num6;
-                    paragraph2.Inlines.Add(new Run("Fecha  : " + empeño.Fecha.ToString("dd/MMM/yyyy")));
+                    paragraph2.Inlines.Add(new Run("Fecha  : " + compra.Fecha.ToString("dd/MMM/yyyy")));
                     paragraph2.Inlines.Add(new LineBreak());
-                    paragraph2.Inlines.Add(new Run("Cliente: " + empeño.Cliente.NombreCompleto));
+                    paragraph2.Inlines.Add(new Run("Cliente: " + compra.Cliente.NombreCompleto));
                     paragraph2.Inlines.Add(new LineBreak());
-                    paragraph2.Inlines.Add(new Run("Cédula : " + empeño.Código_Cliente));
+                    paragraph2.Inlines.Add(new Run("Cédula : " + compra.Código_Cliente));
                     paragraph2.Inlines.Add(new LineBreak());
                     paragraph2.Inlines.Add(new LineBreak());
                     InlineCollection inlines3 = paragraph2.Inlines;
@@ -333,69 +101,209 @@ namespace Empeños.Reportes
                     line.Stroke = (Brush)solidColorBrush;
                     double num8 = 1.0;
                     line.X2 = num8;
-                    inlines3.Add((UIElement)line);
-                    blocks2.Add((Block)paragraph2);
+                    inlines3.Add(line);
+                    blocks2.Add(paragraph2);
                     flowDocument1 = flowDocument2;
-                    foreach (EmpeñosDetalle empeñosDetalle in empeño.EmpeñosDetalles)
+                    foreach (ComprasDetalle compraDetalles in compra.ComprasDetalles)
                     {
                         BlockCollection blocks3 = flowDocument1.Blocks;
                         Paragraph paragraph3 = new Paragraph();
                         int num9 = 0;
                         paragraph3.TextAlignment = (TextAlignment)num9;
-                        paragraph3.Inlines.Add(new Run(empeñosDetalle.Artículo.ToString()));
+                        paragraph3.Inlines.Add(new Run(compraDetalles.Artículo.ToString()));
                         blocks3.Add((Block)paragraph3);
                     }
                     BlockCollection blocks4 = flowDocument1.Blocks;
-                    Block[] blockArray = new Block[2];
+                    Block[] blockArray = new Block[4];
                     int index1 = 0;
                     Paragraph paragraph4 = new Paragraph();
                     int num10 = 1;
                     paragraph4.TextAlignment = (TextAlignment)num10;
-                    paragraph4.Inlines.Add(new Run("Total: "));
-                    paragraph4.Inlines.Add(empeño.TotalMontoPréstamo.ToString("C0"));
+                    paragraph4.Inlines.Add(new Run("Monto Total: "));
+                    paragraph4.Inlines.Add((compra.ComprasDetalles.Sum(det => det.Artículo.Costo)).ToString("C0"));
                     blockArray[index1] = (Block)paragraph4;
                     int index2 = 1;
                     Paragraph paragraph5 = new Paragraph();
-                    paragraph5.TextAlignment = (TextAlignment)3;
+                    int num11 = 3;
+                    paragraph5.TextAlignment = (TextAlignment)num11;
                     double num12 = 10.0;
                     paragraph5.FontSize = num12;
                     paragraph5.Inlines.Add(new LineBreak());
-                    Run run3 = new Run("  ACUERDO DE COMPRA Y VENTA  ");
-                    FontWeight bold3 = FontWeights.Bold;
-                    run3.FontWeight = bold3;
-                    run3.FontSize = 14.0;
-                    paragraph5.Inlines.Add(run3);
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run("Nosotros, Porfirio Morales Mora,  cédula:2 0290 0936, de ahora en adelante EL COMPRADOR y "));
-                    paragraph5.Inlines.Add(new Run(empeño.Cliente.Nombre + " " + empeño.Cliente.Apellidos + ", cédula: " + empeño.Cliente.Código));
-                    paragraph5.Inlines.Add(new Run(", de ahora en adelante, EL VENDEDOR, segun se identifican en este contrato."));
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run("EL VENDEDOR es dueño de o los articulos que se supra detalla, quien da en venta a EL COMPRADOR y lo libera de toda responsabilidad"));
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run("EL COMPRADOR lo o los acepta comprar y almacenarlos por 30 dias desde hoy; por si "));
-                    paragraph5.Inlines.Add(new Run("EL VENDEDOR en cualquier momento lo o los desea adquirir, por el periodo de almacenamiento, por el total, mas el 10% del mismo "));
-                    paragraph5.Inlines.Add(new Run("por concepto de almacenamiento de o los artículos. El periodo de almacenamiento podrá extenderse en acuerdo de ambos, cada 30 días "));
-                    paragraph5.Inlines.Add(new Run("realizando el pago del 10% del precio del total cada 30 dias, de lo contrario EL COMPRADOR no estará más obligado a mantener el o os articulos almacenados y disponer de este o estos."));
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    BitmapImage bitmapImageF = new BitmapImage();
-                    bitmapImageF.BeginInit();
-                    bitmapImageF.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\FirmaPorfirio.png"), UriKind.Relative);
-                    bitmapImageF.EndInit();
-                    paragraph5.Inlines.Add(new Run { Text = "Firma COMPRADOR:", FontSize = 12 });
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Image { Source = bitmapImageF, MaxWidth = 130 });
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run { Text = "Cédula COMPRADOR: 2 0290 0936 ", FontSize = 12 });
                     paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new LineBreak());
+                    blockArray[index2] = (Block)paragraph5;
+                    int index3 = 2;
+                    Paragraph paragraph6 = new Paragraph();
+                    int num13 = 2;
+                    paragraph6.TextAlignment = (TextAlignment)num13;
+                    paragraph6.Inlines.Add(new Run("GRACIAS POR PREFERIRNOS."));
+                    blockArray[index3] = (Block)paragraph6;
+                    int index4 = 3;
+                    Paragraph paragraph7 = new Paragraph();
+                    int num14 = 2;
+                    paragraph7.TextAlignment = (TextAlignment)num14;
+                    InlineCollection inlines4 = paragraph7.Inlines;
+                    paragraph7.Inlines.Add(new LineBreak());
+                    paragraph7.Inlines.Add(new LineBreak());
+                    blockArray[index4] = (Block)paragraph7;
+                    blocks4.AddRange((IEnumerable)blockArray);
+                }
+            }
+
+            return flowDocument1;
+        }
+
+        public static FlowDocument ReciboDeEmpeño(int códigoEmpeño, string firma)
+        {
+            using (var bd = new EmpeñosDataContext())
+            {
+                var empeño = bd.Empeños.SingleOrDefault<Empeño>(emp => emp.Código == códigoEmpeño);
+                var parámetros = bd.Parámetros.SingleOrDefault();
+
+                if (empeño != null && parámetros != null)
+                {
+                    //Documento con Encabezado
+                    var recibo = new FlowDocument
+                    {
+                        TextAlignment = TextAlignment.Justify,
+                        PageWidth = Recibos.anchoPágina,
+                        PageHeight = double.NaN,
+                        PagePadding = new Thickness(Recibos.margenPágina),
+                        FontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana"),
+                        FontSize = 13,
+                        Blocks =
+                        {
+                            new Paragraph
+                            {
+                                TextAlignment = TextAlignment.Center,
+                                Inlines =
+                                {
+                                    new Image
+                                    {
+                                        Stretch = Stretch.None,
+                                        Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\Logo.png")))
+                                    },
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    "Compra Venta",
+                                    new LineBreak(),
+                                    new Run("La Salvada") { FontSize = 18, FontWeight = FontWeights.Bold },
+                                    new LineBreak(),
+                                    "Porfirio Morales Mora",
+                                    new LineBreak(),
+                                    "Cédula: 2-0290-0936",
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    "Tel: 2474-0641",
+                                    new LineBreak(),
+                                    "Aguas Zarcas - San Carlos",
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new Run("COMPRA NO. " + empeño.Código) { FontSize = 18, FontWeight = FontWeights.Bold },
+                                }
+                            },
+                            new Paragraph
+                            {
+                                TextAlignment = TextAlignment.Left,
+                                Inlines =
+                                {
+                                    $"Fecha  : {empeño.Fecha.ToString("dd/MMM/yyyy")}",
+                                    new LineBreak(),
+                                    $"Cliente: {empeño.Cliente.NombreCompleto}",
+                                    new LineBreak(),
+                                    $"Cédula : {empeño.Código_Cliente}",
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 }
+                                }
+                            }
+                        }
+                    };
+
+                    //Artículos
+                    foreach (EmpeñosDetalle empeñosDetalle in empeño.EmpeñosDetalles)
+                    {
+                        recibo.Blocks.Add(new Paragraph
+                        {
+                            TextAlignment = TextAlignment.Left,
+                            Inlines =
+                            {
+                                empeñosDetalle.Artículo.ToString()
+                            }
+                        });
+                    }
+
+                    // Totales
+                    recibo.Blocks.Add
+                    (
+                        new Paragraph
+                        {
+                            TextAlignment = TextAlignment.Right,
+                            Inlines =
+                            {
+                                $"Total: {empeño.TotalMontoPréstamo.ToString("C0")}"
+                            }
+                        }
+                    );
+
+                    //Acuerdo de Compra y Venta
+                    recibo.Blocks.Add
+                    (
+                        new Paragraph
+                        {
+                            FontSize = 10,
+                            Inlines =
+                            {
+                                new LineBreak(),
+                                new Run("  ACUERDO DE COMPRA Y VENTA  ") { FontWeight = FontWeights.Bold, FontSize = 14},
+                                new LineBreak(),
+                                new LineBreak(),
+                                "Nosotros, Porfirio Morales Mora,  cédula: 2-0290-0936, de ahora en adelante EL COMPRADOR y ",
+                                $"{empeño.Cliente.Nombre} {empeño.Cliente.Apellidos}, cédula: {empeño.Cliente.Código}",
+                                ", de ahora en adelante EL VENDEDOR, según se identifican en este contrato.",
+                                new LineBreak(),
+                                "EL VENDEDOR es dueño de o los artículos que se supra detalla, quien da en venta a EL COMPRADOR y lo libera de toda responsabilidad",
+                                new LineBreak(),
+                                "EL COMPRADOR lo o los acepta comprar y almacenarlos por 30 dias desde hoy; por si ",
+                                "EL VENDEDOR en cualquier momento lo o los desea adquirir, por el periodo de almacenamiento, por el total, mas el 10% del mismo ",
+                                "por concepto de almacenamiento de o los artículos. El periodo de almacenamiento podrá extenderse en acuerdo de ambos, cada 30 días ",
+                                "realizando el pago del 10% del precio del total cada 30 días, de lo contrario EL COMPRADOR no estará más obligado a mantener el o los articulos almacenados y disponer de este o estos.",
+                            }
+                        }
+                    );
+
+                    recibo.Blocks.Add(
+                        new Paragraph
+                        {
+                            FontSize = 12,
+                            TextAlignment = TextAlignment.Center,
+                            Inlines =
+                            {
+                                new Image
+                                {
+                                    Stretch = Stretch.None,
+                                    Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\FirmaPorfirio.png")))
+                                },
+                                new LineBreak(),
+                                new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                new LineBreak(),
+                                "Firma COMPRADOR",
+                                new LineBreak(),
+                                new LineBreak(),
+                                "2-0290-0936",
+                                new LineBreak(),
+                                new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                new LineBreak(),
+                                "Cédula COMPRADOR",
+                                new LineBreak()
+                            }
+                        });
+
                     if (firma != null && firma.Length > 0)
                     {
-                        paragraph5.Inlines.Add(new Run { Text = "Firma VENDEDOR:", FontSize = 12 });
-                        paragraph5.Inlines.Add(new LineBreak());
-                        paragraph5.Inlines.Add(new LineBreak());
+                        #region Cargar Firma
+
                         var inkFirma = new Topaz.SigPlusNET();
                         // Encriptar y Comprimir Firma
                         inkFirma.SetSigCompressionMode(2);
@@ -413,175 +321,67 @@ namespace Empeños.Reportes
                         var img = new BitmapImage();
                         var ms = new MemoryStream();
                         inkFirma.GetSigImage().Save(ms, ImageFormat.Bmp);
-
                         var imgFirma = new BitmapImage();
                         imgFirma.BeginInit();
                         imgFirma.StreamSource = ms;
                         imgFirma.EndInit();
 
+                        #endregion
 
-                        paragraph5.Inlines.Add(new Image { Source = imgFirma});
-                        paragraph5.Inlines.Add(new Run { Text = "Cédula VENDEDOR:______________", FontSize = 12 });
-                        blockArray[index2] = (Block)paragraph5;
-                        blocks4.AddRange((IEnumerable)blockArray);
+                        recibo.Blocks.Add
+                        (
+                            new Paragraph
+                            {
+                                FontSize = 12,
+                                TextAlignment = TextAlignment.Center,
+                                Inlines =
+                                {
+                                    new Image
+                                    {
+                                        Source = imgFirma
+                                    },
+                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                    "Firma VENDEDOR",
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                    "Cédula VENDEDOR"
+                                }
+                            }
+                        );
                     }
                     else
                     {
-                        paragraph5.Inlines.Add(new Run { Text = "Firma VENDEDOR:_______________", FontSize = 12 });
-                        paragraph5.Inlines.Add(new LineBreak());
-                        paragraph5.Inlines.Add(new Run { Text = "Cédula VENDEDOR:______________", FontSize = 12 });
-                        blockArray[index2] = (Block)paragraph5;
-                        blocks4.AddRange((IEnumerable)blockArray);
+                        recibo.Blocks.Add
+                        (
+                            new Paragraph
+                            {
+                                FontSize = 12,
+                                TextAlignment = TextAlignment.Center,
+                                Inlines =
+                                {
+                                    new LineBreak(),
+                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                    new LineBreak(),
+                                    "Firma VENDEDOR",
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new LineBreak(),
+                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
+                                    new LineBreak(),
+                                    "Cédula VENDEDOR"
+                                }
+                            }
+                        );
                     }
+
+                    return recibo;
                 }
+
+                return new FlowDocument();
             }
-            finally
-            {
-                if (empeñosDataContext != null)
-                    empeñosDataContext.Dispose();
-            }
-            return flowDocument1;
         }
-
-        /*public static FlowDocument ReciboDeEmpeño(int códigoEmpeño)
-        {
-            FlowDocument flowDocument1 = (FlowDocument)null;
-            EmpeñosDataContext empeñosDataContext = new EmpeñosDataContext();
-            try
-            {
-                Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == códigoEmpeño));
-                if (empeño != null)
-                {
-                    Image image = new Image()
-                    {
-                        Stretch = Stretch.None
-                    };
-                    BitmapImage bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
-                    bitmapImage.EndInit();
-                    image.Source = (ImageSource)bitmapImage;
-                    FlowDocument flowDocument2 = new FlowDocument();
-                    flowDocument2.PageWidth = Recibos.anchoPágina;
-                    Thickness thickness = new Thickness(Recibos.margenPágina);
-                    flowDocument2.PagePadding = thickness;
-                    double num1 = double.NaN;
-                    flowDocument2.PageHeight = num1;
-                    FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
-                    flowDocument2.FontFamily = fontFamily;
-                    double num2 = 13.0;
-                    flowDocument2.FontSize = num2;
-                    flowDocument2.Blocks.Add((Block)new BlockUIContainer((UIElement)image));
-                    BlockCollection blocks1 = flowDocument2.Blocks;
-                    Paragraph paragraph1 = new Paragraph();
-                    int num3 = 2;
-                    paragraph1.TextAlignment = (TextAlignment)num3;
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Compra Venta & Casa de Empeño"));
-                    paragraph1.Inlines.Add(new LineBreak());
-                    InlineCollection inlines1 = paragraph1.Inlines;
-                    Run run1 = new Run("La Salvada");
-                    double num4 = 18.0;
-                    run1.FontSize = num4;
-                    FontWeight bold1 = FontWeights.Bold;
-                    run1.FontWeight = bold1;
-                    inlines1.Add(run1);
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new LineBreak());
-                    InlineCollection inlines2 = paragraph1.Inlines;
-                    Run run2 = new Run("EMPEÑO NO. " + (object)empeño.Código);
-                    FontWeight bold2 = FontWeights.Bold;
-                    run2.FontWeight = bold2;
-                    double num5 = 18.0;
-                    run2.FontSize = num5;
-                    inlines2.Add(run2);
-                    blocks1.Add((Block)paragraph1);
-                    BlockCollection blocks2 = flowDocument2.Blocks;
-                    Paragraph paragraph2 = new Paragraph();
-                    int num6 = 0;
-                    paragraph2.TextAlignment = (TextAlignment)num6;
-                    paragraph2.Inlines.Add(new Run("Fecha  : " + empeño.Fecha.ToString("dd/MMM/yyyy")));
-                    paragraph2.Inlines.Add(new LineBreak());
-                    paragraph2.Inlines.Add(new Run("Cliente: " + empeño.Cliente.NombreCompleto));
-                    paragraph2.Inlines.Add(new LineBreak());
-                    paragraph2.Inlines.Add(new Run("Cédula : " + empeño.Código_Cliente));
-                    paragraph2.Inlines.Add(new LineBreak());
-                    paragraph2.Inlines.Add(new LineBreak());
-                    InlineCollection inlines3 = paragraph2.Inlines;
-                    Line line = new Line();
-                    int num7 = 1;
-                    line.Stretch = (Stretch)num7;
-                    SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Black);
-                    line.Stroke = (Brush)solidColorBrush;
-                    double num8 = 1.0;
-                    line.X2 = num8;
-                    inlines3.Add((UIElement)line);
-                    blocks2.Add((Block)paragraph2);
-                    flowDocument1 = flowDocument2;
-                    foreach (EmpeñosDetalle empeñosDetalle in empeño.EmpeñosDetalles)
-                    {
-                        BlockCollection blocks3 = flowDocument1.Blocks;
-                        Paragraph paragraph3 = new Paragraph();
-                        int num9 = 0;
-                        paragraph3.TextAlignment = (TextAlignment)num9;
-                        paragraph3.Inlines.Add(new Run(empeñosDetalle.Artículo.ToString()));
-                        blocks3.Add((Block)paragraph3);
-                    }
-                    BlockCollection blocks4 = flowDocument1.Blocks;
-                    Block[] blockArray = new Block[2];
-                    int index1 = 0;
-                    Paragraph paragraph4 = new Paragraph();
-                    int num10 = 1;
-                    paragraph4.TextAlignment = (TextAlignment)num10;
-                    paragraph4.Inlines.Add(new Run("Total Préstamo: "));
-                    paragraph4.Inlines.Add(empeño.TotalMontoPréstamo.ToString("C0"));
-                    blockArray[index1] = (Block)paragraph4;
-                    int index2 = 1;
-                    Paragraph paragraph5 = new Paragraph();
-                    int num11 = 3;
-                    paragraph5.TextAlignment = (TextAlignment)num11;
-                    double num12 = 10.0;
-                    paragraph5.FontSize = num12;
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-
-                    paragraph5.Inlines.Add(new Run { Text = "Firma:_____________________________", FontSize = 12 });
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run { Text = "Cédula:____________________________", FontSize = 12 });
-
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run($"1. Todo préstamo, es hecho a un plazo de { empeño.Plazo } {  (empeño.Plazo == 1 ? "mes" : "meses") }, por cada mes de intereses cancelado renueva el plazo de vencimiento un mes más."));
-                    paragraph5.Inlines.Add(new LineBreak());
-                    string value = Math.Round(empeño.PorcentajeInterés, 2).ToString();
-                    paragraph5.Inlines.Add(new Run("2. Tasa de interés del " + value + "% mensual, cobrandose siempre un mes como mínimo. Pagaderos mensualmente."));
-
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new Run($"3. El no pago de intereses en { empeño.Plazo }{(empeño.Plazo == 1 ? " mes" : " meses") } autoriza a La Salvada a disponer de la prenda empeñada."));
-                    paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
-                    DateTime fecha = empeño.Fecha.AddMonths(empeño.Plazo);
-                    paragraph5.Inlines.Add(new Run("No olvide su próximo pago el: " + fecha.ToShortDateString()));
-                    blockArray[index2] = (Block)paragraph5;
-                    blocks4.AddRange((IEnumerable)blockArray);
-                }
-            }
-            finally
-            {
-                if (empeñosDataContext != null)
-                    empeñosDataContext.Dispose();
-            }
-            return flowDocument1;
-        }*/
 
         public static FlowDocument ReciboDePago(string códigoEmpeño, string códigoCliente, string nombreCliente, int cuota, DateTime fecha, DateTime fechaPago, int intereses, int abono, int saldo, string firma)
         {
@@ -658,9 +458,9 @@ namespace Empeños.Reportes
             InlineCollection inlines3 = paragraph2.Inlines;
             Line line = new Line();
             int num7 = 1;
-           // line.Stretch = (Stretch)num7;
-           // SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Black);
-           // line.Stroke = (Brush)solidColorBrush;
+            // line.Stretch = (Stretch)num7;
+            // SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Black);
+            // line.Stroke = (Brush)solidColorBrush;
             double num8 = 1.0;
             line.X2 = num8;
             inlines3.Add((UIElement)line);
@@ -785,19 +585,19 @@ namespace Empeños.Reportes
             if (saldo > 0)
             {
 
-               /* Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == int.Parse(códigoEmpeño)));
-                paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new Run($"1. Todo préstamo, es hecho a un plazo de { empeño.Plazo } {  (empeño.Plazo == 1 ? "mes" : "meses") }, por cada mes de intereses cancelado renueva el plazo de vencimiento un mes más."));
-                paragraph11.Inlines.Add(new LineBreak());
-                string value = Math.Round(empeño.PorcentajeInterés, 2).ToString();
-                paragraph11.Inlines.Add(new Run("2. Tasa de interés del " + value + "% mensual, cobrandose siempre un mes como mínimo. Pagaderos mensualmente."));
+                /* Empeño empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>((System.Linq.Expressions.Expression<Func<Empeño, bool>>)(emp => emp.Código == int.Parse(códigoEmpeño)));
+                 paragraph11.Inlines.Add(new LineBreak());
+                 paragraph11.Inlines.Add(new LineBreak());
+                 paragraph11.Inlines.Add(new Run($"1. Todo préstamo, es hecho a un plazo de { empeño.Plazo } {  (empeño.Plazo == 1 ? "mes" : "meses") }, por cada mes de intereses cancelado renueva el plazo de vencimiento un mes más."));
+                 paragraph11.Inlines.Add(new LineBreak());
+                 string value = Math.Round(empeño.PorcentajeInterés, 2).ToString();
+                 paragraph11.Inlines.Add(new Run("2. Tasa de interés del " + value + "% mensual, cobrandose siempre un mes como mínimo. Pagaderos mensualmente."));
 
-                paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new Run($"3. El no pago de intereses en { empeño.Plazo }{(empeño.Plazo == 1 ? " mes" : " meses") } autoriza a La Salvada a disponer de la prenda empeñada."));
-                paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new LineBreak());
-                paragraph11.Inlines.Add(new Run("No olvide su próximo pago el: " + fecha.AddMonths(1).ToShortDateString()));*/
+                 paragraph11.Inlines.Add(new LineBreak());
+                 paragraph11.Inlines.Add(new Run($"3. El no pago de intereses en { empeño.Plazo }{(empeño.Plazo == 1 ? " mes" : " meses") } autoriza a La Salvada a disponer de la prenda empeñada."));
+                 paragraph11.Inlines.Add(new LineBreak());
+                 paragraph11.Inlines.Add(new LineBreak());
+                 paragraph11.Inlines.Add(new Run("No olvide su próximo pago el: " + fecha.AddMonths(1).ToShortDateString()));*/
                 blocks4.Add((Block)paragraph11);
             }
             else
