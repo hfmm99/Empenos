@@ -290,15 +290,15 @@ namespace Empeños.Reportes
                     paragraph1.Inlines.Add(new LineBreak());
                     InlineCollection inlines1 = paragraph1.Inlines;
                     Run run1 = new Run("La Salvada");
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
-                    paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     double num4 = 18.0;
                     run1.FontSize = num4;
                     FontWeight bold1 = FontWeights.Bold;
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
@@ -366,7 +366,6 @@ namespace Empeños.Reportes
                     run3.FontSize = 14.0;
                     paragraph5.Inlines.Add(run3);
                     paragraph5.Inlines.Add(new LineBreak());
-                    paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new Run("Nosotros, Porfirio Morales Mora,  cédula:2 0290 0936, de ahora en adelante EL COMPRADOR y "));
                     paragraph5.Inlines.Add(new Run(empeño.Cliente.Nombre + " " + empeño.Cliente.Apellidos + ", cédula: " + empeño.Cliente.Código));
                     paragraph5.Inlines.Add(new Run(", de ahora en adelante, EL VENDEDOR, segun se identifican en este contrato."));
@@ -377,7 +376,6 @@ namespace Empeños.Reportes
                     paragraph5.Inlines.Add(new Run("EL VENDEDOR en cualquier momento lo o los desea adquirir, por el periodo de almacenamiento, por el total, mas el 10% del mismo "));
                     paragraph5.Inlines.Add(new Run("por concepto de almacenamiento de o los artículos. El periodo de almacenamiento podrá extenderse en acuerdo de ambos, cada 30 días "));
                     paragraph5.Inlines.Add(new Run("realizando el pago del 10% del precio del total cada 30 dias, de lo contrario EL COMPRADOR no estará más obligado a mantener el o os articulos almacenados y disponer de este o estos."));
-                    paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new LineBreak());
                     paragraph5.Inlines.Add(new LineBreak());
                     BitmapImage bitmapImageF = new BitmapImage();
@@ -624,6 +622,10 @@ namespace Empeños.Reportes
             run1.FontWeight = bold1;
             inlines1.Add(run1);
             paragraph1.Inlines.Add(new LineBreak());
+            paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+            paragraph1.Inlines.Add(new LineBreak());
+            paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
+            paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
             paragraph1.Inlines.Add(new LineBreak());
@@ -803,7 +805,6 @@ namespace Empeños.Reportes
                 paragraph11.Inlines.Add(new Run("No se aceptarán reclamos sobre artículos retirados, una vez que salgan de nuestras instalaciones."));
                 paragraph11.Inlines.Add(new LineBreak());
                 paragraph11.Inlines.Add(new LineBreak());
-                InlineCollection inlines5 = paragraph11.Inlines;
                 blocks4.Add((Block)paragraph11);
             }
             return flowDocument2;
@@ -842,7 +843,7 @@ namespace Empeños.Reportes
                     int num3 = 2;
                     paragraph1.TextAlignment = (TextAlignment)num3;
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Compra Venta & Casa de Empeño"));
+                    paragraph1.Inlines.Add(new Run("Compra Venta"));
                     paragraph1.Inlines.Add(new LineBreak());
                     InlineCollection inlines1 = paragraph1.Inlines;
                     Run run1 = new Run("La Salvada");
@@ -851,6 +852,10 @@ namespace Empeños.Reportes
                     FontWeight bold1 = FontWeights.Bold;
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
