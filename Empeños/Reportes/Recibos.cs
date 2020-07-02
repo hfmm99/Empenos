@@ -336,11 +336,6 @@ namespace Empeños.Reportes
                                     },
                                     new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
                                     "Firma VENDEDOR",
-                                    new LineBreak(),
-                                    new LineBreak(),
-                                    new LineBreak(),
-                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
-                                    "Cédula VENDEDOR"
                                 }
                             }
                         );
@@ -359,12 +354,6 @@ namespace Empeños.Reportes
                                     new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
                                     new LineBreak(),
                                     "Firma VENDEDOR",
-                                    new LineBreak(),
-                                    new LineBreak(),
-                                    new LineBreak(),
-                                    new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
-                                    new LineBreak(),
-                                    "Cédula VENDEDOR"
                                 }
                             }
                         );
@@ -380,6 +369,7 @@ namespace Empeños.Reportes
         public static FlowDocument ReciboDePago(string códigoEmpeño, string códigoCliente, string nombreCliente, int cuota, DateTime fecha, DateTime fechaPago, int intereses, int abono, int saldo, string firma)
         {
             EmpeñosDataContext empeñosDataContext = new EmpeñosDataContext();
+            var empeño = empeñosDataContext.Empeños.SingleOrDefault<Empeño>(emp => emp.Código == int.Parse(códigoEmpeño));
             Image image = new Image()
             {
                 Stretch = Stretch.None
@@ -396,7 +386,7 @@ namespace Empeños.Reportes
             flowDocument1.PagePadding = thickness;
             double num1 = double.NaN;
             flowDocument1.PageHeight = num1;
-            FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
+            FontFamily fontFamily = new FontFamily("Arial");
             flowDocument1.FontFamily = fontFamily;
             double num2 = 13.0;
             flowDocument1.FontSize = num2;
@@ -449,17 +439,22 @@ namespace Empeños.Reportes
             paragraph2.Inlines.Add(new Run("Fecha de Pago: " + fechaPago.ToString("dd/MMM/yyyy hh:mm:ss tt")));
             paragraph2.Inlines.Add(new LineBreak());
             paragraph2.Inlines.Add(new LineBreak());
-            InlineCollection inlines3 = paragraph2.Inlines;
-            Line line = new Line();
-            int num7 = 1;
+            blocks2.Add((Block)paragraph2);
+            foreach (EmpeñosDetalle empeñosDetalle in empeño.EmpeñosDetalles)
+            {
+                blocks2.Add(new Paragraph
+                {
+                    TextAlignment = TextAlignment.Left,
+                    Inlines =
+                            {
+                                "- "+empeñosDetalle.Artículo.ToString()
+                            }
+                });
+            }
             // line.Stretch = (Stretch)num7;
             // SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Black);
             // line.Stroke = (Brush)solidColorBrush;
-            double num8 = 1.0;
-            line.X2 = num8;
-            inlines3.Add((UIElement)line);
-            paragraph2.Inlines.Add(new LineBreak());
-            blocks2.Add((Block)paragraph2);
+            
             /*BlockCollection blocks3 = flowDocument1.Blocks;
             System.Windows.Documents.Table table = new System.Windows.Documents.Table();
             TableRowGroupCollection rowGroups = table.RowGroups;
@@ -521,7 +516,7 @@ namespace Empeños.Reportes
             blocks3.Add((Block)table);*/
             FlowDocument flowDocument2 = flowDocument1;
 
-            BlockCollection blocks4 = flowDocument2.Blocks;
+            BlockCollection blocks5 = flowDocument2.Blocks;
             Paragraph paragraph11 = new Paragraph();
             int num9 = 3;
             paragraph11.TextAlignment = (TextAlignment)num9;
@@ -592,14 +587,14 @@ namespace Empeños.Reportes
                  paragraph11.Inlines.Add(new LineBreak());
                  paragraph11.Inlines.Add(new LineBreak());
                  paragraph11.Inlines.Add(new Run("No olvide su próximo pago el: " + fecha.AddMonths(1).ToShortDateString()));*/
-                blocks4.Add((Block)paragraph11);
+                blocks5.Add((Block)paragraph11);
             }
             else
             {
                 paragraph11.Inlines.Add(new Run("No se aceptarán reclamos sobre artículos retirados, una vez que salgan de nuestras instalaciones."));
                 paragraph11.Inlines.Add(new LineBreak());
                 paragraph11.Inlines.Add(new LineBreak());
-                blocks4.Add((Block)paragraph11);
+                blocks5.Add((Block)paragraph11);
             }
             return flowDocument2;
         }
@@ -627,7 +622,7 @@ namespace Empeños.Reportes
                     flowDocument2.PagePadding = thickness;
                     double num1 = double.NaN;
                     flowDocument2.PageHeight = num1;
-                    FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
+                    FontFamily fontFamily = new FontFamily("Arial");
                     flowDocument2.FontFamily = fontFamily;
                     double num2 = 13.0;
                     flowDocument2.FontSize = num2;
