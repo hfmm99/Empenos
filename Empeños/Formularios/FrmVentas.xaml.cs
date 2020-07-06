@@ -428,11 +428,6 @@ namespace Empeños.Formularios
             {
               //  inkFirma.SetTabletState(1);
             }
-
-
-
-           // var frmAbono = new FrmAbono(int.Parse(txtCódigo.Text), 0, DateTime.Now,0);
-            //frmAbono.ShowDialog();
         }
     }
 }

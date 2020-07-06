@@ -335,7 +335,7 @@ namespace Empeños.Reportes
                                         Source = imgFirma
                                     },
                                     new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
-                                    "Firma VENDEDOR",
+                                    "Firma y cédula VENDEDOR",
                                 }
                             }
                         );
@@ -353,7 +353,7 @@ namespace Empeños.Reportes
                                     new LineBreak(),
                                     new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
                                     new LineBreak(),
-                                    "Firma VENDEDOR",
+                                    "Firma y cédula VENDEDOR",
                                 }
                             }
                         );
