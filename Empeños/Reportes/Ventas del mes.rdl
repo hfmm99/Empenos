@@ -231,6 +231,78 @@ FROM
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
+                <TablixRow>
+                  <Height>6mm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Color>#4d4d4d</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#e5e5e5</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Total1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!Total.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#4d4d4d</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Total1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#e5e5e5</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
@@ -247,6 +319,9 @@ FROM
                 <TablixMember>
                   <Group Name="Detalles" />
                 </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
@@ -255,9 +330,9 @@ FROM
             <FixedRowHeaders>true</FixedRowHeaders>
             <KeepTogether>true</KeepTogether>
             <DataSetName>Datos</DataSetName>
-            <Top>31.68778mm</Top>
-            <Left>0mm</Left>
-            <Height>12mm</Height>
+            <Top>57.48466mm</Top>
+            <Left>95.51458mm</Left>
+            <Height>18mm</Height>
             <Width>55.45835mm</Width>
             <Style>
               <Border>
@@ -275,7 +350,7 @@ FROM
                     <Value>Compra Venta </Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
-                      <FontSize>20pt</FontSize>
+                      <FontSize>14pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -286,10 +361,37 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>"La Salvada"</Value>
+                    <Value>La Salvada</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
-                      <FontSize>20pt</FontSize>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Porfirio Morales Mora</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cédula: 2-0290-0936</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -303,7 +405,45 @@ FROM
                     <Value />
                     <Style>
                       <FontFamily>Verdana</FontFamily>
-                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Tel: 2474-0641</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Aguas Zarcas - San Carlos</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -317,7 +457,7 @@ FROM
                     <Value>REPORTE DE VENTAS</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
-                      <FontSize>20pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -328,10 +468,24 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>=Format(Parameters!Fecha_inicio.Value, "dd/MMM/yyyy")</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
-                      <FontSize>20pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> - </Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Format(Parameters!Fecha_final.Value, "dd/MMM/yyyy")</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -343,8 +497,8 @@ FROM
             <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
             <rd:DefaultName>ReportTitle</rd:DefaultName>
             <Top>0mm</Top>
-            <Height>19.91382mm</Height>
-            <Width>298.41875mm</Width>
+            <Height>51.9284mm</Height>
+            <Width>248.1479mm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -357,17 +511,17 @@ FROM
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>43.68778mm</Height>
+        <Height>78.3482mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>302.25521mm</Width>
+      <Width>248.1479mm</Width>
       <Page>
         <PageFooter>
-          <Height>55.03333mm</Height>
+          <Height>14.2875mm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -392,10 +546,10 @@ FROM
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
-              <Top>38.1mm</Top>
+              <Top>1.76389mm</Top>
               <Left>0mm</Left>
               <Height>6.35mm</Height>
-              <Width>298.41875mm</Width>
+              <Width>248.1479mm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>

@@ -1,5 +1,6 @@
 ﻿using Empeños.Clases;
 using Empeños.Datos;
+using Empeños.Reportes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -353,6 +354,9 @@ namespace Empeños.Formularios
                     }
 
                     bd.SubmitChanges();
+                    /*if (chkImprimirAlGuardar.IsChecked == true) { 
+                        Recibos.Imprimir.
+                    }*/
 
                     this.DialogResult = true;
                 }

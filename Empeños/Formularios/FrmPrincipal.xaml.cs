@@ -210,8 +210,8 @@ namespace Empeños.Formularios
                     var frmCompras = new FrmCompras() { Owner = this };
                     frmCompras.ShowDialog();
 
-                    //if (frmCompras.ImprimirAlGuardar)
-                    //    Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmCompras.txtCódigo.AsInt));
+                    if (frmCompras.ImprimirAlGuardar)
+                        Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeCompra(frmCompras.txtCódigo.AsInt));
                     break;
                 case 2: //Ventas
                     var frmVentas = new FrmVentas() { Owner = this };

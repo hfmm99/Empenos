@@ -48,7 +48,7 @@ namespace Empeños.Reportes
                     flowDocument2.PagePadding = thickness;
                     double num1 = double.NaN;
                     flowDocument2.PageHeight = num1;
-                    FontFamily fontFamily = new FontFamily("Consolas, Comic Sans MS, Verdana");
+                    FontFamily fontFamily = new FontFamily("Arial");
                     flowDocument2.FontFamily = fontFamily;
                     double num2 = 13.0;
                     flowDocument2.FontSize = num2;
@@ -67,6 +67,10 @@ namespace Empeños.Reportes
                     FontWeight bold1 = FontWeights.Bold;
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new LineBreak());
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));

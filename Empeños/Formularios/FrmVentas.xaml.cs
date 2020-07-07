@@ -185,7 +185,7 @@ namespace Empeños.Formularios
                     int cuota = 0;
                     venta.VentasAbonos.Add(new VentasAbono { Cuota = ++cuota, Fecha = DateTime.Now, Monto = txtTotalMontoVenta.AsInt });
                     venta.Impuesto = txtIVA.AsDecimal;
-                    venta.Total = txtMontoAPagar.AsInt;
+                    venta.Total = (int)txtMontoAPagar.AsDecimal;
 
                     bd.SubmitChanges();
 
