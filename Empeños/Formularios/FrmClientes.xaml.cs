@@ -2,6 +2,7 @@
 using Empeños.Datos;
 using Microsoft.Win32;
 using System;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace Empeños.Formularios
         #region Propiedades
 
         private String códigoCliente;
+        private String códigoCliente2 = "";
 
         public Cliente Cliente { get; private set; }
 
@@ -44,6 +46,7 @@ namespace Empeños.Formularios
                     {
                         txtCódigo.IsReadOnly = true;
                         cmbTipoId.IsEnabled = false;
+                        btnEditarCodigo.Visibility = Visibility.Visible;
                         short caseSwitch = cliente.TipoIdentificación;
                         string tipoid;
                         switch (caseSwitch)
@@ -148,12 +151,28 @@ namespace Empeños.Formularios
             {
                 Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Value.ToString());
 
-                if (Cliente == null)
+                if (Cliente == null && códigoCliente2 == "")
                 {
                     Cliente = new Cliente { TipoIdentificación = tipoid, Código = txtCódigo.Value.ToString() };
                     bd.Clientes.InsertOnSubmit(Cliente);
                 }
+                else if (códigoCliente2 != "")
+                {
+                    try
+                    {
+                        bd.updateIDs(txtCódigo.Value.ToString(), códigoCliente2);
+                        códigoCliente2 = "";
+                        Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Value.ToString());
+                    }
+                    catch (Exception t)
+                    {
+                        System.Windows.MessageBox.Show("Error al actualizar: Identificacion duplicada" + t.Message, "Pregunta", MessageBoxButton.OK); 
+                        
+                    }
+                }
 
+                Cliente.TipoIdentificación = tipoid;
+                //Cliente.Código = txtCódigo.Value.ToString();
                 Cliente.Nombre = txtNombre.Text.Trim();
                 Cliente.Apellidos = txtApellidos.Text.Trim();
                 Cliente.Género = rbMasculino.IsChecked.Value ? 'M' : 'F';
@@ -178,6 +197,7 @@ namespace Empeños.Formularios
 
                 this.DialogResult = true;
 
+               
                 bd.SubmitChanges();
             }
         }
@@ -227,7 +247,7 @@ namespace Empeños.Formularios
            
             if (txtCódigo != null)
             {
-                txtCódigo.Clear();
+                //txtCódigo.Clear();
                 switch (cmbTipoId.SelectedIndex)
                 {
                     case 0:
@@ -250,7 +270,17 @@ namespace Empeños.Formularios
                 txtCódigo.Focus();
             }
         }
-            
+
+        private void btnEditarCodigo_click(object sender, RoutedEventArgs e)
+        {
+            FrmActualizarID frmActualizarID = new FrmActualizarID(txtCódigo.Text, cmbTipoId.Text);
+            if (frmActualizarID.ShowDialog() == true) {
+                códigoCliente2 = txtCódigo.Value.ToString();
+                cmbTipoId.Text = frmActualizarID.cmbActualizarTipoID.Text;
+                txtCódigo.Value = frmActualizarID.txtActualizarID.Text;
+                
+            }
+        }
     }
 
      

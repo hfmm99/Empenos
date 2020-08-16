@@ -1,0 +1,38 @@
+﻿<Window x:Class="Empeños.Formularios.FrmActualizarID"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:local="clr-namespace:Empeños.Formularios"
+        mc:Ignorable="d"
+        Title="Actualizar Identificación" Height="370" Width="800">
+    <Grid Margin="0,0,0,92.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="146*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Tipo identificación actual:" HorizontalAlignment="Left" Margin="62,59,0,0" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
+        <Label Content="Identificación actual:" HorizontalAlignment="Left" Margin="60,110,0,0" VerticalAlignment="Top" Height="30" Width="140" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="28" Margin="160,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox x:Name="txtTipoID" HorizontalAlignment="Left" Height="28" Margin="160,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1" IsReadOnly="True"/>
+        <GroupBox Header="Actualizar" HorizontalAlignment="Left" Height="135" Margin="360,30,0,0" VerticalAlignment="Top" Width="355" Grid.Column="1">
+            <Label Content="Identificación:" HorizontalAlignment="Left" Margin="17,60,0,0" VerticalAlignment="Top" Height="25" Width="88"/>
+        </GroupBox>
+        <ComboBox x:Name="cmbActualizarTipoID" HorizontalAlignment="Left" Margin="500,68,0,0" VerticalAlignment="Top" Width="180" Grid.Column="1" SelectionChanged="ChangeMaskID">
+            <ComboBoxItem Content="Física" />
+            <ComboBoxItem Content="Jurídica" />
+            <ComboBoxItem Content="DIMEX" />
+            <ComboBoxItem Content="NITE" />
+            <ComboBoxItem Content="Sin Definir" />
+        </ComboBox>
+        <Label Content="Tipo identificación" HorizontalAlignment="Left" Margin="375,64,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <xctk:MaskedTextBox x:Name="txtActualizarID" HorizontalAlignment="Left" Height="25" Margin="495,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1"  Mask = "" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False"/>
+        
+
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="445,190,0,0" VerticalAlignment="Top" Width="140" Click="btnActualizar_click" Height="45" Grid.Column="1"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="120,190,0,0" VerticalAlignment="Top" Width="140" Click="btnCancelar_click" Height="45" Grid.Column="1"/>
+
+    </Grid>
+</Window>

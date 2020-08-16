@@ -20,9 +20,10 @@ namespace Empeños.Datos
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Empeños")]
+    using System.Windows;
+    using System.Windows.Forms;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Empeños")]
 	public partial class EmpeñosDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -254,6 +255,16 @@ namespace Empeños.Datos
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), ruta);
 			return ((int)(result.ReturnValue));
+		}
+
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.updateIDs")]
+		public int updateIDs([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "newid", DbType = "VarChar(15)")] string newid, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "oldid", DbType = "VarChar(15)")] string oldid)
+		{
+			
+				IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newid, oldid);
+				return ((int)(result.ReturnValue));
+		
+			
 		}
 	}
 	

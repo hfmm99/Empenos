@@ -160,6 +160,9 @@
     <Compile Include="Formularios\FrmCompras.xaml.cs">
       <DependentUpon>FrmCompras.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmActualizarID.xaml.cs">
+      <DependentUpon>FrmActualizarID.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Recibos.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Page Include="Controles\IndicadorEstado.xaml">
@@ -216,6 +219,10 @@
       <DependentUpon>FrmPrincipal.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Formularios\FrmActualizarID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Recursos\Estilos\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

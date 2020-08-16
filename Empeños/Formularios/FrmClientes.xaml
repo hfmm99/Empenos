@@ -37,7 +37,7 @@
         <!--TextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/-->
 
         <xctk:MaskedTextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0 0000 0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False" />
-        
+
         <Label  Grid.Row="2" VerticalAlignment="Center" Content="Nombre:"/>
         <TextBox x:Name="txtNombre" Height="27" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
 
@@ -59,14 +59,14 @@
 
         <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center"/>
 
-        <Border BorderBrush="#1E90FF" Margin="5" BorderThickness="2" Grid.Column="3" Grid.RowSpan="6" >
-            <Image x:Name="imgFoto" Margin="5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
+        <Border BorderBrush="#1E90FF" Margin="64.5,5,5,5" BorderThickness="2" Grid.Column="2" Grid.RowSpan="6" >
+            <Image x:Name="imgFoto" Margin="102,5,4.5,5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
         </Border>
-        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="3">
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Margin="59.5,33,-4,3" Grid.RowSpan="2">
             <Button x:Name="btnSeleccionarFoto" Content=" Seleccionar Imagen " ToolTip="Seleccionar Foto desde Archivo" Margin="5,0,0,0" Height="36" VerticalAlignment="Bottom" Click="BtnSeleccionarFoto_Click"/>
             <Button x:Name="btnEscanearFoto" Content=" Escanear Imagen " ToolTip="Obtener foto desde Escaner o Multifuncional (Requiere que esté conectado y encendido)" Margin="5,0,0,0" Click="BtnEscanearFoto_Click" Height="36" VerticalAlignment="Bottom"/>
             <Button x:Name="btnTomarFoto" Content=" Tomar Foto " ToolTip="Toma una foto (require una cámara web conectada a la computadora)" Margin="5,0,0,0"  Height="36" VerticalAlignment="Bottom" Click="BtnTomarFoto_Click"/>
-            <Button x:Name="btnBorrarFoto" Content="  Borrar  " Height="36" Margin="15,0,0,0" BorderBrush="#FFC50707" Click="BtnBorrarFoto_Click"/>
+            <Button x:Name="btnBorrarFoto" Content="  Borrar  " Height="36" Margin="15,0,0,0" BorderBrush="#FFC50707" Click="BtnBorrarFoto_Click" Width="61"/>
         </StackPanel>
 
         <Label VerticalAlignment="Center" Grid.Row="8" Content="Dirección:"/>
@@ -79,5 +79,6 @@
             <Button x:Name="btnGuardar" Margin="4" Content="_Guardar&#x9;" Width="76" Height="27" VerticalAlignment="Bottom" Click="btnGuardar_Click"/>
             <Button x:Name="btnCancelar" Margin="4" Content="_Salir" Width="75" Height="27" VerticalAlignment="Bottom" Click="btnCancelar_Click"/>
         </StackPanel>
+        <Button x:Name="btnEditarCodigo" Content="Editar" Grid.Column="2" HorizontalAlignment="Left" Margin="4.5,3.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="50" Click="btnEditarCodigo_click" Visibility="Hidden"/>
     </Grid>
 </Window>
