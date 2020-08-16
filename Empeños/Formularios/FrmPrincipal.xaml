@@ -39,6 +39,7 @@
                             <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150px" />
                             <xcdg:Column Title="Identificación" FieldName="Código_Cliente" Width="200px" />
                             <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="200*" />
+                            <xcdg:Column Title="Artículos" FieldName="Artículos" Width="200*" />
                             <xcdg:Column Title="Monto Compra" FieldName="TotalMontoPréstamo" Width="200px" CellContentStringFormat="{}{0:# ###}"  />
                             <xcdg:Column Title="Estado" FieldName="EstadoEmpeño"  Width="170px"/>
                         </xcdg:DataGridControl.Columns>
