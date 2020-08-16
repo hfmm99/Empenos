@@ -69,6 +69,7 @@ namespace Empeños.Formularios
             }
 
             var bd = new EmpeñosDataContext();
+
             switch (tabOpciones.SelectedIndex)
             {
                 case 0: //Empeños
