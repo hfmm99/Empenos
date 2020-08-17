@@ -25,8 +25,7 @@ namespace Empeños.Formularios
             InitializeComponent();
             txtID.Text = id;
             txtTipoID.Text = tipo;
-            //cmbActualizarTipoID.Text = tipo;
-        }
+        } 
 
         private void btnActualizar_click(object sender, RoutedEventArgs e)
         {
@@ -43,7 +42,6 @@ namespace Empeños.Formularios
             if (MessageBox.Show("¿Está seguro que desea actualizar los datos?", "Pregunta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 DialogResult = true;
         }
-
 
         private void btnCancelar_click(object sender, RoutedEventArgs e)
         {

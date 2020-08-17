@@ -203,11 +203,15 @@
             </TabControl.ItemContainerStyle>
             <TabItem Header="Artículos">
                 <Grid x:Name="gridArtículos">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="107*"/>
+                        <ColumnDefinition Width="1002*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="239*"/>
                         <RowDefinition Height="39*"/>
                     </Grid.RowDefinitions>
-                    <DockPanel x:Name="pnlListaArtículos" LastChildFill="True" d:IsHidden="False">
+                    <DockPanel x:Name="pnlListaArtículos" LastChildFill="True" d:IsHidden="False" Grid.ColumnSpan="2" Margin="0,0,0.5,0.5">
                         <DockPanel.RenderTransform>
                             <TranslateTransform />
                         </DockPanel.RenderTransform>
@@ -223,7 +227,7 @@
                         </WrapPanel>
                         <ListBox x:Name="lstArtículos" MouseDoubleClick="lstArtículos_MouseDoubleClick" KeyUp="lstArtículos_KeyUp" Margin="0,0,0,10" FontSize="20" />
                     </DockPanel>
-                    <DockPanel x:Name="pnlDetalleArtículo" LastChildFill="True" d:IsHidden="True" Margin="0,0,0,40" Grid.RowSpan="2">
+                    <DockPanel x:Name="pnlDetalleArtículo" LastChildFill="True" d:IsHidden="True" Margin="0,0,0.5,40.5" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <DockPanel.RenderTransform>
                             <TranslateTransform />
                         </DockPanel.RenderTransform>
@@ -286,8 +290,8 @@
                             </Grid>
                         </Border>
                     </DockPanel>
-                    <Label HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,267,6" Content="Monto Total del préstamo:" Width="199" Height="29" VerticalAlignment="Bottom"/>
-                    <controles:NumericTextBox x:Name="txtTotalMontoPréstamo" Grid.Row="1" Margin="0,0,10,7" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Right" Width="252" IsReadOnly="True" IsTabStop="False" Background="LightYellow" MinValue="0" Height="27" VerticalAlignment="Bottom"/>
+                    <Label HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,266.5,6.5" Content="Monto Total del préstamo:" Width="200" Height="28" VerticalAlignment="Bottom" Grid.Column="1"/>
+                    <controles:NumericTextBox x:Name="txtTotalMontoPréstamo" Grid.Row="1" Margin="0,0,10.5,6.5" TextWrapping="Wrap" MaxLength="15" HorizontalAlignment="Right" Width="252" IsReadOnly="True" IsTabStop="False" Background="LightYellow" MinValue="0" Height="28" VerticalAlignment="Bottom" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Pagos" Name="tabPagos" IsEnabled="False">

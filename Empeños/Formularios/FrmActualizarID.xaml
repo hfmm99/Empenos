@@ -7,32 +7,31 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         xmlns:local="clr-namespace:Empeños.Formularios"
         mc:Ignorable="d"
-        Title="Actualizar Identificación" Height="370" Width="800">
-    <Grid Margin="0,0,0,92.5">
+        Title="Actualizar Identificación" Height="234.5" Width="757.5" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="146*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Tipo identificación actual:" HorizontalAlignment="Left" Margin="62,59,0,0" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
-        <Label Content="Identificación actual:" HorizontalAlignment="Left" Margin="60,110,0,0" VerticalAlignment="Top" Height="30" Width="140" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="28" Margin="160,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1" IsReadOnly="True"/>
-        <TextBox x:Name="txtTipoID" HorizontalAlignment="Left" Height="28" Margin="160,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1" IsReadOnly="True"/>
-        <GroupBox Header="Actualizar" HorizontalAlignment="Left" Height="135" Margin="360,30,0,0" VerticalAlignment="Top" Width="355" Grid.Column="1">
-            <Label Content="Identificación:" HorizontalAlignment="Left" Margin="17,60,0,0" VerticalAlignment="Top" Height="25" Width="88"/>
+        <Label Content="Tipo identificación actual:" HorizontalAlignment="Left" Margin="22,45,0,0" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
+        <Label Content="Identificación actual:" HorizontalAlignment="Left" Margin="20,86,0,0" VerticalAlignment="Top" Height="30" Width="140" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtID" HorizontalAlignment="Left" Height="28" Margin="116.5,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184" Grid.Column="1" IsReadOnly="True" IsEnabled="False"/>
+        <TextBox x:Name="txtTipoID" HorizontalAlignment="Left" Height="28" Margin="115,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1" IsReadOnly="True" />
+        <GroupBox Header="Nuevo  Valor" HorizontalAlignment="Left" Height="115" Margin="320,20,0,0" VerticalAlignment="Top" Width="355" Grid.Column="1">
+            <Grid>
+                <Label Content="Tipo identificación" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbActualizarTipoID" HorizontalAlignment="Left" Margin="138,8,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="ChangeMaskID" Height="24">
+                    <ComboBoxItem Content="Física" />
+                    <ComboBoxItem Content="Jurídica" />
+                    <ComboBoxItem Content="DIMEX" />
+                    <ComboBoxItem Content="NITE" />
+                    <ComboBoxItem Content="Sin Definir" />
+                </ComboBox>
+                <Label Content="Identificación:" HorizontalAlignment="Left" Margin="17,51,0,0" VerticalAlignment="Top" Height="25" Width="88"/>
+                <xctk:MaskedTextBox x:Name="txtActualizarID" HorizontalAlignment="Left" Height="25" Margin="138,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186"  Mask = "" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False"/>
+            </Grid>
         </GroupBox>
-        <ComboBox x:Name="cmbActualizarTipoID" HorizontalAlignment="Left" Margin="500,68,0,0" VerticalAlignment="Top" Width="180" Grid.Column="1" SelectionChanged="ChangeMaskID">
-            <ComboBoxItem Content="Física" />
-            <ComboBoxItem Content="Jurídica" />
-            <ComboBoxItem Content="DIMEX" />
-            <ComboBoxItem Content="NITE" />
-            <ComboBoxItem Content="Sin Definir" />
-        </ComboBox>
-        <Label Content="Tipo identificación" HorizontalAlignment="Left" Margin="375,64,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <xctk:MaskedTextBox x:Name="txtActualizarID" HorizontalAlignment="Left" Height="25" Margin="495,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Grid.Column="1"  Mask = "" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False"/>
-        
-
-        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="445,190,0,0" VerticalAlignment="Top" Width="140" Click="btnActualizar_click" Height="45" Grid.Column="1"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="120,190,0,0" VerticalAlignment="Top" Width="140" Click="btnCancelar_click" Height="45" Grid.Column="1"/>
-
+        <Button x:Name="btnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="393.5,145,0,0" VerticalAlignment="Top" Width="140" Click="btnActualizar_click" Height="45" Grid.Column="1"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="88.5,145,0,0" VerticalAlignment="Top" Width="140" Click="btnCancelar_click" Height="45" Grid.Column="1"/>
     </Grid>
 </Window>

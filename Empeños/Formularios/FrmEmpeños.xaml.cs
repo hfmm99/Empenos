@@ -39,6 +39,7 @@ namespace Empeños.Formularios
         {
             códigoEmpeño = pCódigoEmpeño;
             reempeñar = pReempeñar;
+            
         }
 
         public bool ImprimirAlGuardar
@@ -109,6 +110,15 @@ namespace Empeños.Formularios
                     {
                         lstArtículos.Items.Add(det.Artículo);
                         det.Artículo.Artículos_Características.ToArray();
+                        
+
+
+
+                    }
+
+                    if (reempeñar) {
+                        txtPlazo.AsInt = parámetros.Plazo;
+                        txtPorcentajeIntereses.AsDecimal = Math.Round(parámetros.PorcentajeInterés, 2);
                     }
 
                     if (!reempeñar)
@@ -133,6 +143,7 @@ namespace Empeños.Formularios
                     #endregion
 
                     dtpFecha.Focus();
+
                 }
             }
             else

@@ -166,13 +166,11 @@ namespace Empeños.Formularios
                     }
                     catch (Exception t)
                     {
-                        System.Windows.MessageBox.Show("Error al actualizar: Identificacion duplicada" + t.Message, "Pregunta", MessageBoxButton.OK); 
-                        
+                        System.Windows.MessageBox.Show("Error al actualizar.  Ya existe un cliente con esta identificación.\n" + t.Message, "Error", MessageBoxButton.OK); 
                     }
                 }
 
                 Cliente.TipoIdentificación = tipoid;
-                //Cliente.Código = txtCódigo.Value.ToString();
                 Cliente.Nombre = txtNombre.Text.Trim();
                 Cliente.Apellidos = txtApellidos.Text.Trim();
                 Cliente.Género = rbMasculino.IsChecked.Value ? 'M' : 'F';
