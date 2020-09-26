@@ -20,10 +20,9 @@ namespace Empeños.Datos
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-    using System.Windows;
-    using System.Windows.Forms;
-
-    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Empeños")]
+	
+	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Empeños")]
 	public partial class EmpeñosDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -217,8 +216,8 @@ namespace Empeños.Datos
 				return this.GetTable<EmpeñosGarantía>();
 			}
 		}
-		
-		public System.Data.Linq.Table<EmpeñosPago> EmpeñosPagos
+
+        public System.Data.Linq.Table<EmpeñosPago> EmpeñosPagos
 		{
 			get
 			{
@@ -260,11 +259,11 @@ namespace Empeños.Datos
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.updateIDs")]
 		public int updateIDs([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "newid", DbType = "VarChar(15)")] string newid, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "oldid", DbType = "VarChar(15)")] string oldid)
 		{
-			
-				IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newid, oldid);
-				return ((int)(result.ReturnValue));
-		
-			
+
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), newid, oldid);
+			return ((int)(result.ReturnValue));
+
+
 		}
 	}
 	
@@ -1690,6 +1689,8 @@ namespace Empeños.Datos
 		
 		private bool _RecibirNotificaciones;
 		
+		private bool _FacturacionElectronica;
+		
 		private string _Dirección;
 		
 		private string _Notas;
@@ -1724,6 +1725,8 @@ namespace Empeños.Datos
     partial void OnEmailChanged();
     partial void OnRecibirNotificacionesChanging(bool value);
     partial void OnRecibirNotificacionesChanged();
+    partial void OnFacturacionElectronicaChanging(bool value);
+    partial void OnFacturacionElectronicaChanged();
     partial void OnDirecciónChanging(string value);
     partial void OnDirecciónChanged();
     partial void OnNotasChanging(string value);
@@ -1916,6 +1919,26 @@ namespace Empeños.Datos
 					this._RecibirNotificaciones = value;
 					this.SendPropertyChanged("RecibirNotificaciones");
 					this.OnRecibirNotificacionesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacturacionElectronica", DbType="Bit NOT NULL")]
+		public bool FacturacionElectronica
+		{
+			get
+			{
+				return this._FacturacionElectronica;
+			}
+			set
+			{
+				if ((this._FacturacionElectronica != value))
+				{
+					this.OnFacturacionElectronicaChanging(value);
+					this.SendPropertyChanging();
+					this._FacturacionElectronica = value;
+					this.SendPropertyChanged("FacturacionElectronica");
+					this.OnFacturacionElectronicaChanged();
 				}
 			}
 		}

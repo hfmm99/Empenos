@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Empeños" Class="EmpeñosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Empeños;Integrated Security=True;User ID=sa" SettingsObjectName="Empeños.Properties.Settings" SettingsPropertyName="EmpeñosConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=Empeños;Integrated Security=True;User ID=sa" SettingsObjectName="Empeños.Properties.Settings" SettingsPropertyName="EmpeñosConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Artículos" Member="Artículos">
     <Type Name="Artículo">
       <Column Name="Código" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -79,6 +79,7 @@
       <Column Name="Teléfono" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="RecibirNotificaciones" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FacturacionElectronica" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Dirección" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="true" />

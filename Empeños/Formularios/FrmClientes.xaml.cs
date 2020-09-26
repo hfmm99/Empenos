@@ -5,6 +5,7 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -75,11 +76,12 @@ namespace Empeños.Formularios
                         txtTeléfono.Text = cliente.Teléfono;
                         txtEmail.Text = cliente.Email;
                         chkRecibirNotificaciones.IsChecked = cliente.RecibirNotificaciones;
+                        chkFacturaElectronica.IsChecked = cliente.FacturacionElectronica;
                         txtDirección.Text = cliente.Dirección;
                         txtNotas.Text = cliente.Notas;
                         cmbTipoId.Text = tipoid;
                         txtCódigo.Text = cliente.Código;
-                        
+
 
                         if (cliente.Foto != null)
                         {
@@ -101,6 +103,18 @@ namespace Empeños.Formularios
             }
             else
                 txtCódigo.Focus();
+        }
+
+        private bool check_email(String emailaddress) {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -125,6 +139,22 @@ namespace Empeños.Formularios
                 txtApellidos.Focus();
                 return;
             }
+            if (chkFacturaElectronica.IsChecked == true)
+            {
+                if (txtEmail.Text == "")
+                {
+                    MessageBox.Show("Debe ingresar el correo electroníco. Ej: ejemplo@ejemplo.com");
+                    txtApellidos.Focus();
+                    return;
+                }
+                else if (!check_email(txtEmail.Text))
+                {
+                    MessageBox.Show("Formato incorrecto en el campo de correo electroníco. Ej: ejemplo@ejemplo.com");
+                    txtApellidos.Focus();
+                    return;
+                }
+            }
+
 
             string caseSwitch = cmbTipoId.Text;
             short tipoid;
@@ -166,7 +196,7 @@ namespace Empeños.Formularios
                     }
                     catch (Exception t)
                     {
-                        System.Windows.MessageBox.Show("Error al actualizar.  Ya existe un cliente con esta identificación.\n" + t.Message, "Error", MessageBoxButton.OK); 
+                        System.Windows.MessageBox.Show("Error al actualizar.  Ya existe un cliente con esta identificación.\n" + t.Message, "Error", MessageBoxButton.OK);
                     }
                 }
 
@@ -177,6 +207,7 @@ namespace Empeños.Formularios
                 Cliente.Teléfono = txtTeléfono.Text;
                 Cliente.Email = txtEmail.Text;
                 Cliente.RecibirNotificaciones = chkRecibirNotificaciones.IsChecked.Value;
+                Cliente.FacturacionElectronica = chkFacturaElectronica.IsChecked.Value;
                 Cliente.Dirección = txtDirección.Text;
                 Cliente.Notas = txtNotas.Text;
 

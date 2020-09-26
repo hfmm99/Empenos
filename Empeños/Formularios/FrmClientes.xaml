@@ -52,12 +52,12 @@
         </StackPanel>
 
         <Label  Grid.Row="5" VerticalAlignment="Center" Content="Teléfono:"/>
-        <TextBox x:Name="txtTeléfono" Height="27" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/>
+        <xctk:MaskedTextBox  x:Name="txtTeléfono" Height="27" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0000-0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False"/>
 
         <Label  Grid.Row="6" VerticalAlignment="Center" Content="Correo electrónico:"/>
         <TextBox x:Name="txtEmail" Height="27" Grid.Row="6" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
 
-        <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="183,32,347,4" Grid.RowSpan="2"/>
 
         <Border BorderBrush="#1E90FF" Margin="55,5,4,5" BorderThickness="2" Grid.Column="2" Grid.RowSpan="6" >
             <Image x:Name="imgFoto" Margin="102,5,4.5,5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
@@ -80,5 +80,6 @@
             <Button x:Name="btnCancelar" Margin="4" Content="_Salir" Width="75" Height="27" VerticalAlignment="Bottom" Click="btnCancelar_Click"/>
         </StackPanel>
         <Button x:Name="btnEditarCodigo" Content="Editar" Grid.Column="2" HorizontalAlignment="Left" Margin="4.5,25,0,0" VerticalAlignment="Top" Width="50" Click="btnEditarCodigo_click" Height="30" Grid.RowSpan="2" Visibility="Hidden" />
+        <CheckBox x:Name="chkFacturaElectronica" Content="Facturación electrónica" Grid.Row="6" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="171,31,5.5,5" Grid.RowSpan="2"/>
     </Grid>
 </Window>
