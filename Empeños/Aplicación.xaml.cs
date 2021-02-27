@@ -36,7 +36,7 @@ namespace Empeños
                             if(!Directory.Exists(rutaRespaldosViejos))
                                 Directory.CreateDirectory(rutaRespaldosViejos);
 
-                            string archivoRespaldoViejo = Path.Combine(rutaRespaldosViejos, "Empeños_" + DateTime.Today.Day + ".bak");
+                            string archivoRespaldoViejo = Path.Combine(rutaRespaldosViejos, "Empeños_" + DateTime.Today.DayOfWeek + ".bak");
 
                             if(File.Exists(archivoRespaldoViejo))
                                 File.Delete(archivoRespaldoViejo);

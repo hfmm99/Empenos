@@ -63,10 +63,22 @@
     <ManifestKeyFile>Empeños_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Empeños.Aplicación</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetProjects.DataVisualization.Toolkit, Version=5.0.43.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
@@ -96,7 +108,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="system.windows.controls.input.toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -148,6 +159,9 @@
     <Compile Include="Datos\Empeños.cs">
       <DependentUpon>Empeños.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmAbono.xaml.cs">
+      <DependentUpon>FrmAbono.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FrmCuota.xaml.cs">
       <DependentUpon>FrmCuota.xaml</DependentUpon>
     </Compile>
@@ -157,11 +171,18 @@
     <Compile Include="Formularios\FrmCompras.xaml.cs">
       <DependentUpon>FrmCompras.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmActualizarID.xaml.cs">
+      <DependentUpon>FrmActualizarID.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Recibos.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Page Include="Controles\IndicadorEstado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\FrmAbono.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Formularios\FrmCuota.xaml">
       <SubType>Designer</SubType>
@@ -209,15 +230,15 @@
       <DependentUpon>FrmPrincipal.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Formularios\FrmActualizarID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Recursos\Estilos\BureauBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Recursos\Estilos\TabControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Reportes\ReciboVenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +276,7 @@
     </None>
     <None Include="Empeños_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -289,6 +311,9 @@
     <None Include="Reportes\Empeños Atrasados.rdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Reportes\Ventas del mes.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Reportes\Empeños Vencidos.rdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -317,6 +342,14 @@
     <Resource Include="Resources\Firmar.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Recursos\Imágenes\FirmaPorfirio.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Scripts\1.sql" />
+    <Content Include="Scripts\2.sql" />
+    <Content Include="Scripts\3.sql" />
+    <Content Include="Scripts\QueryUpdateVentas.sql" />
+    <Content Include="Scripts\Update totales ventas.sql" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

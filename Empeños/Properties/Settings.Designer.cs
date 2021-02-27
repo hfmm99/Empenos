@@ -26,7 +26,7 @@ namespace Empeños.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLExpress;Initial Catalog=Empeños;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=Empeños;Integrated Security=True")]
         public string EmpeñosConnectionString {
             get {
                 return ((string)(this["EmpeñosConnectionString"]));

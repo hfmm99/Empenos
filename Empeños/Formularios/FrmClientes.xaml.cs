@@ -2,8 +2,10 @@
 using Empeños.Datos;
 using Microsoft.Win32;
 using System;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -17,6 +19,7 @@ namespace Empeños.Formularios
         #region Propiedades
 
         private String códigoCliente;
+        private String códigoCliente2 = "";
 
         public Cliente Cliente { get; private set; }
 
@@ -42,8 +45,29 @@ namespace Empeños.Formularios
                     var cliente = bd.Clientes.SingleOrDefault(c => c.Código == códigoCliente);
                     if (cliente != null)
                     {
-                        txtCódigo.Text = cliente.Código;
                         txtCódigo.IsReadOnly = true;
+                        cmbTipoId.IsEnabled = false;
+                        btnEditarCodigo.Visibility = Visibility.Visible;
+                        short caseSwitch = cliente.TipoIdentificación;
+                        string tipoid;
+                        switch (caseSwitch)
+                        {
+                            case 1:
+                                tipoid = "Física";
+                                break;
+                            case 2:
+                                tipoid = "Jurídica";
+                                break;
+                            case 3:
+                                tipoid = "DIMEX";
+                                break;
+                            case 4:
+                                tipoid = "NITE";
+                                break;
+                            default:
+                                tipoid = "Sin Definir";
+                                break;
+                        }
 
                         txtNombre.Text = cliente.Nombre;
                         txtApellidos.Text = cliente.Apellidos;
@@ -52,8 +76,12 @@ namespace Empeños.Formularios
                         txtTeléfono.Text = cliente.Teléfono;
                         txtEmail.Text = cliente.Email;
                         chkRecibirNotificaciones.IsChecked = cliente.RecibirNotificaciones;
+                        chkFacturaElectronica.IsChecked = cliente.FacturacionElectronica;
                         txtDirección.Text = cliente.Dirección;
                         txtNotas.Text = cliente.Notas;
+                        cmbTipoId.Text = tipoid;
+                        txtCódigo.Text = cliente.Código;
+
 
                         if (cliente.Foto != null)
                         {
@@ -75,6 +103,18 @@ namespace Empeños.Formularios
             }
             else
                 txtCódigo.Focus();
+        }
+
+        private bool check_email(String emailaddress) {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -99,24 +139,75 @@ namespace Empeños.Formularios
                 txtApellidos.Focus();
                 return;
             }
+            if (chkFacturaElectronica.IsChecked == true)
+            {
+                if (txtEmail.Text == "")
+                {
+                    MessageBox.Show("Debe ingresar el correo electroníco. Ej: ejemplo@ejemplo.com");
+                    txtApellidos.Focus();
+                    return;
+                }
+                else if (!check_email(txtEmail.Text))
+                {
+                    MessageBox.Show("Formato incorrecto en el campo de correo electroníco. Ej: ejemplo@ejemplo.com");
+                    txtApellidos.Focus();
+                    return;
+                }
+            }
+
+
+            string caseSwitch = cmbTipoId.Text;
+            short tipoid;
+            switch (caseSwitch)
+            {
+                case "Física":
+                    tipoid = 1;
+                    break;
+                case "Jurídica":
+                    tipoid = 2;
+                    break;
+                case "DIMEX":
+                    tipoid = 3;
+                    break;
+                case "NITE":
+                    tipoid = 4;
+                    break;
+                default:
+                    tipoid = 5;
+                    break;
+            }
 
             using (var bd = new EmpeñosDataContext())
             {
-                Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Text.Trim());
+                Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Value.ToString());
 
-                if (Cliente == null)
+                if (Cliente == null && códigoCliente2 == "")
                 {
-                    Cliente = new Cliente();
+                    Cliente = new Cliente { TipoIdentificación = tipoid, Código = txtCódigo.Value.ToString() };
                     bd.Clientes.InsertOnSubmit(Cliente);
                 }
+                else if (códigoCliente2 != "")
+                {
+                    try
+                    {
+                        bd.updateIDs(txtCódigo.Value.ToString(), códigoCliente2);
+                        códigoCliente2 = "";
+                        Cliente = bd.Clientes.SingleOrDefault(c => c.Código == txtCódigo.Value.ToString());
+                    }
+                    catch (Exception t)
+                    {
+                        System.Windows.MessageBox.Show("Error al actualizar.  Ya existe un cliente con esta identificación.\n" + t.Message, "Error", MessageBoxButton.OK);
+                    }
+                }
 
-                Cliente.Código = txtCódigo.Text.Trim();
+                Cliente.TipoIdentificación = tipoid;
                 Cliente.Nombre = txtNombre.Text.Trim();
                 Cliente.Apellidos = txtApellidos.Text.Trim();
                 Cliente.Género = rbMasculino.IsChecked.Value ? 'M' : 'F';
                 Cliente.Teléfono = txtTeléfono.Text;
                 Cliente.Email = txtEmail.Text;
                 Cliente.RecibirNotificaciones = chkRecibirNotificaciones.IsChecked.Value;
+                Cliente.FacturacionElectronica = chkFacturaElectronica.IsChecked.Value;
                 Cliente.Dirección = txtDirección.Text;
                 Cliente.Notas = txtNotas.Text;
 
@@ -135,6 +226,7 @@ namespace Empeños.Formularios
 
                 this.DialogResult = true;
 
+               
                 bd.SubmitChanges();
             }
         }
@@ -178,5 +270,48 @@ namespace Empeños.Formularios
         {
             imgFoto.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png"));
         }
+
+        private void ChangeMaskID(object sender, RoutedEventArgs e)
+        {
+           
+            if (txtCódigo != null)
+            {
+                //txtCódigo.Clear();
+                switch (cmbTipoId.SelectedIndex)
+                {
+                    case 0:
+                        txtCódigo.Mask = "0 0000 0000";
+                        txtCódigo.IncludeLiteralsInValue = false;
+                        break;
+                    case 1:
+                        txtCódigo.Mask = "0 000 000000";
+                        break;
+                    case 2:
+                        txtCódigo.Mask = "000000000000";
+                        break;
+                    case 3:
+                        txtCódigo.Mask = "0 000 000000";
+                        break;
+                    default:
+                        txtCódigo.Mask = "";
+                        break;
+                }
+                txtCódigo.Focus();
+            }
+        }
+
+        private void btnEditarCodigo_click(object sender, RoutedEventArgs e)
+        {
+            FrmActualizarID frmActualizarID = new FrmActualizarID(txtCódigo.Text, cmbTipoId.Text);
+            if (frmActualizarID.ShowDialog() == true) {
+                códigoCliente2 = txtCódigo.Value.ToString();
+                cmbTipoId.Text = frmActualizarID.cmbActualizarTipoID.Text;
+                txtCódigo.Value = frmActualizarID.txtActualizarID.Text;
+                
+            }
+        }
     }
+
+     
+    
 }
