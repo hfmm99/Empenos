@@ -35,13 +35,13 @@
                     </StackPanel>
                     <xcdg:DataGridControl x:Name="dgEmpeños" MouseDoubleClick="dgEmpeños_MouseDoubleClick" SelectionChanged="dgEmpeños_SelectionChanged" KeyUp="dgEmpeños_KeyUp" AutoCreateColumns="False" ReadOnly="True" ItemsSourceChangeCompleted="dgEmpeños_ItemsSourceChangeCompleted" FontSize="22">
                         <xcdg:DataGridControl.Columns>
-                            <xcdg:Column Title="Código" FieldName="Código" Width="150*" />
-                            <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150*" />
-                            <xcdg:Column Title="Identificación" FieldName="Código_Cliente" Width="200*" />
-                            <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="200px" />
+                            <xcdg:Column Title="Código" FieldName="Código" Width="150px" />
+                            <xcdg:Column Title="Fecha" FieldName="Fecha" Width="150px" />
+                            <xcdg:Column Title="Identificación" FieldName="Código_Cliente" Width="200px" />
+                            <xcdg:Column Title="Cliente" FieldName="Cliente.NombreCompleto" Width="200*" />
                             <xcdg:Column Title="Artículos" FieldName="Artículos" Width="200px" />
-                            <xcdg:Column Title="Monto Compra" FieldName="TotalMontoPréstamo" Width="200*" CellContentStringFormat="{}{0:# ###}"  />
-                            <xcdg:Column Title="Estado" FieldName="EstadoEmpeño"  Width="170*"/>
+                            <xcdg:Column Title="Monto Compra" FieldName="TotalMontoPréstamo" Width="200px" CellContentStringFormat="{}{0:# ###}"  />
+                            <xcdg:Column Title="Estado" FieldName="EstadoEmpeño"  Width="170px"/>
                         </xcdg:DataGridControl.Columns>
                     </xcdg:DataGridControl>
                 </DockPanel>
@@ -124,9 +124,9 @@
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Horizontal" Height="44" HorizontalAlignment="Right" Width="461" VerticalAlignment="Top">
+        <StackPanel Orientation="Horizontal" Height="44" HorizontalAlignment="Right" Width="497" VerticalAlignment="Top">
             <Label Content="Buscar:" VerticalAlignment="Center" Foreground="White" />
-            <TextBox x:Name="txtBuscar" Width="350" VerticalContentAlignment="Center" Margin="0,5" KeyUp="txtBuscar_KeyUp"/>
+            <TextBox x:Name="txtBuscar" Width="389" VerticalContentAlignment="Center" Margin="0,5" KeyUp="txtBuscar_KeyUp" ToolTip="Digite el criterio de búsqueda, o deje en blanco para cargar los datos del día actual"/>
             <Button x:Name="btnBuscar" Width="32" Click="btnBuscar_Click" Height="30" Margin="2,1" Background="{StaticResource ResourceKey=gradientBrushSegmentedTabItem}"
             		BorderThickness="0,0,1,0"
             		BorderBrush="#032A6B">

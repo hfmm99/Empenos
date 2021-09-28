@@ -540,6 +540,11 @@ namespace Empeños.Formularios
                     pagos.Add(pago);
                     gridPagos.SelectedItem = pago;
                     ActualizarTotales();
+
+                    if (frmCuota.chkImprimirAlGuardar.IsChecked == true) 
+                    {
+                        btnImprimir_Click(btnImprimirPago, new RoutedEventArgs());
+                    }
                 }
             }
             finally

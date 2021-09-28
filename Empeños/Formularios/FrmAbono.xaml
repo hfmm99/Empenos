@@ -33,6 +33,7 @@
 
         <!-- Row 4 -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Height="40" Grid.ColumnSpan="2" >
+            <CheckBox x:Name="chkImprimirAlGuardar" Content="Imprimir al guardar" IsChecked="True" Margin="0,0,100,0" Height="32" />
             <Button x:Name="btnLimpiarFirma" Content="  Limpiar Firma  " Margin="0,0,70,0" Click="BtnLimpiarFirma_Click" Background="#FFFF9393" Foreground="White" />
             <Button x:Name="btnGuardar" Content="  Guardar  " Margin="5,0,0,0" Click="BtnGuardar_Click"/>
             <Button x:Name="btnCancelar" Content="  Cancelar  " Margin="5,0,0,0" Click="BtnCancelar_Click"/>
