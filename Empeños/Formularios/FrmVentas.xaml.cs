@@ -313,27 +313,9 @@ namespace Empeños.Formularios
             else
                 ctrlIndicador.Estado = Controles.EstadoIndicador.Rojo;
              * */
-           var suma = listaArtículos.Sum(art => art.Precio);
-           var impuesto = 0;
-           var total = 0;
-
-           DateTime fecha_x = new DateTime(2021, 2, 28); // Este codigo de fecha se agrego para no hacer cambios en BD
-           DateTime fecha_y = new DateTime(2020, 06, 27); // En este fecha aproximadamente se hicieron los cambios en Git
-           int result1 = DateTime.Compare((DateTime)dtpFecha.SelectedDate , fecha_x); // se paso de 0% a 13% y luego a 4% de IVA
-           int result2 = DateTime.Compare((DateTime)dtpFecha.SelectedDate, fecha_y);
-
-            if (result1 >= 0)
-            {
-                impuesto = (int)(suma * parámetros.IVA);
-            }
-            else if (result2 > 0)
-            {
-                impuesto = (int)(suma * 0.13);
-            }
-            else if (result2 <= 0) {
-                impuesto = 0;
-            }
-            total = (int)(suma + impuesto);
+            var suma = listaArtículos.Sum(art => art.Precio);
+            var impuesto = suma * parámetros.IVA;
+            var total = suma + impuesto;
             txtIVA.Text = impuesto.ToString();
             txtTotalMontoVenta.Text = suma.ToString();
             txtMontoAPagar.Text = total.ToString();
@@ -447,7 +429,5 @@ namespace Empeños.Formularios
               //  inkFirma.SetTabletState(1);
             }
         }
-
-        
     }
 }
