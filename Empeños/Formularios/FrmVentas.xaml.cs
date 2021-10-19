@@ -319,19 +319,26 @@ namespace Empeños.Formularios
 
            DateTime fecha_x = new DateTime(2021, 2, 28); // Este codigo de fecha se agrego para no hacer cambios en BD
            DateTime fecha_y = new DateTime(2020, 06, 27); // En este fecha aproximadamente se hicieron los cambios en Git
+           DateTime fecha_z = new DateTime(2021, 10, 19); // En esta fecha se volvio a poner el IVA en 13%
            int result1 = DateTime.Compare((DateTime)dtpFecha.SelectedDate , fecha_x); // se paso de 0% a 13% y luego a 4% de IVA
            int result2 = DateTime.Compare((DateTime)dtpFecha.SelectedDate, fecha_y);
+           int result3 = DateTime.Compare((DateTime)dtpFecha.SelectedDate, fecha_z);
 
             if (result1 >= 0)
             {
-                impuesto = (int)(suma * parámetros.IVA);
+                impuesto = (int)(suma * 0.04);
             }
             else if (result2 > 0)
             {
                 impuesto = (int)(suma * 0.13);
             }
-            else if (result2 <= 0) {
+            else if (result2 <= 0)
+            {
                 impuesto = 0;
+            }
+            else if (result3 >= 0 ) {
+                impuesto = (int)(suma * parámetros.IVA); // cambiar a 13% el IVA en la tabla de parametros
+                
             }
             total = (int)(suma + impuesto);
             txtIVA.Text = impuesto.ToString();

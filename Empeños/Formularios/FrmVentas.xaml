@@ -194,7 +194,7 @@
                 </DockPanel>
             </TabItem>
         </TabControl>
-        <Button x:Name="btnGuardar" Content="Guardar" Margin="0,0,115,-34" HorizontalAlignment="Right" Width="90" Click="btnGuardar_Click" Height="31" VerticalAlignment="Bottom" TabIndex="13"/>
+        <Button x:Name="btnGuardar" Content="Guardar" Margin="0,666,115,-33.5" HorizontalAlignment="Right" Width="90" Click="btnGuardar_Click" Height="30" VerticalAlignment="Top" TabIndex="13"/>
         <Button x:Name="btnCancelar" Content="Salir" Margin="0,0,15,-34" HorizontalAlignment="Right" Width="87" Height="31" VerticalAlignment="Bottom" Click="btnCancelar_Click" TabIndex="14"/>
         <CheckBox x:Name="chkImprimirAlGuardar" Content="Imprimir al guardar" IsChecked="True" Margin="0,0,229,-27" HorizontalAlignment="Right" VerticalAlignment="Bottom" TabIndex="12" />
         <Label HorizontalAlignment="Left" Margin="28,78,0,0" VerticalAlignment="Top" Content="Estado:"/>
