@@ -1,6 +1,8 @@
 ﻿<Window x:Class="Empeños.Formularios.FrmClientes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="16"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         Title="Clientes" Width="1065.946" Height="570.086" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,54 +18,68 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Label VerticalAlignment="Center" Content="Identificación:"/>
-        <TextBox x:Name="txtCódigo" Height="27" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/>
+        <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Tipo Identificación:"/>
+        <ComboBox x:Name="cmbTipoId"  Height="27"  Grid.Row="0"  Grid.Column="1" VerticalAlignment="Center"  SelectedIndex='0'  TabIndex="5" SelectionChanged="ChangeMaskID" Margin="0,5,0.5,4.5" >
+            <ComboBoxItem Content="Física" />
+            <ComboBoxItem Content="Jurídica" />
+            <ComboBoxItem Content="DIMEX" />
+            <ComboBoxItem Content="NITE" />
+            <ComboBoxItem Content="Sin Definir" />
+        </ComboBox>
 
-        <Label  Grid.Row="1" VerticalAlignment="Center" Content="Nombre:"/>
-        <TextBox x:Name="txtNombre" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
+        <Label Grid.Row="1" VerticalAlignment="Center" Content="Identificación:"/>
+        <!--TextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/-->
 
-        <Label  Grid.Row="2" VerticalAlignment="Center" Content="Apellidos:"/>
-        <TextBox x:Name="txtApellidos" Height="27" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100" />
+        <xctk:MaskedTextBox x:Name="txtCódigo" Height="27" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0 0000 0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False" Margin="0,4.5,0.5,5" />
 
-        <Label  Grid.Row="3" VerticalAlignment="Center" Content="Género:"/>
+        <Label  Grid.Row="2" VerticalAlignment="Center" Content="Nombre:"/>
+        <TextBox x:Name="txtNombre" Height="27" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+        <Label  Grid.Row="3" VerticalAlignment="Center" Content="Apellidos:"/>
+        <TextBox x:Name="txtApellidos" Height="27" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100" />
+
+        <Label  Grid.Row="4" VerticalAlignment="Center" Content="Género:"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
             <RadioButton x:Name="rbMasculino" Content="Masculino"  VerticalContentAlignment="Center" IsChecked="True"/>
             <RadioButton x:Name="rbFemenino" Content="Femenino"  VerticalContentAlignment="Center" Margin="15,0,0,0"/>
         </StackPanel>
 
-        <Label  Grid.Row="4" VerticalAlignment="Center" Content="Teléfono:"/>
-        <TextBox x:Name="txtTeléfono" Height="27" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15"/>
+        <Label  Grid.Row="5" VerticalAlignment="Center" Content="Teléfono:"/>
+        <xctk:MaskedTextBox  x:Name="txtTeléfono" Height="27" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="15" Mask = "0000-0000" ValueDataType="{x:Type s:String}" IncludeLiteralsInValue = "False"/>
 
-        <Label  Grid.Row="5" VerticalAlignment="Center" Content="Correo electrónico:"/>
-        <TextBox x:Name="txtEmail" Height="27" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
+        <Label  Grid.Row="6" VerticalAlignment="Center" Content="Correo electrónico:"/>
+        <TextBox x:Name="txtEmail" Height="27" Grid.Row="6" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxLength="100"/>
 
-        <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="183,32,347,4" Grid.RowSpan="2"/>
 
-        <Border BorderBrush="#1E90FF" Margin="5" BorderThickness="2" Grid.Column="3" Grid.RowSpan="6" >
-            <Image x:Name="imgFoto" Margin="5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
+        <Border BorderBrush="#1E90FF" Margin="55,5,4,5" BorderThickness="2" Grid.Column="2" Grid.RowSpan="6" >
+            <Image x:Name="imgFoto" Margin="102,5,4.5,5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
         </Border>
-        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="3">
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Margin="55,33,4,3" Grid.RowSpan="2">
             <Button x:Name="btnSeleccionarFoto" Content=" Seleccionar Imagen " ToolTip="Seleccionar Foto desde Archivo" Margin="5,0,0,0" Height="36" VerticalAlignment="Bottom" Click="BtnSeleccionarFoto_Click"/>
             <Button x:Name="btnEscanearFoto" Content=" Escanear Imagen " ToolTip="Obtener foto desde Escaner o Multifuncional (Requiere que esté conectado y encendido)" Margin="5,0,0,0" Click="BtnEscanearFoto_Click" Height="36" VerticalAlignment="Bottom"/>
             <Button x:Name="btnTomarFoto" Content=" Tomar Foto " ToolTip="Toma una foto (require una cámara web conectada a la computadora)" Margin="5,0,0,0"  Height="36" VerticalAlignment="Bottom" Click="BtnTomarFoto_Click"/>
-            <Button x:Name="btnBorrarFoto" Content="  Borrar  " Height="36" Margin="15,0,0,0" BorderBrush="#FFC50707" Click="BtnBorrarFoto_Click"/>
+            <Button x:Name="btnBorrarFoto" Content="  Borrar  " Height="36" Margin="15,0,0,0" BorderBrush="#FFC50707" Click="BtnBorrarFoto_Click" Width="61"/>
         </StackPanel>
 
-        <Label VerticalAlignment="Center" Grid.Row="7" Content="Dirección:"/>
-        <TextBox x:Name="txtDirección" Height="90" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" AcceptsReturn="True" MaxLength="250" Margin="0,0,7,0" />
+        <Label VerticalAlignment="Center" Grid.Row="8" Content="Dirección:"/>
+        <TextBox x:Name="txtDirección" Height="90" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" AcceptsReturn="True" MaxLength="250" Margin="0,0,7,0" />
 
-        <Label Grid.Row="8" VerticalAlignment="Center" Content="Notas:"/>
-        <TextBox x:Name="txtNotas" Height="105" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" AcceptsReturn="True" MaxLength="250" Margin="0,0,7,0" />
+        <Label Grid.Row="9" VerticalAlignment="Center" Content="Notas:"/>
+        <TextBox x:Name="txtNotas" Height="105" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" AcceptsReturn="True" MaxLength="250" Margin="0,0,7,0" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.ColumnSpan="3" HorizontalAlignment="Right">
             <Button x:Name="btnGuardar" Margin="4" Content="_Guardar&#x9;" Width="76" Height="27" VerticalAlignment="Bottom" Click="btnGuardar_Click"/>
             <Button x:Name="btnCancelar" Margin="4" Content="_Salir" Width="75" Height="27" VerticalAlignment="Bottom" Click="btnCancelar_Click"/>
         </StackPanel>
+        <Button x:Name="btnEditarCodigo" Content="Editar" Grid.Column="2" HorizontalAlignment="Left" Margin="4.5,25,0,0" VerticalAlignment="Top" Width="50" Click="btnEditarCodigo_click" Height="30" Grid.RowSpan="2" Visibility="Hidden" />
+        <CheckBox x:Name="chkFacturaElectronica" Content="Facturación electrónica" Grid.Row="6" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="171,31,5.5,5" Grid.RowSpan="2"/>
     </Grid>
 </Window>

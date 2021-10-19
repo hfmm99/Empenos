@@ -39,6 +39,7 @@ namespace Empeños.Formularios
         {
             códigoEmpeño = pCódigoEmpeño;
             reempeñar = pReempeñar;
+            
         }
 
         public bool ImprimirAlGuardar
@@ -72,6 +73,7 @@ namespace Empeños.Formularios
 
             cmbCategorías.SelectedIndex = 0;
 
+
             dtpFecha.SelectedDate = DateTime.Today;
             pnlDetalleArtículo.Visibility = Visibility.Collapsed;
             txtCódigo.Focus();
@@ -90,6 +92,7 @@ namespace Empeños.Formularios
                         cmbEstado.SelectedIndex = (int)empeño.Estado;
                         gridArtículos.IsEnabled = pnlListaPagos.IsEnabled = btnGuardar.IsEnabled = empeño.Estado != (byte)EstadosEmpeño.Quedado;
                         txtCódigo.IsEnabled = false; ///*****///
+                        tabPagos.IsEnabled = true;
                     }
 
                     if (empeño.Cliente != null)
@@ -98,6 +101,8 @@ namespace Empeños.Formularios
                         txtClientes.Text = empeño.Cliente.NombreCompleto;
                     }
 
+                    txtPlazo.AsInt = empeño.Plazo;
+                    txtPorcentajeIntereses.AsDecimal = empeño.PorcentajeInterés;
                     txtTotalMontoPréstamo.AsInt = empeño.TotalMontoPréstamo;
                     txtNotasEmpeño.Text = empeño.Notas;
 
@@ -105,6 +110,15 @@ namespace Empeños.Formularios
                     {
                         lstArtículos.Items.Add(det.Artículo);
                         det.Artículo.Artículos_Características.ToArray();
+                        
+
+
+
+                    }
+
+                    if (reempeñar) {
+                        txtPlazo.AsInt = parámetros.Plazo;
+                        txtPorcentajeIntereses.AsDecimal = Math.Round(parámetros.PorcentajeInterés, 2);
                     }
 
                     if (!reempeñar)
@@ -129,8 +143,15 @@ namespace Empeños.Formularios
                     #endregion
 
                     dtpFecha.Focus();
+
                 }
             }
+            else
+            {
+                txtPlazo.AsInt = parámetros.Plazo;
+                txtPorcentajeIntereses.AsDecimal = Math.Round(parámetros.PorcentajeInterés, 2);
+            }
+            if (txtPlazo.Text != "1") { labelMeses.Content = "meses"; }
         }
 
         private void pago_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -213,7 +234,12 @@ namespace Empeños.Formularios
 
                     if (empeño == null)
                     {
-                        empeño = new Empeño { Código = txtCódigo.AsInt };
+                        empeño = new Empeño
+                        {
+                            Código = txtCódigo.AsInt,
+                            PorcentajeInterés = txtPorcentajeIntereses.AsDecimal,
+                            TotalMontoPréstamo = txtTotalMontoPréstamo.AsInt
+                        };
                         bd.Empeños.InsertOnSubmit(empeño);
                         insertando = true;
                     }
@@ -229,7 +255,7 @@ namespace Empeños.Formularios
 
                         empeño.Código_Cliente = códigoCliente;
                         empeño.Fecha = dtpFecha.SelectedDate.Value;
-                        empeño.TotalMontoPréstamo = txtTotalMontoPréstamo.AsInt;
+                        empeño.Plazo = txtPlazo.AsInt;
                         empeño.Notas = txtNotasEmpeño.Text;
 
                         if (inkFirma.NumberOfTabletPoints() == 0)
@@ -500,8 +526,8 @@ namespace Empeños.Formularios
                 fechaCuota = últimoPago.FechaCuota.AddMonths(1);
             }
 
-            var frmCuota = new FrmCuota(txtCódigo.AsInt, sender == btnRetirar, DateTime.Now, fechaCuota, Convert.ToInt32(txtSaldoDelPréstamo.AsInt * parámetros.PorcentajeInterés / 100), (sender == btnRetirar) ? txtTotalMontoPréstamo.AsInt - pagos.Sum(p => p.Abono) : 0);
-          
+            var frmCuota = new FrmCuota(txtCódigo.AsInt, sender == btnRetirar, DateTime.Now, fechaCuota, Convert.ToInt32(txtSaldoDelPréstamo.AsInt * txtPorcentajeIntereses.AsDecimal / 100), (sender == btnRetirar) ? txtTotalMontoPréstamo.AsInt - pagos.Sum(p => p.Abono) : 0);
+
             try
             {
                 inkFirma.SetTabletState(1);
@@ -514,6 +540,11 @@ namespace Empeños.Formularios
                     pagos.Add(pago);
                     gridPagos.SelectedItem = pago;
                     ActualizarTotales();
+
+                    if (frmCuota.chkImprimirAlGuardar.IsChecked == true) 
+                    {
+                        btnImprimir_Click(btnImprimirPago, new RoutedEventArgs());
+                    }
                 }
             }
             finally
@@ -587,7 +618,7 @@ namespace Empeños.Formularios
                     cmbEstado.SelectedIndex = saldo == 0 ? (int)EstadosEmpeño.Retirado : (int)EstadosEmpeño.Activo;
 
                 fechaÚltimoPago = pagos.Max(p => p.FechaCuota);
-                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(parámetros.Plazo);
+                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(txtPlazo.AsInt);
 
                 #region Formato Condicional
 
@@ -610,18 +641,22 @@ namespace Empeños.Formularios
                 txtTotalInteresesCancelados.AsInt = txtTotalDePréstamoCancelado.AsInt = 0;
                 txtSaldoDelPréstamo.AsInt = txtTotalMontoPréstamo.AsInt;
                 fechaÚltimoPago = dtpFecha.SelectedDate.Value;
-                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(parámetros.Plazo);
+                dtpFechaVencimiento.SelectedDate = fechaÚltimoPago.AddMonths(txtPlazo.AsInt);
             }
             double días = (DateTime.Today - fechaÚltimoPago).TotalDays;
 
             if (Convert.ToByte(cmbEstado.SelectedIndex) == (byte)EstadosEmpeño.Activo)
             {
-                if (días > 90)
+                crtOrange.Maximum = (txtPlazo.AsInt * 30);
+                crtYellow.Maximum = (txtPlazo.AsInt * 30) / 3 * 2;
+                crtGreen.Maximum = (txtPlazo.AsInt * 30) / 3;
+
+                if (días > (txtPlazo.AsInt * 30))
                 {
                     if (ctrlIndicador.QualitativeRange.Count == 3)
                         ctrlIndicador.QualitativeRange.Add(new Controles.QualitativeRange { Color = Colors.Red, Maximum = días });
 
-                    ctrlIndicador.Maximum = días;
+                    ctrlIndicador.Maximum = txtPlazo.AsInt;
                 }
                 else
                 {
@@ -630,8 +665,7 @@ namespace Empeños.Formularios
                     if (ctrlIndicador.QualitativeRange.Count == 4)
                         ctrlIndicador.QualitativeRange.RemoveAt(3);
 
-                    ctrlIndicador.Maximum = 90;
-
+                    ctrlIndicador.Maximum = txtPlazo.AsInt * 30;
                 }
 
                 ctrlIndicador.Value = días;

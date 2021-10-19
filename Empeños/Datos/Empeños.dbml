@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Empeños" Class="EmpeñosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=Salvada3;Initial Catalog=Empeños;Integrated Security=False;User ID=sa" SettingsObjectName="Empeños.Properties.Settings" SettingsPropertyName="EmpeñosConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=Empeños;Integrated Security=True;User ID=sa" SettingsObjectName="Empeños.Properties.Settings" SettingsPropertyName="EmpeñosConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Artículos" Member="Artículos">
     <Type Name="Artículo">
       <Column Name="Código" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -71,6 +71,7 @@
   <Table Name="dbo.Clientes" Member="Clientes">
     <Type Name="Cliente">
       <Column Name="Código" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TipoIdentificación" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="NombreCompleto" Type="System.String" DbType="VarChar(201) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
@@ -78,6 +79,7 @@
       <Column Name="Teléfono" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="RecibirNotificaciones" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FacturacionElectronica" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Dirección" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="true" />
@@ -113,6 +115,8 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="TotalMontoPréstamo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Plazo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PorcentajeInterés" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Firma" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Empeño_EmpeñosDetalle" Member="EmpeñosDetalles" ThisKey="Código" OtherKey="Código_Empeño" Type="EmpeñosDetalle" />
@@ -158,6 +162,7 @@
       <Column Name="PorcentajeInterés" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="RutaRespaldoBD" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="RutaServidorReportes" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="IVA" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Ventas" Member="Ventas">
@@ -167,6 +172,8 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="Notas" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="Impuesto" Type="System.Decimal" DbType="money" CanBeNull="false" />
+      <Column Name="Total" Type="System.Int32" DbType="int" CanBeNull="false" />
       <Association Name="Venta_VentasDetalle" Member="VentasDetalles" ThisKey="Código" OtherKey="Código_Venta" Type="VentasDetalle" />
       <Association Name="Venta_VentasAbono" Member="VentasAbonos" ThisKey="Código" OtherKey="Código_Venta" Type="VentasAbono" />
       <Association Name="Cliente_Venta" Member="Cliente" ThisKey="Código_Cliente" OtherKey="Código" Type="Cliente" IsForeignKey="true" />

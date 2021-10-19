@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Collections.ObjectModel;
 
 namespace Empeños.Formularios
 {
@@ -19,6 +20,7 @@ namespace Empeños.Formularios
         Parámetro parámetros;
 
         List<Artículo> listaArtículos = new List<Artículo>();
+        ObservableCollection<VentasAbono> abonos;
 
         public FrmVentas()
         {
@@ -57,6 +59,7 @@ namespace Empeños.Formularios
                     dtpFecha.SelectedDate = venta.Fecha;
                     cmbEstado.SelectedIndex = (int)venta.Estado;
                     txtCódigo.IsEnabled = false;
+                    txtMontoAPagar.Text = venta.Total.ToString();
 
                     if (venta.Cliente != null)
                     {
@@ -181,6 +184,8 @@ namespace Empeños.Formularios
 
                     int cuota = 0;
                     venta.VentasAbonos.Add(new VentasAbono { Cuota = ++cuota, Fecha = DateTime.Now, Monto = txtTotalMontoVenta.AsInt });
+                    venta.Impuesto = txtIVA.AsDecimal;
+                    venta.Total = (int)txtMontoAPagar.AsDecimal;
 
                     bd.SubmitChanges();
 
@@ -272,6 +277,8 @@ namespace Empeños.Formularios
 
         private void ActualizarTotales()
         {
+            var bd = new EmpeñosDataContext();
+            parámetros = bd.Parámetros.FirstOrDefault();
             /*
             var pagos = gridPagos.Items.OfType<EmpeñosPago>().ToArray();
 
@@ -306,8 +313,39 @@ namespace Empeños.Formularios
             else
                 ctrlIndicador.Estado = Controles.EstadoIndicador.Rojo;
              * */
+           var suma = listaArtículos.Sum(art => art.Precio);
+           var impuesto = 0;
+           var total = 0;
 
-            txtTotalMontoVenta.Text = listaArtículos.Sum(art => art.Precio).ToString();
+           DateTime fecha_x = new DateTime(2021, 2, 28); // Este codigo de fecha se agrego para no hacer cambios en BD
+           DateTime fecha_y = new DateTime(2020, 06, 27); // En este fecha aproximadamente se hicieron los cambios en Git
+           DateTime fecha_z = new DateTime(2021, 10, 19); // En esta fecha se volvio a poner el IVA en 13%
+           int result1 = DateTime.Compare((DateTime)dtpFecha.SelectedDate , fecha_x); // se paso de 0% a 13% y luego a 4% de IVA
+           int result2 = DateTime.Compare((DateTime)dtpFecha.SelectedDate, fecha_y);
+           int result3 = DateTime.Compare((DateTime)dtpFecha.SelectedDate, fecha_z);
+
+            if (result1 >= 0)
+            {
+                impuesto = (int)(suma * 0.04);
+            }
+            else if (result2 > 0)
+            {
+                impuesto = (int)(suma * 0.13);
+            }
+            else if (result2 <= 0)
+            {
+                impuesto = 0;
+            }
+            else if (result3 >= 0 ) {
+                impuesto = (int)(suma * parámetros.IVA); // cambiar a 13% el IVA en la tabla de parametros  
+            }
+            total = (int)(suma + impuesto);
+           suma = listaArtículos.Sum(art => art.Precio);
+           impuesto = (int)(suma * parámetros.IVA);
+           total = (int)(suma + impuesto);
+           txtIVA.Text = impuesto.ToString();
+           txtTotalMontoVenta.Text = suma.ToString();
+           txtMontoAPagar.Text = total.ToString();
         }
 
         private void btnAgregarArtículo_Click(object sender, RoutedEventArgs e)
@@ -374,6 +412,49 @@ namespace Empeños.Formularios
         {
             if (rbTipoApartado != null)
                 tabAbonos.Visibility = rbTipoApartado.IsChecked.Value ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void GridAbonos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridApartado.SelectedItem != null)
+            {
+                var abono = gridApartado.SelectedItem as VentasAbono;
+
+                if (abono != null)
+                {
+                    var frmVentas = new FrmVentas();
+
+                    if (frmVentas.ShowDialog() == true)
+                    {
+                        //abono.Fecha = frmVentas.abon;
+                        //abono.FechaCuota = frmCuota.FechaCuota;
+                    }
+                }
+            }
+        }
+
+        private void btnAgregarAbono(object sender, RoutedEventArgs e)
+        {
+            var frmAbono = new FrmAbono(int.Parse(txtCódigo.Text), 0, DateTime.Now, 0);
+
+            try
+            {
+                //inkFirma.SetTabletState(1);
+
+                if (frmAbono.ShowDialog() == true)
+                {
+                    var abono = new VentasAbono {Código_Venta = txtCódigo.AsInt, Cuota = abonos.Count, Fecha = frmAbono.Fecha, Monto = frmAbono.Monto };
+
+                    abono.PropertyChanged += pago_PropertyChanged;
+                    abonos.Add(abono);
+                    gridApartado.SelectedItem = abono;
+                    //ActualizarTotales();
+                }
+            }
+            finally
+            {
+              //  inkFirma.SetTabletState(1);
+            }
         }
     }
 }

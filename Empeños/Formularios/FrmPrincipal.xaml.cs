@@ -62,45 +62,77 @@ namespace Empeños.Formularios
 
         private void Buscar()
         {
-            if (txtBuscar.Text.Trim() == string.Empty)
-            {
-                MessageBox.Show("Debe digitar al menos un caracter para realizar una búsqueda");
-                return;
-            }
-
             var bd = new EmpeñosDataContext();
+
             switch (tabOpciones.SelectedIndex)
             {
                 case 0: //Empeños
-                    dgEmpeños.ItemsSource = bd.Empeños
-                                               .Where(em => em.Estado != (byte)EstadosEmpeño.Inactivo && (em.Código.ToString().Contains(txtBuscar.Text) || em.Cliente.Código.Contains(txtBuscar.Text) || em.Cliente.NombreCompleto.Contains(txtBuscar.Text)))
-                                               .OrderBy(em => em.Estado)
-                                               .ThenByDescending(em => em.Fecha)
-                                               .ToList();
+                    var empeños = bd.Empeños.AsQueryable();
+
+                    if (txtBuscar.Text.Trim() == string.Empty)
+                    {
+                        empeños = empeños.Where(em => em.Fecha.Date == DateTime.Today);
+                    }
+                    else
+                    {
+                        empeños = empeños.Where(em => em.Estado != (byte)EstadosEmpeño.Inactivo && (em.Código.ToString().Contains(txtBuscar.Text) || em.Cliente.Código.Contains(txtBuscar.Text) || em.Cliente.NombreCompleto.Contains(txtBuscar.Text)));
+                    }
+
+                    dgEmpeños.ItemsSource = empeños
+                                            .OrderBy(em => em.Estado)
+                                            .ThenByDescending(em => em.Fecha)
+                                            .ToList();
 
                     break;
 
                 case 1: //Compras
-                    dgCompras.ItemsSource = bd.Compras
-                                              .Where(comp => comp.Código.ToString().Contains(txtBuscar.Text) || comp.Cliente.Código.Contains(txtBuscar.Text) || comp.Cliente.NombreCompleto.Contains(txtBuscar.Text))
-                                              .OrderBy(em => em.Estado)
-                                              .ThenByDescending(em => em.Fecha)
-                                              .ToList();
+                    var compras = bd.Compras.AsQueryable();
+
+                    if (txtBuscar.Text.Trim() == string.Empty)
+                    {
+                        compras = compras.Where(em => em.Fecha.Date == DateTime.Today);
+                    }
+                    else
+                    {
+                        compras = compras.Where(comp => comp.Código.ToString().Contains(txtBuscar.Text) || comp.Cliente.Código.Contains(txtBuscar.Text) || comp.Cliente.NombreCompleto.Contains(txtBuscar.Text));
+                    }
+
+                    dgCompras.ItemsSource = compras
+                                           .OrderBy(em => em.Estado)
+                                           .ThenByDescending(em => em.Fecha)
+                                           .ToList();
                     break;
 
                 case 2://Ventas
-                    dgVentas.ItemsSource = bd.Ventas
-                                             .Where(vent => vent.Código.ToString().Contains(txtBuscar.Text) || vent.Cliente.Código.Contains(txtBuscar.Text) || vent.Cliente.NombreCompleto.Contains(txtBuscar.Text))
-                                             .OrderBy(em => em.Estado)
-                                             .ThenByDescending(em => em.Fecha)
-                                             .ToList();
+                    var ventas = bd.Ventas.AsQueryable();
+
+                    if (txtBuscar.Text.Trim() == string.Empty)
+                    {
+                        ventas = ventas.Where(em => em.Fecha.Date == DateTime.Today);
+                    }
+                    else
+                    {
+                        ventas = ventas.Where(vent => vent.Código.ToString().Contains(txtBuscar.Text) || vent.Cliente.Código.Contains(txtBuscar.Text) || vent.Cliente.NombreCompleto.Contains(txtBuscar.Text));
+                    }
+
+                    dgVentas.ItemsSource = ventas
+                                          .OrderBy(em => em.Estado)
+                                          .ThenByDescending(em => em.Fecha)
+                                          .ToList();
                     break;
 
                 default:
-                    dgClientes.ItemsSource = bd.Clientes
-                                               .Where(c => c.Código.Contains(txtBuscar.Text) || c.NombreCompleto.Contains(txtBuscar.Text))
-                                               .OrderBy(c => c.NombreCompleto)
-                                               .ToList();
+                    if (txtBuscar.Text.Trim() == string.Empty)
+                    {
+                        MessageBox.Show("Debe digitar al menos un caracter para realizar una búsqueda");
+                    }
+                    else
+                    {
+                        dgClientes.ItemsSource = bd.Clientes
+                                                   .Where(c => c.Código.Contains(txtBuscar.Text) || c.NombreCompleto.Contains(txtBuscar.Text))
+                                                   .OrderBy(c => c.NombreCompleto)
+                                                   .ToList();
+                    }
                     break;
             }
         }
@@ -192,7 +224,7 @@ namespace Empeños.Formularios
 
         private void tabOpciones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Title = "Empeños - " + (tabOpciones.SelectedItem as TabItem).Header.ToString();
+            this.Title = "La salvada - " + (tabOpciones.SelectedItem as TabItem).Header.ToString();
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -204,14 +236,18 @@ namespace Empeños.Formularios
                     frmEmpeños.ShowDialog();
 
                     if (frmEmpeños.ImprimirAlGuardar)
-                        Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmEmpeños.txtCódigo.AsInt));
+                        if (frmEmpeños.txtClientes.Text != "")
+                        {
+
+                            Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmEmpeños.txtCódigo.AsInt, frmEmpeños.inkFirma.GetSigString()));
+                        }
                     break;
                 case 1: //Compras
                     var frmCompras = new FrmCompras() { Owner = this };
                     frmCompras.ShowDialog();
 
-                    //if (frmCompras.ImprimirAlGuardar)
-                    //    Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño(frmCompras.txtCódigo.AsInt));
+                    if (frmCompras.ImprimirAlGuardar)
+                        Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeCompra(frmCompras.txtCódigo.AsInt));
                     break;
                 case 2: //Ventas
                     var frmVentas = new FrmVentas() { Owner = this };
@@ -236,7 +272,7 @@ namespace Empeños.Formularios
         private void btnImprimirEmpeño_Click(object sender, RoutedEventArgs e)
         {
             if (dgEmpeños.SelectedItem != null)
-                Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño((dgEmpeños.SelectedItem as Empeño).Código));
+                Recibos.Imprimir("Imprimiendo Recibo", Recibos.ReciboDeEmpeño((dgEmpeños.SelectedItem as Empeño).Código, (dgEmpeños.SelectedItem as Empeño).Firma));
         }
 
         private void btnReempeñar_Click(object sender, RoutedEventArgs e)
@@ -438,5 +474,37 @@ namespace Empeños.Formularios
         }
 
         #endregion
+
+        private void btnEliminarCliente_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgClientes.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una venta de la lista");
+                return;
+            }
+
+            if (MessageBox.Show("¿Está seguro que desea borrar el cliente seleccionado?", "Pregunta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                using (var bd = new EmpeñosDataContext())
+                {
+                    var cliente = bd.Clientes.FirstOrDefault(c => c.Código == (dgClientes.SelectedItem as Cliente).Código);
+
+                    if (cliente != null)
+                    {
+                        try
+                        {
+
+                            bd.Clientes.DeleteOnSubmit(cliente);
+                            bd.SubmitChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Se produjo un error al intentar eliminar el cliente, tiene otros registros asociados\n" + ex.Message);
+                        }
+                        Buscar();
+                    }
+                }
+            }
+        }
     }
 }

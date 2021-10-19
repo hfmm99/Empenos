@@ -52,6 +52,11 @@ namespace Empeños.Datos
                 return (EstadosEmpeño)this.Estado;
             }
         }
+
+        public string Artículos
+        {
+            get { return string.Join(", ", EmpeñosDetalles?.Select(ed => ed.Artículo?.Nombre)); }
+        }
     }
 
     partial class Venta
