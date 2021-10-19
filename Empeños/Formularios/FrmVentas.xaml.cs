@@ -313,6 +313,7 @@ namespace Empeños.Formularios
             else
                 ctrlIndicador.Estado = Controles.EstadoIndicador.Rojo;
              * */
+<<<<<<< HEAD
            var suma = listaArtículos.Sum(art => art.Precio);
            var impuesto = 0;
            var total = 0;
@@ -341,6 +342,11 @@ namespace Empeños.Formularios
                 
             }
             total = (int)(suma + impuesto);
+=======
+            var suma = listaArtículos.Sum(art => art.Precio);
+            var impuesto = suma * parámetros.IVA;
+            var total = suma + impuesto;
+>>>>>>> 8282796da909b9cabbf1065b8bd4c5692d87cad0
             txtIVA.Text = impuesto.ToString();
             txtTotalMontoVenta.Text = suma.ToString();
             txtMontoAPagar.Text = total.ToString();
@@ -454,7 +460,5 @@ namespace Empeños.Formularios
               //  inkFirma.SetTabletState(1);
             }
         }
-
-        
     }
 }
