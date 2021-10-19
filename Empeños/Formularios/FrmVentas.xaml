@@ -79,7 +79,7 @@
                                             <TextBlock Text="{Binding Código}">
                                                 <TextBlock.ToolTip>
                                                     <ToolTip>
-                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:#,#}}" />
+                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:##}}" />
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
                                             </TextBlock>
@@ -92,7 +92,7 @@
                                             <TextBlock Text="{Binding DescripciónExtendida}">
                                                 <TextBlock.ToolTip>
                                                     <ToolTip>
-                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:#,#}}" />
+                                                        <TextBlock Text="{Binding Path=Costo, StringFormat=Costo: {0:##}}" />
                                                     </ToolTip>
                                                 </TextBlock.ToolTip>
                                             </TextBlock>

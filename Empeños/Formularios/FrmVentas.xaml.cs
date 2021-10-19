@@ -313,7 +313,6 @@ namespace Empeños.Formularios
             else
                 ctrlIndicador.Estado = Controles.EstadoIndicador.Rojo;
              * */
-<<<<<<< HEAD
            var suma = listaArtículos.Sum(art => art.Precio);
            var impuesto = 0;
            var total = 0;
@@ -338,18 +337,15 @@ namespace Empeños.Formularios
                 impuesto = 0;
             }
             else if (result3 >= 0 ) {
-                impuesto = (int)(suma * parámetros.IVA); // cambiar a 13% el IVA en la tabla de parametros
-                
+                impuesto = (int)(suma * parámetros.IVA); // cambiar a 13% el IVA en la tabla de parametros  
             }
             total = (int)(suma + impuesto);
-=======
-            var suma = listaArtículos.Sum(art => art.Precio);
-            var impuesto = suma * parámetros.IVA;
-            var total = suma + impuesto;
->>>>>>> 8282796da909b9cabbf1065b8bd4c5692d87cad0
-            txtIVA.Text = impuesto.ToString();
-            txtTotalMontoVenta.Text = suma.ToString();
-            txtMontoAPagar.Text = total.ToString();
+           suma = listaArtículos.Sum(art => art.Precio);
+           impuesto = (int)(suma * parámetros.IVA);
+           total = (int)(suma + impuesto);
+           txtIVA.Text = impuesto.ToString();
+           txtTotalMontoVenta.Text = suma.ToString();
+           txtMontoAPagar.Text = total.ToString();
         }
 
         private void btnAgregarArtículo_Click(object sender, RoutedEventArgs e)
