@@ -68,9 +68,9 @@ namespace Empeños.Reportes
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
@@ -194,9 +194,9 @@ namespace Empeños.Reportes
                                     new LineBreak(),
                                     new Run("La Salvada") { FontSize = 18, FontWeight = FontWeights.Bold },
                                     new LineBreak(),
-                                    "Porfirio Morales Mora",
+                                    "Abraham Lanza Torres",
                                     new LineBreak(),
-                                    "Cédula: 2-0290-0936",
+                                    "Cédula: 2-0683-0984",
                                     new LineBreak(),
                                     new LineBreak(),
                                     "Tel: ",
@@ -264,7 +264,7 @@ namespace Empeños.Reportes
                                 new Run("  ACUERDO DE COMPRA Y VENTA  ") { FontWeight = FontWeights.Bold, FontSize = 14},
                                 new LineBreak(),
                                 new LineBreak(),
-                                "Nosotros, Porfirio Morales Mora,  cédula: 2-0290-0936, de ahora en adelante EL COMPRADOR y ",
+                                "Nosotros, Abraham Lanza Torres,  cédula: 2-0683-0984, de ahora en adelante EL COMPRADOR y ",
                                 $"{empeño.Cliente.Nombre} {empeño.Cliente.Apellidos}, cédula: {empeño.Cliente.Código}",
                                 ", de ahora en adelante EL VENDEDOR, según se identifican en este contrato.",
                                 new LineBreak(),
@@ -287,8 +287,7 @@ namespace Empeños.Reportes
                             {
                                 new Image
                                 {
-                                    Stretch = Stretch.None,
-                                    Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\FirmaPorfirio.png")))
+                                    Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\FirmaAbraham.png")))
                                 },
                                 new LineBreak(),
                                 new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
@@ -410,9 +409,9 @@ namespace Empeños.Reportes
             run1.FontWeight = bold1;
             inlines1.Add(run1);
             paragraph1.Inlines.Add(new LineBreak());
-            paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+            paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
             paragraph1.Inlines.Add(new LineBreak());
-            paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
+            paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
@@ -646,9 +645,9 @@ namespace Empeños.Reportes
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
+                    paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
