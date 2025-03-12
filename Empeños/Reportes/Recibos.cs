@@ -1,5 +1,4 @@
 ﻿using Empeños.Datos;
-using Empeños.Formularios;
 using System;
 using System.Collections;
 using System.Drawing.Imaging;
@@ -9,7 +8,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -39,7 +37,7 @@ namespace Empeños.Reportes
                     };
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
-                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
+                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\LogoZapatería.png"), UriKind.Absolute);
                     bitmapImage.EndInit();
                     image.Source = (ImageSource)bitmapImage;
                     FlowDocument flowDocument2 = new FlowDocument();
@@ -57,6 +55,7 @@ namespace Empeños.Reportes
                     Paragraph paragraph1 = new Paragraph();
                     int num3 = 2;
                     paragraph1.TextAlignment = (TextAlignment)num3;
+                    /*
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Compra Venta"));
                     paragraph1.Inlines.Add(new LineBreak());
@@ -67,13 +66,14 @@ namespace Empeños.Reportes
                     FontWeight bold1 = FontWeights.Bold;
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
+                    */
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
+                    paragraph1.Inlines.Add(new Run("Tel: 7140-6005"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
                     paragraph1.Inlines.Add(new LineBreak());
@@ -186,21 +186,23 @@ namespace Empeños.Reportes
                                     new Image
                                     {
                                         Stretch = Stretch.None,
-                                        Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\Logo.png")))
+                                        Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\LogoZapatería.png")))
                                     },
                                     new LineBreak(),
                                     new LineBreak(),
+                                    /*
                                     "Compra Venta",
                                     new LineBreak(),
-                                    new Run("La Salvada") { FontSize = 18, FontWeight = FontWeights.Bold },
+                                    new Run("Aguas Zarcas") { FontSize = 18, FontWeight = FontWeights.Bold },
                                     new LineBreak(),
-                                    "Abraham Lanza Torres",
+                                    */
+                                    "Porfirio Morales Mora",
                                     new LineBreak(),
-                                    "Cédula: 2-0683-0984",
+                                    "Cédula: 2-0290-0936",
                                     new LineBreak(),
                                     new LineBreak(),
                                     "Tel: ",
-                                    new Run("2474-0641") { FontFamily = new FontFamily("Arial") },
+                                    new Run("7140-6005") { FontFamily = new FontFamily("Arial") },
                                     new LineBreak(),
                                     "Aguas Zarcas - San Carlos",
                                     new LineBreak(),
@@ -264,7 +266,7 @@ namespace Empeños.Reportes
                                 new Run("  ACUERDO DE COMPRA Y VENTA  ") { FontWeight = FontWeights.Bold, FontSize = 14},
                                 new LineBreak(),
                                 new LineBreak(),
-                                "Nosotros, Abraham Lanza Torres,  cédula: 2-0683-0984, de ahora en adelante EL COMPRADOR y ",
+                                "Nosotros, Porfirio Morales Mora,  cédula: 2-0290-0936, de ahora en adelante EL COMPRADOR y ",
                                 $"{empeño.Cliente.Nombre} {empeño.Cliente.Apellidos}, cédula: {empeño.Cliente.Código}",
                                 ", de ahora en adelante EL VENDEDOR, según se identifican en este contrato.",
                                 new LineBreak(),
@@ -287,7 +289,8 @@ namespace Empeños.Reportes
                             {
                                 new Image
                                 {
-                                    Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\FirmaAbraham.png")))
+                                    Stretch = Stretch.None,
+                                    Source = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Recursos\\Imágenes\\FirmaPorfirio.png")))
                                 },
                                 new LineBreak(),
                                 new Line { Stretch = Stretch.Fill, Stroke = new SolidColorBrush(Colors.Black), X2 = 1 },
@@ -309,8 +312,8 @@ namespace Empeños.Reportes
                         inkFirma.SetAutoKeyData("La Salvada");
                         inkFirma.AutoKeyFinish();
 
-                        inkFirma.SetImageXSize(500);
-                        inkFirma.SetImageYSize(150);
+                        inkFirma.SetImageXSize(333);
+                        inkFirma.SetImageYSize(100);
                         inkFirma.SetJustifyMode(5);
 
                         inkFirma.SetSigString(firma);
@@ -379,7 +382,7 @@ namespace Empeños.Reportes
             };
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
+            bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\LogoZapatería.png"), UriKind.Absolute);
             bitmapImage.EndInit();
             image.Source = (ImageSource)bitmapImage;
 
@@ -396,8 +399,10 @@ namespace Empeños.Reportes
             flowDocument1.Blocks.Add((Block)new BlockUIContainer((UIElement)image));
             BlockCollection blocks1 = flowDocument1.Blocks;
             Paragraph paragraph1 = new Paragraph();
+            paragraph1.TextAlignment = TextAlignment.Center;
+            /*
             int num3 = 2;
-            paragraph1.TextAlignment = (TextAlignment)num3;
+             (TextAlignment)num3;
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new Run("Compra Venta"));
             paragraph1.Inlines.Add(new LineBreak());
@@ -409,12 +414,13 @@ namespace Empeños.Reportes
             run1.FontWeight = bold1;
             inlines1.Add(run1);
             paragraph1.Inlines.Add(new LineBreak());
-            paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
+            */
+            paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
             paragraph1.Inlines.Add(new LineBreak());
-            paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
+            paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new LineBreak());
-            paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
+            paragraph1.Inlines.Add(new Run("Tel: 7140-6005"));
             paragraph1.Inlines.Add(new LineBreak());
             paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
             paragraph1.Inlines.Add(new LineBreak());
@@ -616,7 +622,7 @@ namespace Empeños.Reportes
                     };
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
-                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\Logo.png"), UriKind.Absolute);
+                    bitmapImage.UriSource = new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location.ToString()), "Recursos\\Imágenes\\LogoZapatería.png"), UriKind.Absolute);
                     bitmapImage.EndInit();
                     image.Source = (ImageSource)bitmapImage;
                     FlowDocument flowDocument2 = new FlowDocument();
@@ -630,10 +636,10 @@ namespace Empeños.Reportes
                     double num2 = 13.0;
                     flowDocument2.FontSize = num2;
                     flowDocument2.Blocks.Add((Block)new BlockUIContainer((UIElement)image));
-                    BlockCollection blocks1 = flowDocument2.Blocks;
+                    BlockCollection blocks1 = flowDocument2.Blocks;                    
                     Paragraph paragraph1 = new Paragraph();
-                    int num3 = 2;
-                    paragraph1.TextAlignment = (TextAlignment)num3;
+                    paragraph1.TextAlignment = TextAlignment.Center;
+                    /*
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Compra Venta"));
                     paragraph1.Inlines.Add(new LineBreak());
@@ -645,12 +651,13 @@ namespace Empeños.Reportes
                     run1.FontWeight = bold1;
                     inlines1.Add(run1);
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Abraham Lanza Torres"));
+                    */
+                    paragraph1.Inlines.Add(new Run("Porfirio Morales Mora"));
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Cédula: 2-0683-0984"));
+                    paragraph1.Inlines.Add(new Run("Cédula: 2-0290-0936"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new LineBreak());
-                    paragraph1.Inlines.Add(new Run("Tel: 2474-0641"));
+                    paragraph1.Inlines.Add(new Run("Tel: 7140-6005"));
                     paragraph1.Inlines.Add(new LineBreak());
                     paragraph1.Inlines.Add(new Run("Aguas Zarcas - San Carlos"));
                     paragraph1.Inlines.Add(new LineBreak());
@@ -665,8 +672,7 @@ namespace Empeños.Reportes
                     blocks1.Add((Block)paragraph1);
                     BlockCollection blocks2 = flowDocument2.Blocks;
                     Paragraph paragraph2 = new Paragraph();
-                    int num6 = 0;
-                    paragraph2.TextAlignment = (TextAlignment)num6;
+                    paragraph2.TextAlignment = TextAlignment.Left;
                     paragraph2.Inlines.Add(new Run("Fecha  : " + venta.Fecha.ToString("dd/MMM/yyyy")));
                     paragraph2.Inlines.Add(new LineBreak());
                     paragraph2.Inlines.Add(new Run("Cliente: " + venta.Cliente.NombreCompleto));

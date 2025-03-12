@@ -5,7 +5,7 @@
     <DataSource Name="Empeños">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=.\SQLEXPRESS;Initial Catalog=Empeños</ConnectString>
+        <ConnectString>Data Source=.;Initial Catalog=Empeños</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
@@ -302,6 +302,7 @@ FROM
                                   <Value>=Fields!Resta.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -337,6 +338,7 @@ FROM
                                   <Value>=Fields!Impuesto.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -448,6 +450,7 @@ FROM
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -484,6 +487,7 @@ FROM
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -520,6 +524,7 @@ FROM
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -591,7 +596,7 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Compra Venta </Value>
+                    <Value>Compra &amp; Venta </Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>14pt</FontSize>
@@ -605,7 +610,7 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>La Salvada</Value>
+                    <Value>Aguas Zarcas</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>14pt</FontSize>
@@ -620,7 +625,7 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Abraham Lanza Torres</Value>
+                    <Value>Porfirio Morales Mora</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                     </Style>
@@ -633,7 +638,7 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Cédula: 2-0683-0984</Value>
+                    <Value>Cédula: 2-0290-0936</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                     </Style>
@@ -659,7 +664,7 @@ FROM
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Tel: 2474-0641</Value>
+                    <Value>Tel: 7140-6005</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                     </Style>

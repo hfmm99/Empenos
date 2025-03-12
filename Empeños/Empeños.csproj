@@ -348,6 +348,9 @@
     <None Include="Recursos\Imágenes\FirmaAbraham.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Recursos\Imágenes\LogoZapatería.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Scripts\1.sql" />
     <Content Include="Scripts\2.sql" />
     <Content Include="Scripts\3.sql" />

@@ -600,6 +600,7 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
                                   <Value>=Fields!Último_Pago.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>d MMMM, yyyy</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -619,6 +620,7 @@ Order  By [Meses Pendientes] Desc, [Código del Empeño] Asc</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

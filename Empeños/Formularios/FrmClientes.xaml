@@ -60,7 +60,7 @@
         <CheckBox x:Name="chkRecibirNotificaciones" Content="Recibir notificaciones" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="183,32,347,4" Grid.RowSpan="2"/>
 
         <Border BorderBrush="#1E90FF" Margin="55,5,4,5" BorderThickness="2" Grid.Column="2" Grid.RowSpan="6" >
-            <Image x:Name="imgFoto" Margin="102,5,4.5,5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png" />
+            <Image x:Name="imgFoto" Margin="102,5,4.5,5" ToolTip="Foto o Identificación del Cliente" Source="pack://siteoforigin:,,,/Recursos/Imágenes/LogoZapatería.png" />
         </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" Margin="55,33,4,3" Grid.RowSpan="2">
             <Button x:Name="btnSeleccionarFoto" Content=" Seleccionar Imagen " ToolTip="Seleccionar Foto desde Archivo" Margin="5,0,0,0" Height="36" VerticalAlignment="Bottom" Click="BtnSeleccionarFoto_Click"/>

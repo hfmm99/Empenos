@@ -268,7 +268,7 @@ namespace Empeños.Formularios
 
         private void BtnBorrarFoto_Click(object sender, RoutedEventArgs e)
         {
-            imgFoto.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Recursos/Imágenes/Logo.png"));
+            imgFoto.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Recursos/Imágenes/LogoZapatería.png"));
         }
 
         private void ChangeMaskID(object sender, RoutedEventArgs e)

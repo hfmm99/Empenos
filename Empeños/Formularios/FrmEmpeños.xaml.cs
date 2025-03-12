@@ -54,7 +54,7 @@ namespace Empeños.Formularios
             inkFirma.SetSigCompressionMode(2);
             inkFirma.SetEncryptionMode(2);
             inkFirma.AutoKeyStart();
-            inkFirma.SetAutoKeyData("La Salvada");
+            inkFirma.SetAutoKeyData("Aguas Zarcas");
             inkFirma.AutoKeyFinish();
 
             #endregion

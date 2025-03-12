@@ -224,7 +224,7 @@ namespace Empeños.Formularios
 
         private void tabOpciones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Title = "La salvada - " + (tabOpciones.SelectedItem as TabItem).Header.ToString();
+            this.Title = "Compra & Venta Aguas Zarcas - " + (tabOpciones.SelectedItem as TabItem).Header.ToString();
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
